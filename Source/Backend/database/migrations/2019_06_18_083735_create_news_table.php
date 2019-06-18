@@ -20,7 +20,7 @@ class CreateNewsTable extends Migration
             $table->text('title');
             $table->text('short_description')->nullable();
             $table->text('content')->nullable();
-            $table->text('image')->default('default.png');
+            $table->text('image')->nullable();
             $table->text('url_news')->nullable();
             $table->bigInteger('number_view')->default(0);
             $table->tinyInteger('is_active')->default(1);
