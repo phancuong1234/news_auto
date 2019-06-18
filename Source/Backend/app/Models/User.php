@@ -25,8 +25,17 @@ class User extends Model
         'function',
     ];
 
-    public function roles()
+    protected $hidden = [
+        'remember_token',
+    ];
+
+    public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function news()
+    {
+        return $this->hasMany(News::class);
     }
 }
