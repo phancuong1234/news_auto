@@ -21994,4 +21994,29 @@ dl li {
   color: initial;
 }
 
+.nothing {
+    text-align: center;
+}
+
+.text_overfollow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search {
+    float: right;
+    width: 35%;
+}
+
+.btn-after-search {
+    float: left;
+}
+
+.error {
+    padding: 1% 1%;
+    margin: 1%;
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
 /*# sourceMappingURL=maps/style.css.map */
