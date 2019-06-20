@@ -1,4 +1,5 @@
 /Source/Backend/node_modules
+/Source/Backend/public/images/avatars/
 /Source/Backend/public/hot
 /Source/Backend/public/storage
 /Source/Backend/storage/*.key

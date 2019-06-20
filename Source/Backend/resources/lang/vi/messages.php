@@ -27,4 +27,18 @@ return [
             'fail' => 'Sửa danh mục thất bại',
         ]
     ],
+    'user' => [
+        'add' => [
+            'success' => 'Thêm người dùng thành công',
+            'fail' => 'Thêm người dùngthất bại',
+        ],
+        'del' => [
+            'success' => 'Xóa người dùng thành công',
+            'fail' => 'Xóa người dùng thất bại',
+        ],
+        'edit' => [
+            'success' => 'Sửa người dùng thành công',
+            'fail' => 'Sửa người dùng thất bại',
+        ]
+    ],
 ];

@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait Upload
 {
-    public function saveImg($imgFile,$path)
+    public function saveImg($imgFile, $path)
     {
         if (isset($imgFile)) {
             $strDefault = config('setting.str_default');
