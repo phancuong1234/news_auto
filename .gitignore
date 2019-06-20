@@ -1,0 +1,14 @@
+/Source/Backend/node_modules
+/Source/Backend/public/hot
+/Source/Backend/public/storage
+/Source/Backend/storage/*.key
+/Source/Backend/vendor
+/Source/Backend/public/templates
+/Source/Backend/tests
+/Source/Backend/.env
+.idea
+/Source/Backend/.phpunit.result.cache
+/Source/Backend/Homestead.json
+/Source/Backend/Homestead.yaml
+/Source/Backend/npm-debug.log
+/Source/Backend/yarn-error.log

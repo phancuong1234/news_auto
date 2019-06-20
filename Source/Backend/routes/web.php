@@ -11,12 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
 Route::prefix('admin')->group(function () {
-    Route::get('/users', function () {
-        return view('admin_page.users.index');
+
+    Route::get('/', function () {
+        return view('index');
+    });
+
+    Route::namespace('Admin')->group(function () {
+
+        Route::resource('category','CategoryController');
+
+        Route::get('/category/search/{text}',[
+            'as' => 'search.category',
+            'uses' => 'CategoryController@getSearchAjax',
+        ]);
     });
 });
 
