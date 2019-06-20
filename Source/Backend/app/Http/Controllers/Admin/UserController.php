@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Traits\Upload;
+use App\Http\Requests\Admin\UsersRequest;
+use App\Http\Requests\Admin\EditUserRequest;
 use Hash;
 class UserController extends Controller
 {
@@ -30,12 +32,11 @@ class UserController extends Controller
     }
 
     //
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
-        
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-        $input['image'] = $this->saveImg($input['image'],'/images/avatars/');
+        $input['id_role'] = config('setting.role.mod');
         $status = User::create($input);
         if($status){
 
@@ -70,12 +71,11 @@ class UserController extends Controller
         return view ('admin_page.users.edit', compact('oldModUser'));
     }
 
-  
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-        unset($input['_method'],$input['_token']);
+        unset($input['_method'],$input['_token'],$input['repass']);
         if($input['password'] == null) {
             unset($input['password']);
         }
