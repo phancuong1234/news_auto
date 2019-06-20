@@ -1,5 +1,6 @@
 <?php
 return [
+    'str_default' => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     'is_active' => [
         'active' => 1,
         'lock' => 0
