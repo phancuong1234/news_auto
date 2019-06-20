@@ -22,6 +22,8 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('category','CategoryController');
 
+        Route::resource('users','UserController');
+
         Route::get('/category/search/{text}',[
             'as' => 'search.category',
             'uses' => 'CategoryController@getSearchAjax',

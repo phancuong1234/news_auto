@@ -27,4 +27,18 @@ return [
             'fail' => 'edit fail category',
         ]
     ],
+    'user' => [
+        'add' => [
+            'success' => 'add successful user',
+            'fail' => 'add fail user',
+        ],
+        'del' => [
+            'success' => 'del successful user',
+            'fail' => 'del fail user',
+        ],
+        'edit' => [
+            'success' => 'edit successful user',
+            'fail' => 'edit fail user',
+        ]
+    ],
 ];
