@@ -27,6 +27,20 @@ return [
             'fail' => 'edit fail category',
         ]
     ],
+    'news' => [
+        'add' => [
+            'success' => 'add successful news',
+            'fail' => 'add fail news',
+        ],
+        'del' => [
+            'success' => 'del successful news',
+            'fail' => 'del fail news',
+        ],
+        'edit' => [
+            'success' => 'edit successful news',
+            'fail' => 'edit fail news',
+        ]
+    ],
     'user' => [
         'add' => [
             'success' => 'add successful user',

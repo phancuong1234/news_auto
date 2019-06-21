@@ -49,7 +49,7 @@ $(document).ready(function() {
             form.submit();
         },
     });
-    //validate các trường trong form add user 
+    //validate các trường trong form add user
     $("#add-user").validate({
         onfocusout: false,
         onkeyup: false,
@@ -107,7 +107,7 @@ $(document).ready(function() {
         },
     });
 
-    //validate các trường trong form edit user 
+    //validate các trường trong form edit user
     $("#edit-user").validate({
         onfocusout: false,
         onkeyup: false,
@@ -183,12 +183,99 @@ $(document).ready(function() {
             form.submit();
         },
     });
-    jQuery.validator.addMethod("validateSpecial", function(value, element) {
-        return this.optional( element ) || /^[0-9a-zA-Z]+$/.test( value );
-    }, Lang.get('validation_admin.category.no_special_char'));
-
+    //validate all field in form add news
+    $("#add-news").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            title: {
+                required: true,
+                minlength: 10,
+                maxlength: 180,
+            },
+            short_description : {
+                required: true,
+                minlength: 10,
+                maxlength: 180,
+            },
+            content : {
+                required: true,
+                minlength: 10
+            },
+            text_image : {
+                required: true,
+            }
+        },
+        messages: {
+            title: {
+                required: Lang.get('validation_admin.new.title.required'),
+                minlength: Lang.get('validation_admin.new.title.minlenght'),
+                maxlength: Lang.get('validation_admin.new.title.maxlenght')
+            },
+            short_description : {
+                required: Lang.get('validation_admin.new.short_description.required'),
+                minlength: Lang.get('validation_admin.new.short_description.required'),
+                maxlength: Lang.get('validation_admin.new.short_description.required')
+            },
+            content : {
+                required: Lang.get('validation_admin.new.content.required'),
+            },
+            image : {
+                required: Lang.get('validation_admin.new.image.required')
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
+    //validate form edit news
+    $("#edit-news").validate({
+        rules: {
+            title: {
+                required: true,
+                minlength: 10,
+                maxlength: 180,
+            },
+            short_description : {
+                required: true,
+                minlength: 10,
+                maxlength: 180
+            },
+            content : {
+                required: true,
+            },
+            url_news : {
+                maxlength: 180,
+            }
+        },
+        messages: {
+            title: {
+                required: Lang.get('validation_admin.new.title.required'),
+                minlength: Lang.get('validation_admin.new.title.minlenght'),
+                maxlength: Lang.get('validation_admin.new.title.maxlenght')
+            },
+            short_description : {
+                required: Lang.get('validation_admin.new.short_description.required'),
+                minlength: Lang.get('validation_admin.new.short_description.required'),
+                maxlength: Lang.get('validation_admin.new.short_description.required')
+            },
+            content : {
+                required: Lang.get('validation_admin.new.content.required')
+            },
+            url_news : {
+                maxlength: Lang.get('validation_admin.new.url.required'),
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
+    //reject special char
+    $.validator.addMethod("validateSpecial", function(value, element) {
+        return this.optional( element ) || /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$/.test( value );
+    }, Lang.get('validation_admin.no_special_char'));
     jQuery.validator.addMethod("validateUsername", function(value, element) {
         return this.optional( element ) || /^[a-zA-Z][a-zA-Z0-9]{4,50}$/.test( value );
     }, Lang.get('validation_admin.user.valid_user'));
 });
-

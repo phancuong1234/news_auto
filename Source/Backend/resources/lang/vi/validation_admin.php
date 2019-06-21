@@ -13,11 +13,35 @@ return [
     |
     */
     'confirm_del' => 'Bạn có chắc chắc chắn muốn xóa vĩnh viễn bản ghi này không? Dữ liệu sẽ bị mất vĩnh viễn.',
+    'no_special_char' => 'Trường nay không cho phép nhập kí tự đặc biệt',
     'category' => [
         'required' => 'vui lòng nhập tên danh mục',
         'minlenght' => 'tên danh mục không thể nhỏ hơn 5 kí tự',
         'maxlenght' => 'tên danh mục không thể lớn hơn 100 kí tự',
-        'no_special_char' => 'tên danh mục không cho phép nhập kí tự đặc biệt',
+    ],
+    'new' => [
+        'title' => [
+            'required' => 'vui lòng nhập tiêu đề',
+            'minlenght' => 'tiêu đề không thể nhỏ hơn 10 kí tự',
+            'maxlenght' => 'tiêu đề không thể lớn hơn 180 kí tự',
+        ],
+        'short_description' => [
+            'required' => 'vui lòng nhập mô tả',
+            'minlenght' => 'trường mô tả không thể nhỏ hơn 10 kí tự',
+            'maxlenght' => 'trường mô tả không thể lớn hơn 300 kí tự',
+        ],
+        'content' => [
+            'required' => 'vui lòng nhập nội dung bài viết',
+            'minlenght' => 'trường nội dung bài viết không thể nhỏ hơn 100 kí tự',
+        ],
+        'url' => [
+            'maxlenght' => 'trường URL không thể lớn hơn 180 kí tự',
+        ],
+        'image' => [
+            'required' => 'vui lòng thêm ảnh',
+            'mimes' => "Ảnh đại diện phải là một tệp loại: jpeg, png, bmp, gif, svg, jpg.",
+            'max' => 'giới hạn upload file là 10 MB',
+        ]
     ],
     'user' => [
         'required' => [
@@ -37,7 +61,7 @@ return [
             'email'=>'Email không đúng định dạng',
             'unique'=>'Email đã tồn tại trong hệ thống',
         ],
-        
+
         'repass'=>[
             'same'=>'Xác nhận mật khẩu không trùng khớp',
         ],
@@ -47,8 +71,8 @@ return [
         ],
         'image'=>[
             'image' => 'Tệp được chọn không phải là tệp hình ảnh',
-            'mines' => 'Tệp được chọn phải thuộc các đuôi sau : jpeg, png, jpg, gif'        
+            'mines' => 'Tệp được chọn phải thuộc các đuôi sau : jpeg, png, jpg, gif'
         ],
         'valid_user'=>'username phải bắt đầu bằng chữ và không chứa kí tự đặc biệt',
-    ],    
+    ],
 ];

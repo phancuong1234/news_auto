@@ -9,19 +9,19 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    //trả về view index
+    # return index category view
     public function index()
     {
         $listCategories = Category::all();
 
         return view('admin_page.category.index', compact('listCategories'));
     }
-    //trả về view add
+    # return add category view
     public function create()
     {
         return view('admin_page.category.add');
     }
-    // lưu bản ghi vào db
+    # store record to db
     public function store(CategoryRequest $request)
     {
         $input = $request->all();
@@ -35,7 +35,7 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->with('messageFail', trans('messages.category.add.fail'));
         }
     }
-    //trả về view edit
+    # return edit category view
     public function show($id)
     {
         $category = Category::where('id', $id)->first();
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     {
         //
     }
-    //cập nhật bản ghi
+    //update record
     public function update(CategoryRequest $request, $id)
     {
         $input = $request->all();
@@ -61,7 +61,7 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->with('messageFail', trans('messages.category.edit.fail'));
         }
     }
-    //xóa bản ghi
+    # del record
     public function destroy($id)
     {
         $status = Category::where('id', $id)->delete();
@@ -73,7 +73,7 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->with('messageFail', trans('messages.category.del.fail'));
         }
     }
-    //live search bằng ajax . return kết quả search theo tên cate
+    # live search by ajax . return result of search by the cate name
     public function getSearchAjax($text)
     {
         if(isset($text))

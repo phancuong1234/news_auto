@@ -12,7 +12,9 @@
 <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
-
+<!-- Include the editors JS -->
+<script src="https://cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
+{{--<script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>--}}
 <!-- plugins:js -->
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.base.js')) }}
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.addons.js')) }}
@@ -21,8 +23,8 @@
 {{ Html::script(asset('/templates/admin/js/dashboard.js')) }}
 {{ Html::script(asset('/templates/admin/js/jsforadmin.js')) }}
 {{ Html::script(asset('/templates/admin/js/validate.js')) }}
-{{ Html::script(asset('/templates/admin/js/jquery.min.js')) }}
 {{ Html::script(asset('messages.js')) }}
+{{ Html::script(asset('/templates/admin/js/jquery.js')) }}
 {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
 <!-- End custom js for this page-->
 </body>
