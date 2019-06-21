@@ -11,10 +11,10 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                    @include('common.error')
                     <h4 class="card-title">Cập nhật Người Dùng</h4>
                     @foreach($oldModUser as $oldModUser)
-                    {!!Form::open(['method'=>'PATCH','route'=>['users.update',$oldModUser->id],'files'=>true]) !!}
-                    
+                    {!!Form::open(['method'=>'PATCH','id'=>'edit-user','route'=>['users.update',$oldModUser->id],'files'=>true]) !!}             
                         <div class="form-group">
                             {!! Form::label('username', 'UserName') !!}  
                             {!! Form::text('username', $oldModUser->username
@@ -25,12 +25,12 @@
                             {!! Form::text('fullname', $oldModUser->fullname , ['class'=>'form-control', 'placeholder'=>'FullName']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('email', 'Email') !!} 
-                            {!! Form::email('email', $oldModUser->email , ['class'=>'form-control', 'placeholder'=>'Email']) !!}
+                            {!! Form::label('password', 'Password') !!} 
+                            {!! Form::input('password','password',$oldModUser->password, ['class'=>'form-control', 'placeholder'=>'Password']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('password', 'Password') !!} 
-                            {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Password']) !!}
+                            {!! Form::label('repass', 'Re-Password') !!} 
+                            {!! Form::input('password','repass',$oldModUser->password, ['class'=>'form-control', 'placeholder'=>'Re-Password']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('phone', 'Phone') !!}
@@ -41,10 +41,14 @@
                             {!! Form::select('gender', ['male' => 'Male', 'female' => 'Female'],$oldModUser->gender,['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('active', 'Active') !!}
+                            {!! Form::select('active', ['0' => 'Lock', '1' => 'Active'],$oldModUser->active,['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('image', 'Image') !!}
                             <div class="input-group col-xs-12">
                                 <span class="input-group-append">
-                                    {!! Form::file('image', ['class'=>'file-upload-browse btn btn-gradient-primary','id'=>'file',]) !!}
+                                    {!! Form::file('image', ['class'=>'file-upload-browse btn btn-gradient-primary','id'=>'file']) !!}
                                 </span>
                             </div>
                         </div>
