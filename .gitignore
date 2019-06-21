@@ -1,9 +1,11 @@
 /Source/Backend/node_modules
 /Source/Backend/public/images/avatars/
+/Source/Backend/public/images/news/
 /Source/Backend/public/hot
 /Source/Backend/public/storage
 /Source/Backend/storage/*.key
 /Source/Backend/vendor
+/Source/Backend/public/messages.js
 /Source/Backend/public/templates
 /Source/Backend/tests
 /Source/Backend/.env

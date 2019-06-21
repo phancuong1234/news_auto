@@ -27,6 +27,21 @@ return [
             'fail' => 'Sửa danh mục thất bại',
         ]
     ],
+    'news' => [
+        'add' => [
+            'success' => 'Thêm tin tức thành công',
+            'fail' => 'Thêm tin tức thất bại',
+        ],
+        'del' => [
+            'success' => 'Xóa tin tức thành công',
+            'fail' => 'Xóa tin tức thất bại',
+        ],
+        'edit' => [
+            'success' => 'Sửa tin tức thành công',
+            'fail' => 'Sửa tin tức thất bại',
+        ]
+    ],
+
     'user' => [
         'add' => [
             'success' => 'Thêm người dùng thành công',

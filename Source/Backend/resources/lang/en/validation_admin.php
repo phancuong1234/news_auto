@@ -48,8 +48,32 @@ return [
             'image' => 'The selected file is not an image file',
             'mines' => 'The selected file must have the extension : jpeg, png, jpg, gif'
         ],
-        
+
         'valid_user'=>'The username must start with the word and do not contain special characters',
 
     ],
+    'new' => [
+        'title' => [
+            'required' => 'please enter a title',
+            'minlenght' => 'title cannot be less than 10 characters',
+            'maxlenght' => 'title cannot be greater than 180 characters',
+        ],
+        'short_description' => [
+            'required' => 'please enter description',
+            'minlenght' => 'description field cannot be less than 10 characters',
+            'maxlenght' => 'description field cannot be greater than 300 characters',
+        ],
+        'content' => [
+            'required' => 'please enter article content',
+            'minlenght' => 'article content field cannot be less than 100 characters',
+        ],
+        'url' => [
+            'maxlenght' => 'URL field cannot be greater than 180 characters',
+        ],
+        'image' => [
+            'required' => 'please add photos',
+            'mimes' => "The avatar must be a file type: jpeg, png, bmp, gif, svg, jpg.",
+            'max' => 'file upload limit is 10 MB',
+        ]
+    ]
 ];

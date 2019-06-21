@@ -22019,4 +22019,16 @@ dl li {
     color: #D8000C;
     background-color: #FFD2D2;
 }
+
+.btn_file {
+    padding:10px 31px !important;
+    color: white !important;
+}
+
+.img-preview {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 2%;
+    border: 1px solid black;
+}
 /*# sourceMappingURL=maps/style.css.map */
