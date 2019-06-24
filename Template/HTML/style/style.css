@@ -1,20 +1,66 @@
-/* Import */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300i,400,500,700&display=swap');
+/* add Roboto fonts */
+
+/* default version */
+@font-face {
+	font-family: 'Roboto';
+	src: url('fonts/Roboto-Regular.ttf'); 
+	src: 
+		local('Roboto Font'),
+		local('Roboto-Font'),
+		url('fonts/Roboto-Regular.ttf') 
+		format('opentype');
+}
+/*bold version*/
+@font-face {
+	font-family: 'Roboto';
+	src: url('fonts/Roboto-Bold.ttf'); 
+	src: 
+		local('Roboto Font Bold'),
+		local('Roboto-Font-Bold'),
+		url('fonts/Roboto-Bold.ttf') 
+		format('opentype');
+	font-weight: bold;
+}
+/*medium version*/
+@font-face {
+	font-family: 'Roboto';
+	src: url('fonts/Roboto-Medium.ttf'); 
+	src: 
+		local('Roboto Font Medium'),
+		local('Roboto-Font-Medium'),
+		url('fonts/Roboto-Medium.ttf') 
+		format('opentype');
+	font-weight: medium;
+}
+/*Light Italic version*/
+@font-face {
+	font-family: 'Roboto';
+	src: url('fonts/Roboto-LightItalic.ttf'); 
+	src: 
+		local('Roboto Font Light Italic'),
+		local('Roboto-Font-Medium-Italic'),
+		url('fonts/Roboto-LightItalic.ttf') 
+		format('opentype');
+  font-weight: lighter;
+  font-style: italic;
+}
 
 /* Custom CSS */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 nav.navbar div.container .nav__logo--impact {
   font-size: 34px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 nav.navbar div.container div.collapse .navbar__item--roboto {
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: medium;
 }
 nav.navbar div.container div.collapse form.form-inline .form-search__placeholder {
-  font-family: 'Roboto', sans-serif;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: lighter;
   font-style: italic;
 }
 .inner-addon { 
@@ -34,28 +80,23 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 }
 
 .copy-right .container .row .font {
-  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   color: rgb(78, 69, 69);
 }
 .footer .container .row h3 {
   font-size: 21px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: medium;
 }
 .content__card .card__title {
   font-size: 24px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: medium;
 }
 .content__card .card__desc {
   font-size: 15px;
-  font-family: 'Roboto', sans-serif;
 }
 .media-body__title {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: medium;
   line-height: 20px;
 }
 .image__sidebar {
@@ -63,31 +104,26 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 }
 .category__name  {
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
+  font-weight: bold;
 }
 .content__title {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
+  font-weight: bold;
 }
 .font__desc {
   font-size: 13px;
-  font-family: 'Roboto', sans-serif;
 }
 .read_most {
   width: 100%;
 }
 .read_most h5 {
   font-size: 21px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: medium;
 }
 
 .main__aside  .media-body__title {
   font-size: 15px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: medium;
 }
 .image--size {
   max-width: 125px;
@@ -96,23 +132,18 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 }
 .footer p {
   font-size: 15px;
-  font-family: 'Roboto', sans-serif;
 }
 .cate__tittle {
   font-size: 20px;
-  font-family: 'Roboto', sans-serif;
 }
 .cate__time {
   font-size: 12px;
-  font-family: 'Roboto', sans-serif;
 }
 .cate__desc {
   font-size: 13px;
-  font-family: 'Roboto', sans-serif;
 }
 .cate__img {
-  height: 140px;
-  max-width: 250px;
+  height: 125px;
   width: 100%;
 }
 .pagination a {
@@ -123,6 +154,23 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 }
 .category__name a {
   color: white;
+}
+.main__titile {
+  font-size: 26px;
+  font-weight: medium;
+}
+.main__content p {
+  font-size: 13px;
+  margin-bottom: 1.5rem;
+  line-height: 20px;
+}
+.carousel__title {
+  font-size: 21px;
+  font-weight: medium;
+}
+.img--full {
+  width: 100%;
+  height: auto;
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px) {
@@ -144,5 +192,10 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 @media screen and (max-width: 1189px) {
   #main-content {
     border-right: none !important;
+  }
+}
+@media screen and (max-width: 576px) {
+  .w100 {
+    width: 100%;
   }
 }
