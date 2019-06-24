@@ -19,6 +19,7 @@
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.base.js')) }}
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.addons.js')) }}
 {{ Html::script(asset('/templates/admin/js/off-canvas.js')) }}
+{{ Html::script(asset('/templates/admin/js/Chartjs.js')) }}
 {{ Html::script(asset('/templates/admin/js/misc.js')) }}
 {{ Html::script(asset('/templates/admin/js/dashboard.js')) }}
 {{ Html::script(asset('/templates/admin/js/jsforadmin.js')) }}

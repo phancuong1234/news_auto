@@ -11,9 +11,9 @@
                 <div class="panel-body" id="panel-body">
                     <canvas id="Comment-chart"></canvas>
                 </div>
-                <div class="">
-                    Xem top comment của tháng :
-                    <select class="bmdb-select md-form" name="month" id="select-month">
+                <div class="panel-footer">
+                    <p class="float-left">Xem top comment của tháng :</p>
+                    <select class="bmdb-select md-form ml-2" name="month" id="select-month">
                         <option value="" disabled selected>Chọn tháng</option>
                             @for($i=1 ; $i<=12 ; $i++ )
                                 <option value="{!! $i !!}">tháng {!! $i !!}</option>

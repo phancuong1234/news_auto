@@ -29,6 +29,7 @@
                         <li class="nav-item"> <a class="nav-link" href="{{route('ChartComment')}}">Total Comment</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticle')}}">Total Article</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleRate')}}">Article Rate By Category</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleTopView')}}">Top 10 Article View</a></li>
                     </ul>
                 </div>
             </li>

@@ -12,47 +12,58 @@ use App\Models\Category;
 use Carbon\Carbon;
 
 class ChartController extends Controller
-{
+{	
+
     public function index()
     {
-	    return view('admin_page.charts.UserChart');
+	    return view('admin_page.charts.UserChart',compact('year'));
     }
     # data chart count user in year
     public function countUser(){
-    	$users = User::select('id', 'created_at')->get()->groupBy(function($date) {
+		$users = User::whereYear('created_at', date('Y'))
+				->select('id', 'created_at')
+				->get()
+				->groupBy(function($date) {
 	    		return Carbon::parse($date->created_at)->format('m'); // grouping by months
 		});
 		$usermcount = [];
-		$userArr = [];
 		foreach ($users as $key => $value) {
 		    $usermcount[(int)$key] = count($value);
 		}
-		for($i = 1; $i <= 12; $i++){
-		    if(!empty($usermcount[$i])){
-		        $userArr[$i] = $usermcount[$i];    
-		    }else{
-		        $userArr[$i] = 0;    
-		    }
-		}
-		$userArrFormat = [];
-		foreach ($userArr as $key => $value) {
-			array_push($userArrFormat, $value);
-		}
 
-    	return json_encode($userArrFormat);
+    	return json_encode($usermcount);
     }
+	
+	#count user in five year ago
+	public function countUserByYear($year){
+		$user = User::whereYear('created_at', '=', $year)
+					->select('id', 'created_at')
+					->get()
+					->groupBy(function($date) {
+						return Carbon::parse($date->created_at)->format('m'); // grouping by months
+				});
+		$countuserbyyear = [];
+		foreach ($user as $key => $value) {
+		    $countuserbyyear[(int)$key] = count($value);
+		}
 
+		return json_encode($countuserbyyear);
+	}
+
+	
     public function indexView()
     {
 	    return view('admin_page.charts.ChartView');
     }
     # data chart count view in year
     public function countView(){
-    	$view = News::select('number_view', 'created_at')->get()->groupBy(function($date) {
+		$view = News::whereYear('created_at', date('Y'))
+				->select('number_view', 'created_at')
+				->get()
+				->groupBy(function($date) {
 	    		return Carbon::parse($date->created_at)->format('m'); // grouping by months
 		});
 		$viewcount = [];
-		$viewarr = [];
 		foreach ($view as $key => $value) {
 			$count = 0;
 			foreach($value as $number){
@@ -60,22 +71,34 @@ class ChartController extends Controller
 			}
 			$viewcount[(int)$key] = $count;
 		}
-		for($i = 1; $i <= 12; $i++){
-		    if(!empty($viewcount[$i])){
-		        $viewarr[$i] = $viewcount[$i];    
-		    }else{
-		        $viewarr[$i] = 0;    
-		    }
-		}
-		$viewArrFormat = [];
-		foreach ($viewarr as $key => $value) {
-			array_push($viewArrFormat, $value);
-		}	
-    	return json_encode($viewArrFormat);
+
+    	return json_encode($viewcount);
     }
+
+	#
+	public function countViewByYear($year){
+		$view = News::whereYear('created_at', $year)
+					->select('number_view', 'created_at')
+					->get()
+					->groupBy(function($date) {
+						return Carbon::parse($date->created_at)->format('m'); // grouping by months
+				});
+		$countviewbyyear = [];
+			foreach ($view as $key => $value) {
+				$count = 0;
+				foreach($value as $number){
+					$count += $number->number_view;
+				}
+				$countviewbyyear[(int)$key] = $count;
+			}
+		
+		return json_encode($countviewbyyear);
+		
+	}
 
     public function indexComment()
     {
+		
 	    return view('admin_page.charts.ChartComment');
     }
 
@@ -84,25 +107,13 @@ class ChartController extends Controller
     			->get()
     			->groupBy(function($date) {
 	    		return Carbon::parse($date->created_at)->format('m');
-	    	});
+			});
 		$commentcount = [];
-		$commentArr = [];
 		foreach ($comment as $key => $value) {
 		    $commentcount[(int)$key] = count($value);
 		}
-		for($i = 1; $i <= 12; $i++){
-		    if(!empty($commentcount[$i])){
-		        $commentArr[$i] = $commentcount[$i];    
-		    }else{
-		        $commentArr[$i] = 0;    
-		    }
-		}
-		$commentArrFormat = [];
-		foreach ($commentArr as $key => $value) {
-			array_push($commentArrFormat, $value);
-		}
 
-    	return json_encode($commentArrFormat);
+    	return json_encode($commentcount);
     }
 
     public function commentChartByMonth($month){
@@ -128,36 +139,24 @@ class ChartController extends Controller
 
     public function indexArticle()
     {
-    	$category = Category::select('id','name_category')->get();
-    	return view('admin_page.charts.ChartArticle',compact('category'));
+		$category = Category::select('id', 'name_category')->get();
+		
+    	return view('admin_page.charts.ChartArticle', compact('category'));
     }
 
     public function countArticle()
     {
-    	$totalNews = News::get()
+		$totalNews = News::whereYear('created_at',date('Y'))
+				->get()
     			->groupBy(function($date) {
 	    		return Carbon::parse($date->created_at)->format('m');
 	    	});
     	$countarticle = [];
-    	$articleArr = [];
     	foreach ($totalNews as $key => $value) {
     		$countarticle[(int)$key] = count($value);
     	}
-    	
-    	for($i = 1; $i <= 12; $i++){
-		    if(!empty($countarticle[$i])){
-		        $articleArr[$i] = $countarticle[$i];    
-		    }else{
-		        $articleArr[$i] = 0;    
-		    }
-		}
 
-		$articleArrFormat = [];
-		foreach ($articleArr as $key => $value) {
-			array_push($articleArrFormat, $value);
-		}
-
-		return json_encode($articleArrFormat);
+		return json_encode($countarticle);
     }
 
     public function ChartArticleByCategory($id)
@@ -167,26 +166,28 @@ class ChartController extends Controller
 				->groupBy(function($date) {
 					return Carbon::parse($date->created_at)->format('m');
 				});
-		$countArticleByMonth = [];
-		$articleArr = [];
+		$countArticleByCate = [];
 		foreach ($Article as $key => $value) {
-    		$countArticleByMonth[(int)$key] = count($value);
-		}
-		for($i = 1; $i <= 12; $i++){
-		    if(!empty($countArticleByMonth[$i])){
-		        $articleArr[$i] = $countArticleByMonth[$i];    
-		    }else{
-		        $articleArr[$i] = 0;    
-		    }
-		}
-		$articleArrFormat = [];
-		foreach ($articleArr as $key => $value) {
-			array_push($articleArrFormat, $value);
+    		$countArticleByCate[(int)$key] = count($value);
 		}
 
-		return json_encode($articleArrFormat);
+		return json_encode($countArticleByCate);
 	}
 	
+	public function ChartArticleByYear($year){
+		$ArticleByYear = News::whereYear('created_at',$year)
+					->get()
+					->groupBy(function($date) {
+						return Carbon::parse($date->created_at)->format('m');
+					});
+		$countArticleByYear = [];
+		foreach ($ArticleByYear as $key => $value) {
+    		$countArticleByYear[(int)$key] = count($value);
+		}
+		
+		return json_encode($countArticleByYear);
+	}
+
 	public function indexArticleRate()
 	{
 		return view('admin_page.charts.ChartArticleRate');
@@ -196,16 +197,66 @@ class ChartController extends Controller
 	{
 		$articlerate = News::select(DB::raw('categories.name_category AS name , COUNT(news.id) AS total'))
 				->join('categories','news.id_category','=','categories.id')
+				->whereYear('news.created_at',date('Y'))
 				->groupBy('news.id_category')
 				->get();
 		$countArticleRate = [];
+		$total = 0;
 		foreach ($articlerate as $key => $value) {
-			$countArticleRate[$key]['name'] = $value->name;
-			$countArticleRate[$key]['total'] = $value->total;
+				$total += $value->total;
+				$countArticleRate[$key]['name'] = $value->name;
+				$countArticleRate[$key]['total'] = $value->total;
+				
 		}
-		dd($countArticleRate);
+		foreach($countArticleRate as $key => $value){
+			$countArticleRate[$key]['countall'] = $total;
+		}
+
 		return json_encode($countArticleRate);
 
 	}
 
+	public function indexArticleTopView(){
+		return view('admin_page.charts.ChartArticleTopView');
+	}
+
+	public function topViewArt(){
+		$topview = News::whereYear('created_at',date('Y'))
+				->select('id','number_view')
+				->orderBy('number_view','DESC')
+				->limit(10)
+				->get();
+		$topviewArr = [];
+		foreach($topview as $key => $value){
+			$topviewArr[$key]['id'] = $value->id;
+			$topviewArr[$key]['view']  = $value->number_view;
+		}
+		
+		return json_encode($topviewArr);
+	}
+
+	public function topViewArtChooseTime($year, $month){
+		if($month != '0'){
+			$topviewchoosetime = News::whereYear('created_at',$year)
+				->whereMonth('created_at',$month)
+				->select('id','number_view')
+				->orderBy('number_view','DESC')
+				->limit(10)
+				->get();
+		}
+		else{
+			$topviewchoosetime = News::whereYear('created_at',$year)
+				->select('id','number_view')
+				->orderBy('number_view','DESC')
+				->limit(10)
+				->get();
+		}
+		$topviewchoosetimeArr = [];
+		foreach($topviewchoosetime as $key => $value){
+			$topviewchoosetimeArr[$key]['id'] = $value->id;
+			$topviewchoosetimeArr[$key]['view']  = $value->number_view;
+		}	
+		
+		return json_encode($topviewchoosetimeArr);
+	}
 }
