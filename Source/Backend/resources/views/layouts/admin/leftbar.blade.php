@@ -24,8 +24,11 @@
                 </a>
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="./templates/admin/pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="./templates/admin/pages/ui-features/typography.html">Typography</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartUser')}}">Total User</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartView')}}">Total View</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartComment')}}">Total Comment</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticle')}}">Total Article</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleRate')}}">Article Rate By Category</a></li>
                     </ul>
                 </div>
             </li>

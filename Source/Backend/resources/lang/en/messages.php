@@ -27,20 +27,6 @@ return [
             'fail' => 'edit fail category',
         ]
     ],
-    'news' => [
-        'add' => [
-            'success' => 'add successful news',
-            'fail' => 'add fail news',
-        ],
-        'del' => [
-            'success' => 'del successful news',
-            'fail' => 'del fail news',
-        ],
-        'edit' => [
-            'success' => 'edit successful news',
-            'fail' => 'edit fail news',
-        ]
-    ],
     'user' => [
         'add' => [
             'success' => 'add successful user',
@@ -80,4 +66,16 @@ return [
             'fail' => 'edit fail comment',
         ]
     ],
+    'name_chart'=>[
+        'user' => 'Total number of users registered by month ',
+        'view' => 'Total views of the months',
+        'comment' => 'Total comment of the months',
+        'commentmonth' => 'Top comment of the months',
+        'article' => 'Total article of the month',
+        'articlebycate' => 'Total article order by Category',
+        'default_col_name' => 'Amount',
+        'default_row_name' => 'Month',
+        'col_name' => 'number of comments',
+        'row_name' => 'ID article',
+    ],    
 ];
