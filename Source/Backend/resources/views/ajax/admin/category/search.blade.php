@@ -24,13 +24,13 @@
                 {{ (isset($cate->url_cate)) ? $cate->url_cate:"Chưa cập nhật..." }}
             </td>
             <td>
-                <a href="{{ route('category.show', $cate->id) }}">
+                <a href="{{ route('categories.show', $cate->id) }}">
                     <i class="mdi mdi-tooltip-edit"></i>
                 </a>
                 <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-category' + {{$cate->id}})">
                     <i class="mdi mdi-delete"></i>
                 </a>
-                {!! Form::open(['method' => 'DELETE', 'route' => ['category.destroy',$cate->id], 'id'=>'delete-category'.$cate->id]) !!}
+                {!! Form::open(['method' => 'DELETE', 'route' => ['categories.destroy',$cate->id], 'id'=>'delete-category'.$cate->id]) !!}
                 {!! Form::close() !!}
             </td>
         </tr>

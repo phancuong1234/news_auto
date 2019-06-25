@@ -41,7 +41,6 @@ return [
             'fail' => 'Sửa tin tức thất bại',
         ]
     ],
-
     'user' => [
         'add' => [
             'success' => 'Thêm người dùng thành công',
@@ -56,4 +55,13 @@ return [
             'fail' => 'Sửa người dùng thất bại',
         ]
     ],
+    'crawl' => [
+        'crawl-success' => 'cào dữ liệu thành công',
+        'crawl-fail' => 'cào dữ liệu thất bại',
+    ],
+    'button' => [
+        'start' => 'Bắt đầu',
+        'cancel' => 'Hủy',
+    ],
+
 ];

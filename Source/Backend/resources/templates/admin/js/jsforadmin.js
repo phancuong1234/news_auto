@@ -14,7 +14,7 @@ function liveSearch(type){
     if(query != '') {
         if (type == 'category') { // kiểm tra nếu search danh mục thì thực hiện lệnh bên dưới
             $.ajax({
-                url: "/admin/category/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                url: "/admin/categories/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
                 method: "GET", // phương thức gửi dữ liệu.
                 success: function (data) { //dữ liệu nhận về
                     $('#category').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
@@ -31,39 +31,116 @@ function liveSearch(type){
             });
         }
     }
-
 };
 $( document ).ready(function() {
-    //event show name file
-    $('#image').on('change', function(e) {
-        var fileName = e.target.files[0].name;
-        document.getElementById('text_image').value = fileName;
-        readURLPicTure(this);
-    });
+    var btn = document.getElementById("btn-start-crawl");
+    //loader event crawl
+    var loader = {
+        unload: function(){
+            $("#screen-loader").css("display", "none");
+            $("#bubblingG").css("display", "none");
+            $("#text-wait").css("display", "none");
+            $("#icon-success").css("display", "none");
+            $("#screen-info").css("display", "none");
+        },
+        //loading
+        load: function() {
+            $("#screen-loader").css("display", "block");
+            $("#bubblingG").css("display", "block");
+            $("#text-wait").css("display", "block");
+            $("#icon-success").css("display", "none");
+            $("#screen-info").css("display", "none");
+            // $('#btn-start-crawl').attr("disabled", true);
+        },
+        //Startet success Animation
+        success: function(){
+            btn.innerHTML = Lang.get('messages.button.start');
+            $("#bubblingG").css("display", "none");
+            $("#icon-success").css("display", "block");
+            $("#icon-fail").css("display", "none");
+            document.getElementById("text-status").innerHTML = Lang.get('messages.crawl.crawl-success');
+            $("#text-status").css("color", "green");
+            setTimeout(() => {
+                $("#screen-info").css("display", "block");
+            }, 1000);
+            $('#btn-start-crawl').attr("disabled", false);
 
-    //CKeditor
-    // ClassicEditor
-    //     .create( document.querySelector( '#editor' ) )
-    //     .then( editor => {
-    //         editor.getData(); // -> '<p>Foo!</p>'
-    //     } )
-    //     .catch( error => {
-    //         console.error( error );
-    //     } );
-    CKEDITOR.replace( 'content' );
-    // preview img
-    function readURLPicTure(input) {
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#img-preview').attr('src', e.target.result);
-                $('#img-preview-tag-a').attr('href', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
+        },
+        //Startet error Animation
+        error: function() {
+            $("#bubblingG").css("display", "none");
+            $("#icon-success").css("display", "none");
+            $("#icon-fail").css("display", "block");
+            document.getElementById("text-status").innerHTML = Lang.get('messages.crawl.crawl-fail');
+            $("#text-status").css("color", "red");
+            $('#btn-start-crawl').attr("disabled", false);
+            btn.innerHTML = Lang.get('messages.button.start');
         }
     }
-});
+    //ajax manage
+    var ignore;
+    // event crawl
+    $('#btn-start-crawl').click(function(){
+        if($('#btn-start-crawl').text().trim() == Lang.get('messages.button.start')){
+            btn.innerHTML = Lang.get('messages.button.cancel');
+            setTimeout(() => {
+                loader.load();
+            }, 200);
+            setTimeout(() => {
+                ignore = $.ajax({
+                    url: "/admin/crawl-auto", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                    method: "GET", // phương thức gửi dữ liệu.
+                    success: function (data) { //dữ liệu nhận về
+                        $('#info-of-crawl').html(data); //nhận dữ liệu dạng html và gán vào thẻ có id là info-of-crawl
+                        loader.success();
+                    },
+                    error: function () {
+                        loader.error();
+                    },
+                });
+            }, 2000);
+        }
+        else {
+            loader.error();
+            btn.innerHTML = Lang.get('messages.button.start');
+        }
 
+
+        //event show name file
+        $('#image').on('change', function(e) {
+            var fileName = e.target.files[0].name;
+            document.getElementById('text_image').value = fileName;
+            readURLPicTure(this);
+        });
+        CKEDITOR.replace( 'content' );
+        // preview img
+        function readURLPicTure(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img-preview').attr('src', e.target.result);
+                    $('#img-preview-tag-a').attr('href', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    });
+});
+//event keyup Enter to paginate
+$( document ).ready(function() {
+    $('#text-paginate-news').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $('#text-paginate-news').val();
+            window.location.href = "/admin/news?page=" + number;
+        }
+    });
+    $('#text-paginate-cate').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $('#text-paginate-cate').val();
+            window.location.href = "/admin/categories?page=" + number;
+        }
+    });
+});

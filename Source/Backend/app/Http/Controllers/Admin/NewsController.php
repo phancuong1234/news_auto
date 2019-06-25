@@ -17,7 +17,7 @@ class NewsController extends Controller
     # return view index of news
     public function index()
     {
-        $listNews = News::where('is_active', config('setting.is_active.active'))->get();
+        $listNews = News::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
 
         return view('admin_page.news.index', compact('listNews'));
     }
@@ -101,7 +101,7 @@ class NewsController extends Controller
             $listNews = News::where('title', 'LIKE', "%{$text}%")
                 ->orWhere('id', 'LIKE', "%{$text}%")
                 ->orWhere('id_user', 'LIKE', "%{$text}%")
-                ->get();
+                ->paginate(config('setting.paginate'));
 
             return view('ajax.admin.news.search', compact('listNews'));
         }

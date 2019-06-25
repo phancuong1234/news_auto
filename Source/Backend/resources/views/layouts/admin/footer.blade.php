@@ -24,7 +24,8 @@
 {{ Html::script(asset('/templates/admin/js/jsforadmin.js')) }}
 {{ Html::script(asset('/templates/admin/js/validate.js')) }}
 {{ Html::script(asset('messages.js')) }}
-{{ Html::script(asset('/templates/admin/js/jquery.js')) }}
+{{--{{ Html::script(asset('/templates/admin/js/jquery.js')) }}--}}
+{{ Html::script(asset('/templates/admin/js/jquery.min.js')) }}
 {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
 <!-- End custom js for this page-->
 </body>

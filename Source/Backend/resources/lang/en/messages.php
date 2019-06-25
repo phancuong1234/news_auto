@@ -55,4 +55,12 @@ return [
             'fail' => 'edit fail user',
         ]
     ],
+    'crawl' => [
+        'crawl-success' => 'successful data scratching',
+        'crawl-fail' => 'failed data scratching',
+    ],
+    'button' => [
+        'start' => 'start',
+        'cancel' => 'cancel',
+    ],
 ];
