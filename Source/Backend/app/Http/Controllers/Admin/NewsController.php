@@ -83,12 +83,13 @@ class NewsController extends Controller
     # function delete new
     public function destroy($id)
     {
-        $status = News::where('id', $id)->delete();
-        if($status){
+        try {
+            News::find($id)->delete();
 
             return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.del.success'));
-        } else {
-
+        }
+        catch (Exception $exception)
+        {
             return redirect()->route('news.index')->with('messageFail', trans('messages.news.del.fail'));
         }
     }

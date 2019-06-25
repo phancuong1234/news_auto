@@ -64,12 +64,13 @@ class CategoryController extends Controller
     # del record
     public function destroy($id)
     {
-        $status = Category::where('id', $id)->delete();
-        if($status){
+        try {
+            Category::find($id)->delete();
 
             return redirect()->route('categories.index')->with('messageSuccess', trans('messages.category.del.success'));
-        } else {
-
+        }
+        catch (Exception $exception)
+        {
             return redirect()->route('categories.index')->with('messageFail', trans('messages.category.del.fail'));
         }
     }

@@ -44,7 +44,7 @@ return [
     'user' => [
         'add' => [
             'success' => 'Thêm người dùng thành công',
-            'fail' => 'Thêm người dùngthất bại',
+            'fail' => 'Thêm người dùng thất bại',
         ],
         'del' => [
             'success' => 'Xóa người dùng thành công',
@@ -63,5 +63,21 @@ return [
         'start' => 'Bắt đầu',
         'cancel' => 'Hủy',
     ],
-
+    'confirm_change_status' => 'Bạn có muốn thay đổi trạng thái của bản ghi không ?',
+    'update_status_fail' => 'Thay đổi trạng thái của bản ghi thất bại',
+    'update_status_success' => 'Thay đổi trạng thái của bản ghi thành công',
+    'comment' => [
+        'add' => [
+            'success' => 'Thêm bình luận thành công',
+            'fail' => 'Thêm bình luận thất bại',
+        ],
+        'del' => [
+            'success' => 'Xóa bình luận thành công',
+            'fail' => 'Xóa bình luận thất bại',
+        ],
+        'edit' => [
+            'success' => 'Sửa bình luận thành công',
+            'fail' => 'Sửa bình luận thất bại',
+        ]
+    ],
 ];

@@ -48,6 +48,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('comments.index') }}">
+                    <span class="menu-title">Quản Lý Bình Luận</span>
+                    <i class="mdi mdi-comment-text-outline menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('crawler.index') }}">
                     <span class="menu-title">Cập Nhật Từ Website</span>
                     <i class="mdi mdi-auto-upload menu-icon"></i>
