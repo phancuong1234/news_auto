@@ -46,7 +46,6 @@
                 </a>
             </li>
             <li class="nav-item">
-
                 <a class="nav-link" data-toggle="collapse" href="#ui-news-basic" aria-expanded="false" aria-controls="ui-news-basic">
                     <span class="menu-title">Quản Lý Bài Viết</span>
                     <i class="menu-arrow"></i>
@@ -66,10 +65,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('crawler.index') }}">
+                <a class="nav-link" data-toggle="collapse" href="#ui-crawl-basic" aria-expanded="false" aria-controls="ui-crawl-basic">
                     <span class="menu-title">Cập Nhật Từ Website</span>
+                    <i class="menu-arrow"></i>
                     <i class="mdi mdi-auto-upload menu-icon"></i>
                 </a>
+                <div class="collapse" id="ui-crawl-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('crawler.index') }}">Cập nhật tất cả data</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('index.crawl.xml') }}">Thu thập dữ liệu RSS</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </nav>

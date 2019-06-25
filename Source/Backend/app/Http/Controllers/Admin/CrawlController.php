@@ -111,4 +111,19 @@ class CrawlController extends Controller
 
         return $count;
     }
+    #page index crawl by xml link
+    function indexPageCrawlByRSS(){
+        return view('admin_page.crawl.xml.index');
+    }
+    #crawl page xml
+    function CrawlByRSS(Request $request){
+        $url = $request->url;
+        $context  = stream_context_create(array('http' => array('header' => 'Accept: application/xml')));
+        $xml = file_get_contents($url, false, $context);
+        $xml = str_replace('<?xml version="1.0" encoding="utf-16"?>', '<?xml version="1.0" encoding="UTF-8"?>', $xml);
+        $xml = simplexml_load_string($xml);
+        $contentXML = json_decode( json_encode($xml) , 1);
+
+        return view('ajax.admin.crawl.index_crawl_xml', compact('contentXML'));
+    }
 }
