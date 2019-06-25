@@ -21,6 +21,26 @@ class NewsController extends Controller
 
         return view('admin_page.news.index', compact('listNews'));
     }
+    #pending page
+    public function pendingIndex()
+    {
+        $listNews = News::where('is_active', '!=', config('setting.is_active.active'))
+            ->paginate(config('setting.paginate'));
+
+        return view('admin_page.news.pending', compact('listNews'));
+    }
+    #approve news
+    public function approve($id){
+        try {
+            News::find($id)->update(['is_active' => config('setting.is_active.active')]);
+
+            return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.approve.success'));
+        }
+        catch (Exception $exception)
+        {
+            return redirect()->route('news.index')->with('messageFail', trans('messages.news.approve.fail'));
+        }
+    }
     # return view add news
     public function create()
     {
@@ -50,12 +70,33 @@ class NewsController extends Controller
     # return view edit news
     public function show($id)
     {
-        $news = News::where(['id' => $id, 'is_active' => config('setting.is_active.active')])->first();
+        $news = News::where(['id' => $id])->first();
         $idCategory = Category::pluck('name_category', 'id');
+        $typeURL = $this->explodeStr($news->image);
 
-        return view('admin_page.news.edit', compact('news', 'idCategory'));
+        return view('admin_page.news.edit', compact('news', 'idCategory', 'typeURL'));
     }
+    #explode string
+    public function explodeStr($str)
+    {
+        $arrURL = explode('/', $str);
+        if(in_array(config('setting.URL_image.url_crawl_dantri'), $arrURL)){
+            $typeURL = config('setting.URL_image.type_url.crawl');
+        }
+        else {
+            $typeURL = config('setting.URL_image.type_url.of_server');
+        }
 
+        return $typeURL;
+    }
+    #pending_preview
+    public function pendingPreview($id)
+    {
+        $news = News::where(['id' => $id])->first();
+        $typeURL = $this->explodeStr($news->image);
+
+        return view('admin_page.news.preview_news', compact('news', 'typeURL'));
+    }
     public function edit($id)
     {
         //
@@ -95,12 +136,29 @@ class NewsController extends Controller
     }
 
     # live search by ajax . return result of search by the title or id or id_user
-    public function getSearchAjax($text)
+    public function getSearchAjax($text, $typeRQ)
     {
+        $data = [];
+        if($typeRQ == config('setting.search_by.pending')){
+            $listPending = News::where('is_active', '=', config('setting.is_active.pending'))->get();
+            if($listPending->count() > 0){
+                foreach($listPending as $key => $value){
+                    array_push($data, $value->id);
+                }
+            }
+        }
+        else {
+            $listPending = News::where('is_active', '=', config('setting.is_active.active'))->get();
+            if($listPending->count() > 0){
+                foreach($listPending as $key => $value){
+                    array_push($data, $value->id);
+                }
+            }
+        }
         if(isset($text))
         {
-            $listNews = News::where('title', 'LIKE', "%{$text}%")
-                ->orWhere('id', 'LIKE', "%{$text}%")
+            $listNews = News::whereIn('id', $data)
+                ->where('title', 'LIKE', "%{$text}%")
                 ->orWhere('id_user', 'LIKE', "%{$text}%")
                 ->paginate(config('setting.paginate'));
 

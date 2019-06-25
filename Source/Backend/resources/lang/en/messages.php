@@ -27,6 +27,24 @@ return [
             'fail' => 'edit fail category',
         ]
     ],
+    'news' => [
+        'add' => [
+            'success' => 'add successful news',
+            'fail' => 'add fail news',
+        ],
+        'del' => [
+            'success' => 'del successful news',
+            'fail' => 'del fail news',
+        ],
+        'edit' => [
+            'success' => 'edit successful news',
+            'fail' => 'edit fail news',
+        ],
+        'approve' => [
+            'success' => 'approved successful news',
+            'fail' => 'approved fail news',
+        ],
+    ],
     'user' => [
         'add' => [
             'success' => 'add successful user',
@@ -81,5 +99,10 @@ return [
         'default_row_name' => 'Month',
         'col_name' => 'Amount',
         'row_name' => 'ID article',
-    ],    
+    ],
+    'confirm' => [
+        'confirm' => 'Would you like to accept this news?',
+        'success' => 'accept successful request approval',
+        'fail' => 'reject the request approval',
+    ],
 ];
