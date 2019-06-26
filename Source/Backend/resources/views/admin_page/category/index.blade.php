@@ -9,11 +9,17 @@
                     <h4 class="card-title">Danh sách danh mục</h4>
                     @include('common.error')
                     <div>
-                        <a href="{{ route('category.create') }}" class="btn btn-gradient-info btn-sm">
+                        <a href="{{ route('categories.create') }}" class="btn btn-gradient-info btn-sm">
                             <i class="mdi mdi-library-plus"></i>
                             Thêm
                         </a>
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('category')">
+                        <div class="btn-next-prev">
+                            <span class="text-total-news"> {{ $listCategories->firstItem() }} - {{ $listCategories->lastItem() }} trong tổng số {{ $listCategories->total() }} danh mục </span>
+                            <a href="{{ $listCategories->previousPageUrl() }}" class="previous round {{ ($listCategories->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                            <input class="text-paginate" type="text" id="text-paginate-cate" />
+                            <a href="{{ $listCategories->nextPageUrl() }}" class="next round {{ ($listCategories->currentPage() != $listCategories->total())?'btn-active':'' }}">&#8250;</a>
+                        </div>
                     </div>
                     <table class="table table-striped">
                         <thead>
@@ -62,13 +68,13 @@
                                         {{ (isset($cate->url_cate)) ? $cate->url_cate:"Chưa cập nhật..." }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('category.show', $cate->id) }}">
+                                        <a href="{{ route('categories.show', $cate->id) }}">
                                             <i class="mdi mdi-tooltip-edit"></i>
                                         </a>
                                         <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-category' + {{$cate->id}})">
                                             <i class="mdi mdi-delete"></i>
                                         </a>
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['category.destroy',$cate->id], 'id'=>'delete-category'.$cate->id]) !!}
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['categories.destroy',$cate->id], 'id'=>'delete-category'.$cate->id]) !!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>

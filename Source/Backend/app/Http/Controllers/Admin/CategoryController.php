@@ -12,7 +12,7 @@ class CategoryController extends Controller
     # return index category view
     public function index()
     {
-        $listCategories = Category::all();
+        $listCategories = Category::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
 
         return view('admin_page.category.index', compact('listCategories'));
     }
@@ -29,10 +29,10 @@ class CategoryController extends Controller
 
         if($status){
 
-            return redirect()->route('category.index')->with('messageSuccess', trans('messages.category.add.success'));
+            return redirect()->route('categories.index')->with('messageSuccess', trans('messages.category.add.success'));
         } else {
 
-            return redirect()->route('category.index')->with('messageFail', trans('messages.category.add.fail'));
+            return redirect()->route('categories.index')->with('messageFail', trans('messages.category.add.fail'));
         }
     }
     # return edit category view
@@ -55,10 +55,10 @@ class CategoryController extends Controller
 
         if($status){
 
-            return redirect()->route('category.index')->with('messageSuccess', trans('messages.category.edit.success'));
+            return redirect()->route('categories.index')->with('messageSuccess', trans('messages.category.edit.success'));
         } else {
 
-            return redirect()->route('category.index')->with('messageFail', trans('messages.category.edit.fail'));
+            return redirect()->route('categories.index')->with('messageFail', trans('messages.category.edit.fail'));
         }
     }
     # del record
@@ -67,10 +67,10 @@ class CategoryController extends Controller
         $status = Category::where('id', $id)->delete();
         if($status){
 
-            return redirect()->route('category.index')->with('messageSuccess', trans('messages.category.del.success'));
+            return redirect()->route('categories.index')->with('messageSuccess', trans('messages.category.del.success'));
         } else {
 
-            return redirect()->route('category.index')->with('messageFail', trans('messages.category.del.fail'));
+            return redirect()->route('categories.index')->with('messageFail', trans('messages.category.del.fail'));
         }
     }
     # live search by ajax . return result of search by the cate name
@@ -78,7 +78,7 @@ class CategoryController extends Controller
     {
         if(isset($text))
         {
-            $listCategories = Category::where('name_category', 'LIKE', "%{$text}%")->get();
+            $listCategories = Category::where('name_category', 'LIKE', "%{$text}%")->paginate(config('setting.paginate'));
 
             return view('ajax.admin.category.search', compact('listCategories'));
         }

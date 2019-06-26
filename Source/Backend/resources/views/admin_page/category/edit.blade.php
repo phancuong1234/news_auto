@@ -11,7 +11,7 @@
                     <p class="card-description">
                         Chỉnh sửa danh mục
                     </p>
-                    {!! Form::open(['method' => 'PATCH', 'route' => ['category.update', $category->id], 'class' => 'forms-sample', 'id' => 'edit-category']) !!}
+                    {!! Form::open(['method' => 'PATCH', 'route' => ['categories.update', $category->id], 'class' => 'forms-sample', 'id' => 'edit-category']) !!}
                     <div class="form-group">
                         {!! Form::label('name_category', 'Tên danh mục') !!}
                         {!! Form::text('name_category', $category->name_category, ['id' => 'name_category', 'class' => 'form-control', 'placeholder' => 'Tên danh mục']) !!}

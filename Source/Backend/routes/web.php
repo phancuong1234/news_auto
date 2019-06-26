@@ -19,22 +19,26 @@ Route::prefix('admin')->group(function () {
     });
     Route::namespace('Admin')->group(function () {
 
-        Route::resource('category','CategoryController');
+        Route::resource('categories','CategoryController');
 
         Route::resource('users','UserController');
 
         Route::resource('news','NewsController');
 
-        Route::get('/category/search/{text}',[
+        Route::resource('crawler','CrawlController');
+
+        Route::get('/categories/search/{text}',[
             'as' => 'search.category',
             'uses' => 'CategoryController@getSearchAjax',
         ]);
-
         Route::get('/news/search/{text}',[
             'as' => 'search.news',
             'uses' => 'NewsController@getSearchAjax',
         ]);
-
+        # crawl auto
+        Route::get('/crawl-auto',[
+            'as' => 'crawl.auto',
+            'uses' => 'CrawlController@crawl',
+        ]);
     });
 });
-

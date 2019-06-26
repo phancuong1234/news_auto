@@ -14,23 +14,29 @@
                             Thêm
                         </a>
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('news')">
+                        <div class="btn-next-prev">
+                            <span class="text-total-news"> {{ $listNews->firstItem() }} - {{ $listNews->lastItem() }} trong tổng số {{ $listNews->total() }} bài viết </span>
+                            <a href="{{ $listNews->previousPageUrl() }}" class="previous round {{ ($listNews->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                            <input class="text-paginate" type="text" id="text-paginate-news"/>
+                            <a href="{{ $listNews->nextPageUrl() }}" class="next round {{ ($listNews->currentPage() != $listNews->total())?'btn-active':'' }}">&#8250;</a>
+                        </div>
                     </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th width="15%">
+                                <th>
                                     ID
                                 </th>
-                                <th width="20%">
+                                <th>
                                     Tiêu đề
                                 </th>
-                                <th width="35%">
+                                <th>
                                     Mô tả ngắn
                                 </th>
-                                <th width="15%">
+                                <th>
                                     Tình Trạng
                                 </th>
-                                <th width="15%">
+                                <th>
                                     Hành Động
                                 </th>
                             </tr>

@@ -36,15 +36,21 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./templates/admin/pages/forms/basic_elements.html">
+                <a class="nav-link" href="{{ route('categories.index') }}">
                     <span class="menu-title">Quản Lý Danh Mục</span>
                     <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./templates/admin/pages/charts/chartjs.html">
+                <a class="nav-link" href="{{ route('news.index') }}">
                     <span class="menu-title">Quản Lý Bài Viết</span>
                     <i class="mdi mdi mdi-newspaper menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('crawler.index') }}">
+                    <span class="menu-title">Cập Nhật Từ Website</span>
+                    <i class="mdi mdi-auto-upload menu-icon"></i>
                 </a>
             </li>
         </ul>

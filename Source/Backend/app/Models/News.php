@@ -11,7 +11,7 @@ class News extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id_category',
+        'list_id_category',
         'id_user',
         'title',
         'short_description',

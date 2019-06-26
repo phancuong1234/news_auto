@@ -11,7 +11,7 @@
                     <p class="card-description">
                         Thêm danh mục mới
                     </p>
-                    {!! Form::open(['method' => 'POST', 'route' => 'category.store', 'class' => 'forms-sample', 'id' => 'add-category']) !!}
+                    {!! Form::open(['method' => 'POST', 'route' => 'categories.store', 'class' => 'forms-sample', 'id' => 'add-category']) !!}
                         <div class="form-group">
                             {!! Form::label('name_category', 'Tên danh mục') !!}
                             {!! Form::text('name_category', '', ['id' => 'name_category', 'class' => 'form-control', 'placeholder' => 'Tên danh mục']) !!}
