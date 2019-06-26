@@ -76,7 +76,6 @@ $(function() {
         radius: 0
       }
     }
-
   };
   var doughnutPieData = {
     datasets: [{

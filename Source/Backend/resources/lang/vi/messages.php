@@ -79,5 +79,17 @@ return [
             'success' => 'Sửa bình luận thành công',
             'fail' => 'Sửa bình luận thất bại',
         ]
+    'name_chart'=>[
+        'user' => 'Số người đăng ký trong các tháng',
+        'view' => 'Tổng số view các bài viết theo tháng',
+        'comment' => 'Tổng số view các bài viết theo tháng',
+        'commentmonth' => 'Top 10 bài viết có số bình luận nhiều nhất tháng',
+        'article' => 'Tổng số bài viết trong các tháng',
+        'articlebycate' => 'Tổng số  bài viết sắp xếp theo danh mục',
+        'col_name' => 'Số lượng comment',
+        'row_name' => 'ID bài viết',
+        'default_col_name' => 'Số Lượng',
+        'default_row_name' => 'Tháng',
+
     ],
 ];
