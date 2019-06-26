@@ -15,7 +15,7 @@
                         </a>
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('category')">
                         <div class="btn-next-prev">
-                            <span class="text-total-news"> {{ $listCategories->firstItem() }} - {{ $listCategories->lastItem() }} trong tổng số {{ $listCategories->total() }} danh mục </span>
+                            <span class="text-total-news">{{ ($listCategories->count() > 0) ? $listCategories->firstItem().' - '.$listCategories->lastItem().' trong tổng số '.$listCategories->total().' danh mục':"" }} </span>
                             <a href="{{ $listCategories->previousPageUrl() }}" class="previous round {{ ($listCategories->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
                             <input class="text-paginate" type="text" id="text-paginate-cate" />
                             <a href="{{ $listCategories->nextPageUrl() }}" class="next round {{ ($listCategories->currentPage() != $listCategories->total())?'btn-active':'' }}">&#8250;</a>

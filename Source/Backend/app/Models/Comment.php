@@ -11,7 +11,7 @@ class Comment extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id_new',
+        'id_news',
         'id_user',
         'content',
         'is_active',

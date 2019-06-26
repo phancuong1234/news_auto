@@ -63,4 +63,21 @@ return [
         'start' => 'start',
         'cancel' => 'cancel',
     ],
+    'confirm_change_status' => 'Do you want to change the status of the record?',
+    'update_status_fail' => 'Change the state of the failed record',
+    'update_status_success' => 'Change the status of the record successfully',
+    'comment' => [
+        'add' => [
+            'success' => 'add successful comment',
+            'fail' => 'add fail comment',
+        ],
+        'del' => [
+            'success' => 'del successful comment',
+            'fail' => 'del fail comment',
+        ],
+        'edit' => [
+            'success' => 'edit successful comment',
+            'fail' => 'edit fail comment',
+        ]
+    ],
 ];

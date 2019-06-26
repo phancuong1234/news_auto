@@ -22239,7 +22239,8 @@ dl li {
     display: inline;
     float: right;
     margin-right: 1%;
-    width: 35%;
+    width: 55%;
+    text-align: right;
 }
 .text-total-news {
     font-size: 13px;
@@ -22247,6 +22248,6 @@ dl li {
 }
 .text-paginate {
     width: 10%;
-    border: 1px solid;
+    border: 1px solid #ebedf2;
 }
 /*# sourceMappingURL=maps/style.css.map */
