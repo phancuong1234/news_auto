@@ -97,8 +97,8 @@ $(document).ready(function() {
                 minlength: Lang.get('validation_admin.user.email.password'),
             },
             repass: {
-                required: Lang.get('validation_admin.user.required.re-pass'),
-                equalTo: Lang.get('validation_admin.user.re-pass.same'),
+                required: Lang.get('validation_admin.user.required.repass'),
+                equalTo: Lang.get('validation_admin.user.repass.same'),
             },
         },
 
