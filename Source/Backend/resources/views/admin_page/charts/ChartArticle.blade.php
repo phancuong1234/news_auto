@@ -13,17 +13,17 @@
                 </div>
                 <div class="panel-footer">
                     <p class="float-left ml-2">Xem theo loại bài viết :</p>
-                    <select class="bmdb-select md-form" name="month" id="select-cate">
+                    <select class="bmdb-select md-form ml-2" name="month" id="select-cate">
                         <option value="" disabled selected>Chọn Loại</option>
                             @foreach($category as $cate)                
                                 <option value="{{$cate->id}}">{{$cate->name_category}}</option>
                             @endforeach
                     </select>
-                </div>
-                <div class="form-group flex-row bd-highlight d-flex mt-3">
-                        <label for="select-year-user" class="p-2 bd-highlight">Xem Theo Năm :</label>
-                        <input type="text" class="form-control w-50 p-2 bd-highlight" id="select-year-art" name="selectyear" placeholder="Mời nhập Năm">
-                        <button type="submit" id="submit-year-art" class="btn btn-primary ml-2 btn-sm">Submit</button>
+                    <form class="form-group mt-3" id="form-art">
+                        <label for="select-year-art" class="p-2 bd-highlight">Xem Theo Năm :</label>
+                        <input type="text" class="form-control input-year-chart" id="select-year-art" name="selectyear" placeholder="Mời nhập Năm">
+                        <button type="submit" id="submit-year-art" class="btn btn-primary btn-sm">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

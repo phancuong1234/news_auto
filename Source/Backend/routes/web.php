@@ -73,6 +73,7 @@ Route::prefix('admin')->group(function () {
             'as'=>'ChartUser',
             'uses'=>'ChartController@index',
         ]);
+
         Route::get('ChartView',[
             'as'=>'ChartView',
             'uses'=>'ChartController@indexView',
@@ -94,6 +95,11 @@ Route::prefix('admin')->group(function () {
         Route::get('ChartArticleTopView',[
             'as'=>'ChartArticleTopView',
             'uses'=>'ChartController@indexArticleTopView',
+        ]);
+
+        Route::get('ChartTopMod',[
+            'as'=>'ChartTopMod',
+            'uses'=>'ChartController@indexChartTopMod',
         ]);
         //ajax chart
         Route::get('/ajax/chart/get-number-user-every-month',[
@@ -142,6 +148,14 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/ajax/chart/get-article-rate',[
             'uses' => 'ChartController@countArticleRate',
+        ]);
+        
+        Route::get('/ajax/chart/get-top-btv-in-this-year',[
+            'uses' => 'ChartController@topBTV',
+        ]);
+
+        Route::get('/ajax/chart/get-top-mod-in-choose-time/{year}-{month}',[
+            'uses' => 'ChartController@topModChooseTime',
         ]);
     });
 });

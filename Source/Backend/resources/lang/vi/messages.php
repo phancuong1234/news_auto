@@ -105,5 +105,7 @@ return [
         'row_name' => 'ID bài viết',
         'default_col_name' => 'Số Lượng',
         'default_row_name' => 'Tháng',
+        'row_name_Top_Mod' => 'tên Mod',
+        'topMod' => 'Top 10 Mod trong năm nay',
     ],
 ];

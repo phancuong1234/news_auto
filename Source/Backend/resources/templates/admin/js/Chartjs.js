@@ -100,72 +100,20 @@ $( document ).ready(function() {
             setChart(line, 'bar', Lang.get('messages.name_chart.topview'), 'Article-top-view-chart', id ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name'));
         }
     });
-    //event change chart
-    $('#submit-year-user').click(function(){    
-        var year = $('#select-year-user').val();
-        $("canvas#user-chart").remove();
-        $("div#panel-body").append('<canvas id="user-chart"></canvas>');
-            $.ajax({
-                url : "/admin/ajax/chart/get-number-user-by-year/" + year,
-                method : 'GET',
-                datatype: "json",
-                success : function(data){
-                    var userByYear = JSON.parse(data) ;
-                    var userByYearArr = [];
-                        for(let i = 1; i <= 12; i++){
-                            if(userByYear[i]==null){
-                                userByYearArr.push(0);      
-                            }else{
-                                userByYearArr.push(userByYear[i]);
-                            }
-                        }
-                    setChart(userByYearArr, 'line', Lang.get('messages.name_chart.useryearago'),'user-chart', 0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
-                }
-            });      
-    });
-    $('#submit-year-view').click(function(){
-        $("canvas#view-chart").remove();
-        $("div#panel-body").append('<canvas id="view-chart"></canvas>');
-        var year = $('#select-year-view').val();
-            $.ajax({
-                url : "/admin/ajax/chart/get-number-view-by-year/" + year,
-                method : 'GET',
-                datatype: "json",
-                success : function(data){
-                    var viewByYear = JSON.parse(data) ;
-                    var viewByYearArr = [];
-                        for(let i = 1; i <= 12; i++){
-                            if(viewByYear[i]==null){
-                                viewByYearArr.push(0);      
-                            }else{
-                                viewByYearArr.push(viewByYear[i]);
-                            }
-                        }
-                    setChart(viewByYearArr, 'line', Lang.get('messages.name_chart.view'),'view-chart', 0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
-                }
-            });      
-    });
-    $('#submit-year-art').click(function(){
-        $("canvas#Article-chart").remove();
-        $("div#panel-body").append('<canvas id="Article-chart"></canvas>');
-        var year = $('#select-year-art').val();
-            $.ajax({
-                url : "/admin/ajax/chart/get-count-article-by-year/" + year,
-                method : 'GET',
-                datatype: "json",
-                success : function(data){
-                    var articleByYear = JSON.parse(data) ;
-                    var articleByYearArr = [];
-                        for(let i = 1; i <= 12; i++){
-                            if(articleByYear[i]==null){
-                                articleByYearArr.push(0);      
-                            }else{
-                                articleByYearArr.push(articleByYear[i]);
-                            }
-                        }
-                    setChart(articleByYearArr, 'bar', Lang.get('messages.name_chart.article'),'Article-chart',0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
-                }
-            });      
+    $.ajax({
+        url : '/admin/ajax/chart/get-top-btv-in-this-year',
+        method : 'GET',
+        datatype: "json",
+        success : function(data){
+            var dataFormat = JSON.parse(data);
+            var line = [];
+            var name = [];
+            for(var i = 0; i < Objectsize(dataFormat); i++){
+                line[i] = dataFormat[i].total;
+                name[i] = dataFormat[i].name;
+            }  
+            setChart(line, 'bar', Lang.get('messages.name_chart.topMod'), 'top-btv-chart', name ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name_Top_Mod'));
+        }
     });
     $('#select-cate').change(function(){
         $("canvas#Article-chart").remove();
@@ -217,35 +165,6 @@ $( document ).ready(function() {
           }
         });
     });
-    $("#submit-time-top-view").click(function(){
-        $("canvas#Article-top-view-chart").remove();
-        $("div#panel-body").append('<canvas id="Article-top-view-chart"></canvas>');
-        var year = $('#select-year-top-view').val();
-        var month = $('#select-month-top-view').val();
-          $.ajax({
-            url: "/admin/ajax/chart/get-top-view-in-choose-time/" + year +"-"+ month,
-            method: "GET",
-            datatype: "json",
-            success: function(data){
-                var viewchoosetime = JSON.parse(data);
-                var size = Objectsize(viewchoosetime);
-                var dataOfview = [];
-                var label_rows = [];
-                if(size > 0){
-                  for(var i = 0; i < size; i++){
-                    dataOfview[i] = viewchoosetime[i].view;
-                    label_rows[i] = viewchoosetime[i].id;
-                  }
-                }
-                else {
-                  dataOfview = ['null','null','null','null','null','null','null','null','null','null'];
-                  label_rows = ['null','null','null','null','null','null','null','null','null','null'];
-                }
-    
-                setChart(dataOfview, 'bar', Lang.get('messages.name_chart.topviewchoose'), 'Article-top-view-chart', label_rows ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name'));
-            }
-          });
-      });
 });
 function  Objectsize(obj){
     var size = 0, key;

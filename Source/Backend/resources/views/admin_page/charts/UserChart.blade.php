@@ -11,10 +11,12 @@
                 <div class="panel-body" id="panel-body">
                     <canvas id="user-chart"></canvas>
                 </div>
-                <div class="form-group flex-row bd-highlight d-flex">
-                    <label for="select-year-user" class="p-2 bd-highlight">Xem Theo Năm :</label>
-                    <input type="text" class="form-control w-50 p-2 bd-highlight" id="select-year-user" name="selectyear" placeholder="Mời nhập Năm">
-                    <button type="submit" id="submit-year-user" class="btn btn-primary ml-2 btn-sm">Submit</button>
+                <div class="panel-footer">
+                    <form class="form-group" id="form-user">
+                        <label for="select-year-user" class="p-2 bd-highlight">Xem Theo Năm :</label>
+                        <input type="text" class="form-control input-year-chart" id="select-year-user" name="selectyear" placeholder="Mời nhập Năm">
+                        <button type="submit" id="submit-year-user" class="btn btn-primary btn-sm">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
