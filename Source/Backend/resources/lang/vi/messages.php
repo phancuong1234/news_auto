@@ -39,6 +39,10 @@ return [
         'edit' => [
             'success' => 'Sửa tin tức thành công',
             'fail' => 'Sửa tin tức thất bại',
+        ],
+        'approve' => [
+            'success' => 'Phê duyệt tin tức thành công ',
+            'fail' => 'Phê duyệt tin tức thất bại',
         ]
     ],
     'user' => [
@@ -78,7 +82,12 @@ return [
         'edit' => [
             'success' => 'Sửa bình luận thành công',
             'fail' => 'Sửa bình luận thất bại',
-        ],
+        ]
+    ],
+    'confirm' => [
+        'confirm' => 'bạn có muốn chấp nhận đăng tin tức này không ?',
+        'success' => 'duyệt thành công',
+        'fail' => 'duyệt thất bại',
     ],
     'name_chart'=>[
         'user' => 'Số người đăng ký trong các tháng trong năm nay',

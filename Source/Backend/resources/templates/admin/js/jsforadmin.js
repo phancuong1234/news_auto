@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).ready(function() {
     var btn = document.getElementById("btn-start-crawl");
     //loader event crawl
     var loader = {
@@ -97,10 +97,20 @@ $( document ).ready(function() {
             window.location.href = "/admin/comments?page=" + number;
         }
     });
+    // preview img
+    function readURLPicTure(input) {
 
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img-preview').attr('src', e.target.result);
+                $('#img-preview-tag-a').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     CKEDITOR.replace('content');
 });
-
 //event lock or active
 function changeStatusCmt(id){
     const flag = confirm(Lang.get('messages.confirm_change_status'));
@@ -112,7 +122,7 @@ function changeStatusCmt(id){
             ajaxChangeStatus(id);
         }
     }
-};
+}
 //ajax change status
 function ajaxChangeStatus(id){
     $.ajaxSetup({
@@ -120,35 +130,24 @@ function ajaxChangeStatus(id){
             if (!type.crossDomain) {
                 xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
             }
-        }
+        },
     });
     $.ajax({
-        url: '/admin/comments/' + id,
-        method: "PATCH",
-        success: function () {
-            alert(Lang.get('messages.update_status_success'));
-            $('#event-lock-active').removeClass('badge-gradient-success');
-            $('#event-lock-active').addClass('badge-gradient-danger');
-            document.getElementById("event-lock-active").innerHTML = "Lock";
-        },
-        error: function () {
-            alert(Lang.get('messages.update_status_fail'));
-            $('#event-lock-active').removeClass('badge-gradient-danger');
-            $('#event-lock-active').addClass('badge-gradient-success');
-            document.getElementById("event-lock-active").innerHTML = "Active";
-        }
-     });
-};
-//readURLPicTure
-function readURLPicTure(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#img-preview').attr('src', e.target.result);
-            $('#img-preview-tag-a').attr('href', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
+       url: '/admin/comments/' + id,
+       method: "PATCH",
+       success: function () {
+           alert(Lang.get('messages.update_status_success'));
+           $('#event-lock-active').removeClass('badge-gradient-success');
+           $('#event-lock-active').addClass('badge-gradient-danger');
+           document.getElementById("event-lock-active").innerHTML = "Lock";
+       },
+       error: function () {
+           alert(Lang.get('messages.update_status_fail'));
+           $('#event-lock-active').removeClass('badge-gradient-danger');
+           $('#event-lock-active').addClass('badge-gradient-success');
+           document.getElementById("event-lock-active").innerHTML = "Active";
+       }
+    });
 }
 //confirm khi del 1 bản ghi
 function submitFormDeleteHard(id) {
@@ -157,6 +156,12 @@ function submitFormDeleteHard(id) {
         document.getElementById(id).submit();
     }
 };
+function submitFormAcceptNews(id) {
+    const flag = confirm(Lang.get('messages.confirm.confirm'));
+    if (flag === true) {
+        document.getElementById(id).submit();
+    }
+}
 function thisFileUpload() {
     document.getElementById("image").click();
 };
@@ -175,7 +180,7 @@ function liveSearch(type){
         }
         if (type == 'news'){
             $.ajax({
-                url: "/admin/news/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                url: "/admin/news/search/keyword=" + query+ "/type=active", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
                 method: "GET", // phương thức gửi dữ liệu.
                 success: function (data) { //dữ liệu nhận về
                     $('#news').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
@@ -191,5 +196,14 @@ function liveSearch(type){
                 }
             });
         }
+        if (type == 'news-pending'){
+            $.ajax({
+                url: "/admin/news/search/keyword=" + query+ "/type=pending", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                method: "GET", // phương thức gửi dữ liệu.
+                success: function (data) { //dữ liệu nhận về
+                    $('#news').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
+                }
+            });
+        }
     }
-}
+};

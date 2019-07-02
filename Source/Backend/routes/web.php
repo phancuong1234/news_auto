@@ -24,10 +24,39 @@ Route::prefix('admin')->group(function () {
         Route::resource('users','UserController');
         #news
         Route::resource('news','NewsController');
+        #index pending news
+        Route::get('/pending/news',[
+            'as' => 'pending.news',
+            'uses' => 'NewsController@pendingIndex',
+        ]);
+        #pending preview
+        Route::get('/pending/news/preview/{id}',[
+            'as' => 'pending.news.preview',
+            'uses' => 'NewsController@pendingPreview',
+        ]);
+        #accept news
+        Route::patch('/pending/news/{id}',[
+            'as' => 'pending.accept.news',
+            'uses' => 'NewsController@approve',
+        ]);
         #crawler
         Route::resource('crawler','CrawlController');
         # commment
         Route::resource('comments', 'CommentController');
+        #livesearch
+        Route::get('/categories/search/{text}',[
+            'as' => 'search.category',
+            'uses' => 'CategoryController@getSearchAjax',
+        ]);
+        Route::get('/news/search/keyword={text}/type={typeRQ}',[
+            'as' => 'search.news',
+            'uses' => 'NewsController@getSearchAjax',
+        ]);
+        Route::get('/comments/search/{text}',[
+            'as' => 'search.comments',
+            'uses' => 'CommentController@getSearchAjax',
+        ]);
+        # chart
         Route::get('ChartUser', [
             'as'=>'ChartUser',
             'uses'=>'ChartController@index',
@@ -74,7 +103,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/ajax/chart/get-number-view-every-month',[
             'uses' => 'ChartController@countView',
         ]);
-        
+
         Route::get('/ajax/chart/get-number-view-by-year/{year}',[
             'uses' => 'ChartController@countViewByYear',
         ]);
@@ -101,19 +130,6 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/ajax/chart/get-article-rate',[
             'uses' => 'ChartController@countArticleRate',
-        ]);
-        # live search
-        Route::get('/category/search/{text}',[
-            'as' => 'search.category',
-            'uses' => 'CategoryController@getSearchAjax',
-        ]);
-        Route::get('/news/search/{text}',[
-            'as' => 'search.news',
-            'uses' => 'NewsController@getSearchAjax',
-        ]);
-        Route::get('/comments/search/{text}',[
-            'as' => 'search.comments',
-            'uses' => 'CommentController@getSearchAjax',
         ]);
         # crawl auto
         Route::get('/crawl-auto',[
