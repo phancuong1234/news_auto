@@ -75,5 +75,11 @@ return [
             'mimes' => "The avatar must be a file type: jpeg, png, bmp, gif, svg, jpg.",
             'max' => 'file upload limit is 10 MB',
         ]
+    ],
+    'chart' => [
+        'year' => [
+            'required'=> 'this filed can not be null',
+            'number' => 'please enter a number'
+        ]
     ]
 ];

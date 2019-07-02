@@ -104,5 +104,7 @@ return [
         'default_row_name' => 'Month',
         'col_name' => 'Amount',
         'row_name' => 'ID article',
-    ],
+        'row_name_Top_Mod' => 'Mod Username',
+        'topMod' => 'Top 10 Mod in this year',
+    ],    
 ];

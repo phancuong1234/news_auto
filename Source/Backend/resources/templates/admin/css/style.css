@@ -22250,4 +22250,13 @@ dl li {
     width: 10%;
     border: 1px solid #ebedf2;
 }
+.select-month-chart {
+    width: 15%;
+    display: inline-block;
+}
+.input-year-chart {
+  width: 30%;
+  margin-left: 2%;
+  display: inline;
+}
 /*# sourceMappingURL=maps/style.css.map */

@@ -259,4 +259,55 @@ class ChartController extends Controller
 		
 		return json_encode($topviewchoosetimeArr);
 	}
+
+	public function indexChartTopMod(){
+
+		return view('admin_page.charts.ChartTopMod');
+	}
+
+	public function topBTV(){
+		$topBTV = News::join('users','news.id_user','=','users.id')	
+					->whereNull('news.url_news')
+					->whereYear('news.created_at',date("Y"))
+					->select('users.username',DB::raw("COUNT(news.id) as total"))
+					->groupBy('news.id_user')
+					->limit(10)
+					->orderBy('total','DESC')
+					->get();
+		$topMod = [];
+		foreach ($topBTV as $key => $value) {
+			$topMod[$key]['name'] = $value->username;
+			$topMod[$key]['total'] = $value->total;
+		}
+		return json_encode($topMod);
+	}
+
+	public function topModChooseTime($year, $month){
+		if($month != '0'){
+			$topmodchoosetime = News::whereYear('news.created_at',$year)
+				->whereMonth('news.created_at',$month)
+				->join('users','news.id_user','=','users.id')
+				->select('users.username',DB::raw("COUNT(news.id) as total"))
+				->groupBy('news.id_user')
+				->orderBy('total','DESC')
+				->limit(10)
+				->get();
+		}
+		else{
+			$topmodchoosetime = News::whereYear('news.created_at',$year)
+				->join('users','news.id_user','=','users.id')
+				->select('users.username',DB::raw("COUNT(news.id) as total"))
+				->groupBy('news.id_user')
+				->orderBy('total','DESC')
+				->limit(10)
+				->get();
+		}
+		$topmodchoosetimeArr = [];
+		foreach($topmodchoosetime as $key => $value){
+			$topmodchoosetimeArr[$key]['username'] = $value->username;
+			$topmodchoosetimeArr[$key]['total']  = $value->total;
+		}	
+		
+		return json_encode($topmodchoosetimeArr);
+	}
 }
