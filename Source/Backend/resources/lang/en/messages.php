@@ -111,5 +111,6 @@ return [
         'success' => 'Login success',
         'lock-user' => 'Your account is locked',
         'wrong-pass' => 'Invalid username or password',
-    ],  
+    ],
+    'agree_rule' => 'You have not agreed to the terms',
 ];

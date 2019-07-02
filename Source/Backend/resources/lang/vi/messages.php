@@ -113,4 +113,5 @@ return [
         'lock-user' => 'Tài khoản đã bị khóa',
         'wrong-pass' => 'Sai username hoặc password',
     ],
+    'agree_rule' => 'bạn chưa đồng ý các điều khoản ?',
 ];

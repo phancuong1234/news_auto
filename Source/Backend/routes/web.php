@@ -19,6 +19,8 @@ Route::get('/ajax/profile',[
 Route::namespace('Authentication')->group(function () {
     #login
     Route::resource('login', 'LoginController');
+    #register
+    Route::resource('register', 'RegisterController');
 });
 Route::prefix('admin')->group(function () {
     Route::namespace('Admin')->group(function () {
@@ -28,7 +30,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories','CategoryController');
         #users
         Route::resource('users','UserController');
-                
+
         Route::get('AdminManager', [
             'as'=>'AdminManager',
             'uses'=>'UserManagerController@AdminManager',
@@ -155,11 +157,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/ajax/chart/get-number-view-by-year/{year}',[
             'uses' => 'ChartController@countViewByYear',
         ]);
-        
+
         Route::get('/ajax/chart/get-count-view-by-category',[
             'uses'=>'ChartController@ChartViewByCategory',
         ]);
-        
+
         Route::get('/ajax/chart/get-top-view-in-year',[
             'uses' => 'ChartController@topViewArt',
         ]);
@@ -183,7 +185,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/ajax/chart/get-article-rate',[
             'uses' => 'ChartController@countArticleRate',
         ]);
-        
+
         Route::get('/ajax/chart/get-top-btv-in-this-year',[
             'uses' => 'ChartController@topBTV',
         ]);

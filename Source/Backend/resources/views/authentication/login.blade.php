@@ -1,4 +1,4 @@
-<head>
+<head lang="vi">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,8 +58,7 @@
 <!-- plugins:js -->
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.base.js')) }}
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.addons.js')) }}
-<!-- endinject -->
-<!-- inject:js -->
+{{ Html::script(asset('messages.js')) }}
 {{ Html::script(asset('/templates/admin/js/off-canvas.js')) }}
 {{ Html::script(asset('/templates/admin/js/misc.js')) }}
 <!-- endinject -->
