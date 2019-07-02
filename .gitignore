@@ -2,6 +2,8 @@
 /Source/Backend/public/images/avatars/
 /Source/Backend/public/images/news/
 /Source/Backend/public/hot
+/Source/Backend/public/css
+/Source/Backend/public/js
 /Source/Backend/public/storage
 /Source/Backend/storage/*.key
 /Source/Backend/vendor

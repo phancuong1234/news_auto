@@ -71,8 +71,9 @@ return [
         ],
         'image'=>[
             'image' => 'Tệp được chọn không phải là tệp hình ảnh',
-            'mines' => 'Tệp được chọn phải thuộc các đuôi sau : jpeg, png, jpg, gif'
+            'mimes' => 'Tệp được chọn phải thuộc các đuôi sau : jpeg, png, jpg, gif'
         ],
         'valid_user'=>'username phải bắt đầu bằng chữ và không chứa kí tự đặc biệt',
+        'numeric' => 'Số điện thoại phải là kí tự số',
     ],
 ];
