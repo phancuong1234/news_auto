@@ -31,13 +31,4 @@ return [
             'of_server' => 0,
         ],
     ],
-    'max_time_request' => 20000,
-    'url_crawl' => [
-        'dan_tri_page' => 'https://dantri.com.vn/',
-    ],
-    'detect_name_crawl' => [
-        'name_1' => 'Du lịch',
-        'name_2' => 'Video',
-    ],
-    'paginate' => 10,
 ];

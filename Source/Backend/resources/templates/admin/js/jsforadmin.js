@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var btn = document.getElementById("btn-start-crawl");
+    var btnCrawlRSS = document.getElementById("btn-start-crawl-by-rss");
     //loader event crawl
     var loader = {
         unload: function(){
@@ -16,11 +17,9 @@ $(document).ready(function() {
             $("#text-wait").css("display", "block");
             $("#icon-success").css("display", "none");
             $("#screen-info").css("display", "none");
-            // $('#btn-start-crawl').attr("disabled", true);
         },
         //Startet success Animation
         success: function(){
-            btn.innerHTML = Lang.get('messages.button.start');
             $("#bubblingG").css("display", "none");
             $("#icon-success").css("display", "block");
             $("#icon-fail").css("display", "none");
@@ -29,8 +28,6 @@ $(document).ready(function() {
             setTimeout(() => {
                 $("#screen-info").css("display", "block");
             }, 1000);
-            $('#btn-start-crawl').attr("disabled", false);
-
         },
         //Startet error Animation
         error: function() {
@@ -40,7 +37,6 @@ $(document).ready(function() {
             document.getElementById("text-status").innerHTML = Lang.get('messages.crawl.crawl-fail');
             $("#text-status").css("color", "red");
             $('#btn-start-crawl').attr("disabled", false);
-            btn.innerHTML = Lang.get('messages.button.start');
         }
     }
     // event crawl
@@ -49,17 +45,20 @@ $(document).ready(function() {
             btn.innerHTML = Lang.get('messages.button.cancel');
             setTimeout(() => {
                 loader.load();
+                $('#btn-start-crawl').attr("disabled", true);
             }, 200);
             setTimeout(() => {
                 ignore = $.ajax({
                     url: "/admin/crawl-auto", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
                     method: "GET", // phương thức gửi dữ liệu.
                     success: function (data) { //dữ liệu nhận về
+                        btn.innerHTML = Lang.get('messages.button.start');
                         $('#info-of-crawl').html(data); //nhận dữ liệu dạng html và gán vào thẻ có id là info-of-crawl
                         loader.success();
                     },
                     error: function () {
                         loader.error();
+                        btn.innerHTML = Lang.get('messages.button.start');
                     },
                 });
             }, 2000);
@@ -67,6 +66,42 @@ $(document).ready(function() {
         else {
             loader.error();
             btn.innerHTML = Lang.get('messages.button.start');
+        }
+    });
+    //crawl rss
+    $("#crawl-xml").submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = $(this);
+        var url = form.attr('action');
+        if($('#urlRSS').val().trim() != ''){
+            if($('#btn-start-crawl-by-rss').val().trim() == Lang.get('messages.button.start')){
+                btnCrawlRSS.value = Lang.get('messages.button.cancel');
+                setTimeout(() => {
+                    loader.load();
+                    $('#btn-start-crawl-by-rss').attr("disabled", true);
+                }, 200);
+                setTimeout(() => {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(), // serializes the form's elements.
+                        success: function(data)
+                        {
+                            btnCrawlRSS.value = Lang.get('messages.button.start');
+                            $('#screen-info').html(data);  // show response from the php script.
+                            loader.success();
+                        },
+                        error: function () {
+                            loader.error();
+                            btnCrawlRSS.value = Lang.get('messages.button.start');
+                        },
+                    });
+                }, 2000);
+            }
+            else {
+                loader.error();
+                btnCrawlRSS.value = Lang.get('messages.button.start');
+            }
         }
     });
     //event show name file
@@ -133,20 +168,20 @@ function ajaxChangeStatus(id){
         },
     });
     $.ajax({
-       url: '/admin/comments/' + id,
-       method: "PATCH",
-       success: function () {
-           alert(Lang.get('messages.update_status_success'));
-           $('#event-lock-active').removeClass('badge-gradient-success');
-           $('#event-lock-active').addClass('badge-gradient-danger');
-           document.getElementById("event-lock-active").innerHTML = "Lock";
-       },
-       error: function () {
-           alert(Lang.get('messages.update_status_fail'));
-           $('#event-lock-active').removeClass('badge-gradient-danger');
-           $('#event-lock-active').addClass('badge-gradient-success');
-           document.getElementById("event-lock-active").innerHTML = "Active";
-       }
+        url: '/admin/comments/' + id,
+        method: "PATCH",
+        success: function () {
+            alert(Lang.get('messages.update_status_success'));
+            $('#event-lock-active').removeClass('badge-gradient-success');
+            $('#event-lock-active').addClass('badge-gradient-danger');
+            document.getElementById("event-lock-active").innerHTML = "Lock";
+        },
+        error: function () {
+            alert(Lang.get('messages.update_status_fail'));
+            $('#event-lock-active').removeClass('badge-gradient-danger');
+            $('#event-lock-active').addClass('badge-gradient-success');
+            document.getElementById("event-lock-active").innerHTML = "Active";
+        }
     });
 }
 //confirm khi del 1 bản ghi
@@ -168,7 +203,7 @@ function thisFileUpload() {
 function liveSearch(type){
     var query = document.getElementById('search').value;
     //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
-    if(query != '') {
+    if(query.trim() != '') {
         if (type == 'category') { // kiểm tra nếu search danh mục thì thực hiện lệnh bên dưới
             $.ajax({
                 url: "/admin/categories/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.

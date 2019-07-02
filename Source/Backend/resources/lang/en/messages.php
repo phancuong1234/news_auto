@@ -84,6 +84,11 @@ return [
             'fail' => 'edit fail comment',
         ]
     ],
+    'confirm' => [
+        'confirm' => 'Would you like to accept this news?',
+        'success' => 'accept successful request approval',
+        'fail' => 'reject the request approval',
+    ],
     'name_chart'=>[
         'user' => 'Total number of users registered by month in this year',
         'useryearago'=>'Total number of users registered',
@@ -99,10 +104,5 @@ return [
         'default_row_name' => 'Month',
         'col_name' => 'Amount',
         'row_name' => 'ID article',
-    ],
-    'confirm' => [
-        'confirm' => 'Would you like to accept this news?',
-        'success' => 'accept successful request approval',
-        'fail' => 'reject the request approval',
     ],
 ];

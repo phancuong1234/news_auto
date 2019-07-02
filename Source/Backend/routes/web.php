@@ -39,8 +39,6 @@ Route::prefix('admin')->group(function () {
             'as' => 'pending.accept.news',
             'uses' => 'NewsController@approve',
         ]);
-        #crawler
-        Route::resource('crawler','CrawlController');
         # commment
         Route::resource('comments', 'CommentController');
         #livesearch
@@ -55,6 +53,20 @@ Route::prefix('admin')->group(function () {
         Route::get('/comments/search/{text}',[
             'as' => 'search.comments',
             'uses' => 'CommentController@getSearchAjax',
+        ]);
+        # crawl auto
+        Route::resource('crawler','CrawlController');
+        Route::get('/crawl-auto',[
+            'as' => 'crawl.auto',
+            'uses' => 'CrawlController@crawl',
+        ]);
+        Route::get('/index-crawl-by-xml',[
+            'as' => 'index.crawl.xml',
+            'uses' => 'CrawlController@indexPageCrawlByRSS',
+        ]);
+        Route::post('/crawl-by-xml',[
+            'as' => 'crawl.xml',
+            'uses' => 'CrawlController@CrawlByRSS',
         ]);
         # chart
         Route::get('ChartUser', [
@@ -130,11 +142,6 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/ajax/chart/get-article-rate',[
             'uses' => 'ChartController@countArticleRate',
-        ]);
-        # crawl auto
-        Route::get('/crawl-auto',[
-            'as' => 'crawl.auto',
-            'uses' => 'CrawlController@crawl',
         ]);
     });
 });
