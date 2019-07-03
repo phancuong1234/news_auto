@@ -28,6 +28,19 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories','CategoryController');
         #users
         Route::resource('users','UserController');
+                
+        Route::get('AdminManager', [
+            'as'=>'AdminManager',
+            'uses'=>'UserManagerController@AdminManager',
+        ]);
+        Route::get('ModManager', [
+            'as'=>'ModManager',
+            'uses'=>'UserManagerController@ModManager',
+        ]);
+        Route::get('ViewerManager', [
+            'as'=>'ViewerManager',
+            'uses'=>'UserManagerController@ViewerManager',
+        ]);
         #news
         Route::resource('news','NewsController');
         #crawler
@@ -62,6 +75,14 @@ Route::prefix('admin')->group(function () {
             'as' => 'search.comments',
             'uses' => 'CommentController@getSearchAjax',
         ]);
+        Route::get('/users/search/{text}',[
+            'as' => 'search.users',
+            'uses' => 'UserManagerController@getSearchAjax',
+        ]);
+        Route::get('/viewer/search/{text}',[
+            'as' => 'search.viewer',
+            'uses' => 'UserManagerController@getSearchViewerAjax',
+        ]);
         # crawl auto
         Route::resource('crawler','CrawlController');
         Route::get('/crawl-auto',[
@@ -81,6 +102,7 @@ Route::prefix('admin')->group(function () {
             'as'=>'ChartUser',
             'uses'=>'ChartController@index',
         ]);
+
 
         Route::get('ChartView',[
             'as'=>'ChartView',
@@ -133,12 +155,16 @@ Route::prefix('admin')->group(function () {
         Route::get('/ajax/chart/get-number-view-by-year/{year}',[
             'uses' => 'ChartController@countViewByYear',
         ]);
-
+        
+        Route::get('/ajax/chart/get-count-view-by-category',[
+            'uses'=>'ChartController@ChartViewByCategory',
+        ]);
+        
         Route::get('/ajax/chart/get-top-view-in-year',[
             'uses' => 'ChartController@topViewArt',
         ]);
 
-        Route::get('/ajax/chart/get-top-view-in-choose-time/{year}-{month}',[
+        Route::get('/ajax/chart/get-top-view-in-choose-time/{year}-{month}/{amount}',[
             'uses' => 'ChartController@topViewArtChooseTime',
         ]);
 
@@ -162,7 +188,7 @@ Route::prefix('admin')->group(function () {
             'uses' => 'ChartController@topBTV',
         ]);
 
-        Route::get('/ajax/chart/get-top-mod-in-choose-time/{year}-{month}',[
+        Route::get('/ajax/chart/get-top-mod-in-choose-time/{year}-{month}/{amount}',[
             'uses' => 'ChartController@topModChooseTime',
         ]);
     });

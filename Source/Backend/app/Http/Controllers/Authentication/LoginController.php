@@ -23,19 +23,26 @@ class LoginController extends Controller
     {
         $username = $request->username;
         $password = $request->password;
+       
         if(Auth::attempt(['username' => $username, 'password' => $password]))
-        {
-            if(auth()->user()->id_role == config('setting.role.admin'))
+        {   
+            if(auth()->user()->active == config('setting.is_active.active'))
             {
+                if(auth()->user()->id_role == config('setting.role.admin'))
+                {
+                    return redirect()->route('dashboard.index')->with('alert',trans('messages.login.success'));
+                } else {
 
-                return redirect()->route('dashboard.index')->with('alert','Login success');
-            } else {
-
-                return redirect()->route('home-page')->with('alert','Login success');
+                    return redirect()->route('home-page')->with('alert',trans('messages.login.success'));
+                }
+            }
+            else {
+                Auth::logout();
+                return redirect()->route('login.index')->with('alert',trans('messages.login.lock-user'));
             }
         } else {
 
-            return redirect()->route('login.index')->with('alert','Username or Password is invalid');
+            return redirect()->route('login.index')->with('alert',trans('messages.login.wrong-pass'));
         }
     }
 

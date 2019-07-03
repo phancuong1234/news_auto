@@ -26,6 +26,7 @@ return [
             'email' => 'please enter email',
             'password' => 'please enter password',
             'repass' => 'please enter re-password',
+            'id_role'=> 'please choose id_role',
         ],
         'minlenght' => [
             'username' => 'username cannot be less than 8 characters',

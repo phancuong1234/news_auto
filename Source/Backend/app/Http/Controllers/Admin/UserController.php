@@ -15,10 +15,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $userAdmin = User::where('id_role', config('setting.role.admin'))->get();
-        $userMod = User::where('id_role',config('setting.role.mod'))->get();
-        $viewer = User::where('id_role',config('setting.role.user'))->get();
-        return view('admin_page.users.index',compact('userAdmin','userMod','viewer'));
+        
     }
 
     /**
@@ -31,19 +28,17 @@ class UserController extends Controller
         return view('admin_page.users.add');
     }
 
-    //
+
     public function store(UsersRequest $request)
     {
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-        $input['id_role'] = config('setting.role.mod');
         $status = User::create($input);
         if($status){
-
-            return redirect()->route('users.index')->with('messageSuccess', trans('messages.user.add.success'));
+            return redirect()->route('users.create')->with('messageSuccess', trans('messages.user.add.success'));
         } else {
 
-            return redirect()->route('users.index')->with('messageFail', trans('messages.user.add.fail'));
+            return redirect()->route('users.create')->with('messageFail', trans('messages.user.add.fail'));
         }
     }
 
@@ -93,12 +88,25 @@ class UserController extends Controller
     }
 
     public function destroy($id)
-    {
+    {   
+        $typeUser = User::where('id',$id)->first()->id_role;
+        
         $Del = User::where('id',$id)->delete();
+        
         if($Del){
-            return redirect()->route('users.index')->with('messageSuccess', trans('messages.user.del.success'));
+            if($typeUser == config('setting.role.mod')){
+                return redirect()->route('ModManager')->with('messageSuccess', trans('messages.user.del.success'));
+            }
+            else {
+                return redirect()->route('ViewerManager')->with('messageSuccess', trans('messages.user.del.success'));
+            }
         } else {
-            return redirect()->route('users.index')->with('messageFail', trans('messages.user.del.fail'));
+            if($typeUser == config('setting.role.mod')){
+                return redirect()->route('ModManager')->with('messageFail', trans('messages.user.del.fail'));
+            }
+            else {
+                return redirect()->route('ViewerManager')->with('messageFail', trans('messages.user.del.fail'));
+            }
         }
     }
 }

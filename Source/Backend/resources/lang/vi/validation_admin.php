@@ -50,6 +50,7 @@ return [
             'email' => 'vui lòng nhập email',
             'password' => 'vui lòng nhập mật khẩu',
             'repass' => 'vui lòng xác nhận mật khẩu',
+            'id_role'=> 'vui lòng chọn id_role',
         ],
         'minlenght' => [
             'username' => 'tên người dùng không được ít hơn 8 ký tự',
@@ -76,4 +77,10 @@ return [
         'valid_user'=>'username phải bắt đầu bằng chữ và không chứa kí tự đặc biệt',
         'numeric' => 'Số điện thoại phải là kí tự số',
     ],
+    'chart' => [
+        'year' => [
+            'required'=> 'vui lòng nhập trường này',
+            'number' => 'trường này chỉ được nhập số'
+        ]
+    ]
 ];

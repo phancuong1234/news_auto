@@ -75,7 +75,21 @@ class ChartController extends Controller
     	return json_encode($viewcount);
     }
 
-	#
+	public function ChartViewByCategory()
+    {
+		$viewByCate = News::join('categories','news.id_category','=','categories.id')
+					->whereYear('news.created_at',date('Y'))
+					->select(DB::raw("SUM(news.number_view)as total,categories.name_category as name"))
+					->groupBy('news.id_category')
+					->get();
+		$countViewByCate = [];
+		foreach ($viewByCate as $key => $value) {
+			$countViewByCate[$key]['name'] = $value->name;
+			$countViewByCate[$key]['total'] = $value->total;
+		}
+		return json_encode($countViewByCate);
+	}
+	
 	public function countViewByYear($year){
 		$view = News::whereYear('created_at', $year)
 					->select('number_view', 'created_at')
@@ -235,20 +249,20 @@ class ChartController extends Controller
 		return json_encode($topviewArr);
 	}
 
-	public function topViewArtChooseTime($year, $month){
+	public function topViewArtChooseTime($year, $month ,$amount){
 		if($month != '0'){
 			$topviewchoosetime = News::whereYear('created_at',$year)
 				->whereMonth('created_at',$month)
 				->select('id','number_view')
 				->orderBy('number_view','DESC')
-				->limit(10)
+				->limit($amount)
 				->get();
 		}
 		else{
 			$topviewchoosetime = News::whereYear('created_at',$year)
 				->select('id','number_view')
 				->orderBy('number_view','DESC')
-				->limit(10)
+				->limit($amount)
 				->get();
 		}
 		$topviewchoosetimeArr = [];
@@ -282,7 +296,7 @@ class ChartController extends Controller
 		return json_encode($topMod);
 	}
 
-	public function topModChooseTime($year, $month){
+	public function topModChooseTime($year, $month ,$amount){
 		if($month != '0'){
 			$topmodchoosetime = News::whereYear('news.created_at',$year)
 				->whereMonth('news.created_at',$month)
@@ -290,7 +304,7 @@ class ChartController extends Controller
 				->select('users.username',DB::raw("COUNT(news.id) as total"))
 				->groupBy('news.id_user')
 				->orderBy('total','DESC')
-				->limit(10)
+				->limit($amount)
 				->get();
 		}
 		else{
@@ -299,7 +313,7 @@ class ChartController extends Controller
 				->select('users.username',DB::raw("COUNT(news.id) as total"))
 				->groupBy('news.id_user')
 				->orderBy('total','DESC')
-				->limit(10)
+				->limit($amount)
 				->get();
 		}
 		$topmodchoosetimeArr = [];

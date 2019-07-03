@@ -132,6 +132,20 @@ $(document).ready(function() {
             window.location.href = "/admin/comments?page=" + number;
         }
     });
+    $('#text-paginate-user').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $('#text-paginate-user').val();
+            window.location.href = "/admin/ModManager?page=" + number;
+        }
+    });
+    $('#text-paginate-viewer').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $('#text-paginate-viewer').val();
+            window.location.href = "/admin/ViewerManager?page=" + number;
+        }
+    });
     //btn change picture
     $imgSrc = $('#img-preview').attr('src');
     $('#btnChangePicture').on('click', function () {
@@ -287,5 +301,34 @@ function liveSearch(type){
                 }
             });
         }
+        if (type == 'users'){
+            $.ajax({
+                url: "/admin/users/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                method: "GET", // phương thức gửi dữ liệu.
+                success: function (data) { //dữ liệu nhận về
+                    $('#users').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là Users
+                }
+            });
+        }
+        if (type == 'viewer'){
+            $.ajax({
+                url: "/admin/viewer/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                method: "GET", // phương thức gửi dữ liệu.
+                success: function (data) { //dữ liệu nhận về
+                    $('#viewer').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là Users
+                }
+            });
+        }
     }
 };
+$("#show-change-pass").click(function(){
+    $("#show-change-pass").hide();
+    $('#showpass').show();
+    $('#showrepass').show();
+});
+$("#close").click(function(){
+    $("#show-change-pass").show();
+    $('#showpass').hide();
+    $('#showrepass').hide();
+});
+

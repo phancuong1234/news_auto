@@ -94,7 +94,7 @@ return [
         'useryearago'=>'Số người đăng ký trong các tháng',
         'view' => 'Tổng số view các bài viết theo tháng trong năm nay',
         'topview' => 'Top 10 bài viết có lượt xem cao nhất trong năm',
-        'topviewchoose' => 'Top 10 bài viết có lượt xem cao nhất ',
+        'topviewchoose' => 'Top bài viết có lượt xem cao nhất ',
         'viewyearago'=>"Tổng số view các bài viết theo tháng",
         'comment' => 'Tổng số comment các bài viết theo tháng trong năm nay',
         'commentmonth' => 'Top 10 bài viết có số bình luận nhiều nhất tháng',
@@ -107,5 +107,10 @@ return [
         'default_row_name' => 'Tháng',
         'row_name_Top_Mod' => 'tên Mod',
         'topMod' => 'Top 10 Mod trong năm nay',
+    ],
+    'login'=>[
+        'success' => 'Đăng nhập thành công',
+        'lock-user' => 'Tài khoản đã bị khóa',
+        'wrong-pass' => 'Sai username hoặc password',
     ],
 ];

@@ -24,21 +24,30 @@
                 </a>
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartUser')}}">Total User</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartView')}}">Total View</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartComment')}}">Total Comment</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticle')}}">Total Article</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleRate')}}">Article Rate By Category</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleTopView')}}">Top 10 Article View</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartTopMod')}}">Top 10 Mod</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartUser')}}">Biếủ đồ người dùng</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartView')}}">Biểu đồ lượt xem</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartComment')}}">Biểu đồ bình luận</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticle')}}">Biểu đồ bài viết</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleRate')}}">Tỉ lệ bài viết (danh mục)</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleTopView')}}">TOP 10 bài viết (lượt xem)</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartTopMod')}}">TOP 10 mod </a></li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('users.index') }}">
+                <a class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-basic">
                     <span class="menu-title">Quản Lý Người Dùng</span>
+                    <i class="menu-arrow"></i>
                     <i class="mdi mdi-contacts menu-icon"></i>
                 </a>
+                <div class="collapse" id="ui-user">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{route('AdminManager')}}">Admin</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ModManager')}}">Mod</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('ViewerManager')}}">Người đọc</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('users.create')}}">Thêm người dùng</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('categories.index') }}">

@@ -35,8 +35,12 @@
                             {!! Form::label('repass', 'Re-Password') !!}
                             {!! Form::password('repass', ['class'=>'form-control', 'placeholder'=>'Re-Password']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('role', 'Role') !!}
+                            {!! Form::select('id_role', ['' => 'Select role'] + ['2' => 'Mod','3'=>'View User'], null, ['class' => 'form-control']) !!}
+                        </div>
                         {!! Form::submit('Submit',['class' => 'btn btn-gradient-primary mr-2','name'=>'submit']) !!}
-                        {!! Form::button('Cancel',['class' => 'btn btn-light','name'=>'cancel']) !!}
+                        <a class="btn btn-light" href = "{{route('ModManager')}}" >cancel</a>
                     {!! Form::close() !!}
                 </div>
             </div>

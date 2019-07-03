@@ -77,6 +77,9 @@ $(document).ready(function() {
                 required: true,
                 equalTo : "#password",
             },
+            id_role:{
+                required: true,
+            }
         },
         messages: {
             username: {
@@ -100,6 +103,9 @@ $(document).ready(function() {
                 required: Lang.get('validation_admin.user.required.repass'),
                 equalTo: Lang.get('validation_admin.user.repass.same'),
             },
+            id_role:{
+                required: Lang.get('validation_admin.user.required.id_role'),
+            }
         },
 
         submitHandler: function(form) {
@@ -325,9 +331,17 @@ $(document).ready(function() {
                 required: true,
                 number: true
             },
+            amount:{
+                required :true,
+                number: true
+            },
         },
         messages: {
             selectyear: {
+                required: Lang.get('validation_admin.chart.year.required'),
+                number: Lang.get('validation_admin.chart.year.number'),
+            },
+            amount :{
                 required: Lang.get('validation_admin.chart.year.required'),
                 number: Lang.get('validation_admin.chart.year.number'),
             },
@@ -337,9 +351,10 @@ $(document).ready(function() {
             $("div#panel-body").append('<canvas id="Article-top-view-chart"></canvas>');
             var year = $('#select-year-top-view').val();
             var month = $('#select-month-top-view').val();
+            var amount = $('#select-amount').val();
             $.ajax({
                    type: "GET",
-                   url: "/admin/ajax/chart/get-top-view-in-choose-time/" + year +"-"+ month,
+                   url: "/admin/ajax/chart/get-top-view-in-choose-time/" + year +"-"+ month+"/"+amount,
                    datatype: "json", // serializes the form's elements.
                    success: function(data)
                    {
@@ -369,20 +384,29 @@ $(document).ready(function() {
                 required: true,
                 number: true
             },
+            amount:{
+                required: true,
+                number: true
+            }
         },
         messages: {
             selectyear: {
                 required: Lang.get('validation_admin.chart.year.required'),
                 number: Lang.get('validation_admin.chart.year.number'),
             },
+            amount:{
+                required: Lang.get('validation_admin.chart.year.required'),
+                number: Lang.get('validation_admin.chart.year.number'),
+            }
         },
         submitHandler: function(form) {
             $("canvas#top-btv-chart").remove();
             $("div#panel-body").append('<canvas id="top-btv-chart"></canvas>');
             var year = $('#select-year-top-btv').val();
             var month = $('#select-month-top-btv').val();
+            var amount = $('#select-amount').val();
             $.ajax({
-            url: "/admin/ajax/chart/get-top-mod-in-choose-time/" + year +"-"+ month,
+            url: "/admin/ajax/chart/get-top-mod-in-choose-time/" + year +"-"+ month+"/"+amount,
             method: "GET",
             datatype: "json",
             success: function(data){
@@ -401,7 +425,7 @@ $(document).ready(function() {
                     label_rows = ['null','null','null','null','null','null','null','null','null','null'];
                 }
 
-                setChart(dataOfmod, 'line', Lang.get('messages.name_chart.topviewchoose'), 'top-btv-chart', label_rows ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name'));
+                setChart(dataOfmod, 'bar', Lang.get('messages.name_chart.topMod'), 'top-btv-chart', label_rows ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name_Top_Mod'));
             }
             });
         },
