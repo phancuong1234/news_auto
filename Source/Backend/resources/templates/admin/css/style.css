@@ -22250,6 +22250,12 @@ dl li {
     width: 10%;
     border: 1px solid #ebedf2;
 }
+.center-align {
+    text-align: center !important;
+}
+.p-5 {
+    padding: 2rem !important;
+}
 .select-month-chart {
     width: 15%;
     display: inline-block;

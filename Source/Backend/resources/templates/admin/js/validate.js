@@ -271,6 +271,54 @@ $(document).ready(function() {
             form.submit();
         },
     });
+    //validate form change ava
+    $("#changeInfo").validate({
+        rules: {
+            fullname: {
+                minlength: 8,
+                maxlenght: 50
+            },
+            phone: {
+                number: true,
+            },
+            address: {
+                minlength: 10,
+                maxlenght: 200,
+            }
+        },
+        messages: {
+            fullname: {
+                minlength: Lang.get('validation_admin.user.minlenght.fullname'),
+                maxlength: Lang.get('validation_admin.user.maxlenght.fullname')
+            },
+            phone: {
+                number: Lang.get('validation_admin.user.numeric'),
+            },
+            address: {
+                minlength: Lang.get('validation_admin.user.minlenght.address'),
+                maxlength: Lang.get('validation_admin.user.maxlenght.address')
+            },
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
+    //validate form changinfo
+    $("#changeAva").validate({
+        rules: {
+            file: {
+                extension: "jpeg|png|bmp|gif|svg|jpg"
+            }
+        },
+        messages: {
+            file: {
+                extension: Lang.get('validation_admin.user.image.mimes'),
+            },
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
     $("#form-top-view").validate({
         rules: {
             selectyear: {
@@ -309,10 +357,10 @@ $(document).ready(function() {
                       dataOfview = ['null','null','null','null','null','null','null','null','null','null'];
                       label_rows = ['null','null','null','null','null','null','null','null','null','null'];
                     }
-        
+
                     setChart(dataOfview, 'bar', Lang.get('messages.name_chart.topviewchoose'), 'Article-top-view-chart', label_rows ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name'));
                    }
-                 });    
+                 });
         },
     });
     $("#form-top-mod").validate({
@@ -352,7 +400,7 @@ $(document).ready(function() {
                     dataOfview = ['null','null','null','null','null','null','null','null','null','null'];
                     label_rows = ['null','null','null','null','null','null','null','null','null','null'];
                 }
-    
+
                 setChart(dataOfmod, 'line', Lang.get('messages.name_chart.topviewchoose'), 'top-btv-chart', label_rows ,Lang.get('messages.name_chart.col_name'),Lang.get('messages.name_chart.row_name'));
             }
             });
@@ -384,14 +432,14 @@ $(document).ready(function() {
                         var userByYearArr = [];
                             for(let i = 1; i <= 12; i++){
                                 if(userByYear[i]==null){
-                                    userByYearArr.push(0);      
+                                    userByYearArr.push(0);
                                 }else{
                                     userByYearArr.push(userByYear[i]);
                                 }
                             }
                         setChart(userByYearArr, 'line', Lang.get('messages.name_chart.useryearago'),'user-chart', 0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
                     }
-                });  
+                });
         },
     });
     $("#form-view").validate({
@@ -420,14 +468,14 @@ $(document).ready(function() {
                     var viewByYearArr = [];
                         for(let i = 1; i <= 12; i++){
                             if(viewByYear[i]==null){
-                                viewByYearArr.push(0);      
+                                viewByYearArr.push(0);
                             }else{
                                 viewByYearArr.push(viewByYear[i]);
                             }
                         }
                     setChart(viewByYearArr, 'line', Lang.get('messages.name_chart.view'),'view-chart', 0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
                 }
-            });      
+            });
         }
     });
     $("#form-art").validate({
@@ -456,14 +504,14 @@ $(document).ready(function() {
                     var articleByYearArr = [];
                         for(let i = 1; i <= 12; i++){
                             if(articleByYear[i]==null){
-                                articleByYearArr.push(0);      
+                                articleByYearArr.push(0);
                             }else{
                                 articleByYearArr.push(articleByYear[i]);
                             }
                         }
                     setChart(articleByYearArr, 'bar', Lang.get('messages.name_chart.article'),'Article-chart',0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
                 }
-            });          
+            });
         }
     });
     //reject special char

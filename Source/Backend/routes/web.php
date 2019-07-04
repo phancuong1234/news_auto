@@ -10,20 +10,30 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+#profile
+Route::resource('profile','MyProfileController');
+#ajax load form
+Route::get('/ajax/profile',[
+    'uses' => 'MyProfileController@ajaxLoad',
+]);
+Route::namespace('Authentication')->group(function () {
+    #login
+    Route::resource('login', 'LoginController');
+});
 Route::prefix('admin')->group(function () {
-
-    Route::get('/', function () {
-        return view('index');
-    });
     Route::namespace('Admin')->group(function () {
+        #admin-dashboard
+        Route::resource('dashboard','DashBoardController');
         #category
         Route::resource('categories','CategoryController');
         #users
         Route::resource('users','UserController');
         #news
         Route::resource('news','NewsController');
+        #crawler
+        Route::resource('crawler','CrawlController');
+        # commment
+        Route::resource('comments', 'CommentController');
         #index pending news
         Route::get('/pending/news',[
             'as' => 'pending.news',
@@ -39,8 +49,6 @@ Route::prefix('admin')->group(function () {
             'as' => 'pending.accept.news',
             'uses' => 'NewsController@approve',
         ]);
-        # commment
-        Route::resource('comments', 'CommentController');
         #livesearch
         Route::get('/categories/search/{text}',[
             'as' => 'search.category',

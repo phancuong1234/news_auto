@@ -132,20 +132,67 @@ $(document).ready(function() {
             window.location.href = "/admin/comments?page=" + number;
         }
     });
-    // preview img
-    function readURLPicTure(input) {
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#img-preview').attr('src', e.target.result);
-                $('#img-preview-tag-a').attr('href', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
+    //btn change picture
+    $imgSrc = $('#img-preview').attr('src');
+    $('#btnChangePicture').on('click', function () {
+        if (!$('#btnChangePicture').hasClass('changing')) {
+            $('#file').click();
         }
-    }
+        else {
+            $('#changeAva').submit();
+        }
+    });
+    $('#file').on('change', function () {
+        readURLPicTure(this);
+        $('#btnChangePicture').addClass('changing');
+        $('#btnChangePicture').attr('value', Lang.get('button.confirm'));
+        $('#btnDiscard').removeClass('d-none');
+    });
+    $('#btnDiscard').on('click', function () {
+        $('#btnChangePicture').removeClass('changing');
+        $('#btnChangePicture').attr('value', Lang.get('button.change'));
+        $('#btnDiscard').addClass('d-none');
+        $('#img-preview').attr('src', $imgSrc);
+        $('#file').val('');
+    });
+    $('#btnChangeInfo').on('click', function () {
+        if($('#btnChangeInfo').val().trim() == Lang.get('button.save')){
+            $('#changeInfo').submit();
+        }
+        else {
+            $.ajax({
+                url: '/ajax/profile',
+                method: "GET",
+                success: function(data) {
+                    $('#basicInfo').html(data);
+                    $('.datepicker').datepicker({
+                        format: 'dd-mm-yyyy',
+                        endDate: '+0d',
+                        todayHighlight: true,
+                        autoclose: true,
+                    });
+                    $('#btnChangeInfo').val(Lang.get('button.save'));
+                },
+                error: function () {
+                    alert(Lang.get('messages.user.edit.fail'));
+                }
+            });
+        }
+    });
     CKEDITOR.replace('content');
 });
+// preview img
+function readURLPicTure(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#img-preview').attr('src', e.target.result);
+            $('#img-preview-tag-a').attr('href', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 //event lock or active
 function changeStatusCmt(id){
     const flag = confirm(Lang.get('messages.confirm_change_status'));

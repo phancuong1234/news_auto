@@ -46,11 +46,10 @@ return [
         ],
         'image'=>[
             'image' => 'The selected file is not an image file',
-            'mines' => 'The selected file must have the extension : jpeg, png, jpg, gif'
+            'mimes' => 'The selected file must have the extension : jpeg, png, jpg, gif'
         ],
-
         'valid_user'=>'The username must start with the word and do not contain special characters',
-
+        'numeric' => 'The number phone must be a number',
     ],
     'new' => [
         'title' => [
