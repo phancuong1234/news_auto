@@ -14,6 +14,10 @@ return [
     'max_time_request' => 20000,
     'url_crawl' => [
         'dan_tri_page' => 'https://dantri.com.vn/',
+        'dan_tri' => 'dantri.com.vn',
+    ],
+    'url_denine' => [
+        'dan_tri' => 'trangchu.rss',
     ],
     'detect_name_crawl' => [
         'name_1' => 'Du lịch',
@@ -31,4 +35,12 @@ return [
             'of_server' => 0,
         ],
     ],
+    'type_news' => [
+        'crawl' => 1,
+        'handwritten' => 0
+    ],
+    'type_preview' => [
+        'preview_of_news_pending' => 'news_pending_preview',
+        'preview_of_news' => 'news_preview',
+    ]
 ];

@@ -27,8 +27,8 @@
                     <div class="form-group">
                         <label>Ảnh tải lên</label>
                         <div>
-                            <a id="img-preview-tag-a" href="{{ ($typeURL == 1)?$news->image:asset('images/news/'.$news->image) }}">
-                                <img class="img-preview" id="img-preview" src="{{ ($typeURL == 1)?$news->image:asset('images/news/'.$news->image) }}"/>
+                            <a id="img-preview-tag-a" href="{{ ($news->typeURL == 1)?$news->image:asset('images/news/'.$news->image) }}">
+                                <img class="img-preview" id="img-preview" src="{{ ($news->typeURL == 1)?$news->image:asset('images/news/'.$news->image) }}"/>
                             </a>
                         </div>
                         <div class="input-group col-xs-12">
