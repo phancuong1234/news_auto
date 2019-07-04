@@ -12,6 +12,7 @@
 /Source/Backend/tests
 /Source/Backend/.env
 .idea
+.vscode
 /Source/Backend/.phpunit.result.cache
 /Source/Backend/Homestead.json
 /Source/Backend/Homestead.yaml

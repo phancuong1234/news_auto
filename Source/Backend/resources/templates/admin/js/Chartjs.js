@@ -116,6 +116,7 @@ $( document ).ready(function() {
         }
     });
     $('#select-cate').change(function(){
+        $('#change-panel').html("Tổng số bài viết qua các tháng trong danh mục");
         $("canvas#Article-chart").remove();
         $("div#panel-body").append('<canvas id="Article-chart"></canvas>');
         var article = $('#select-cate').val();
@@ -137,10 +138,32 @@ $( document ).ready(function() {
                 }
             });      
     });
+    $('#view-by-cate').click(function(){
+        $('#change-panel').html("Số View theo danh mục trong năm");
+        $("canvas#view-chart").remove();
+        $("div#panel-body").append('<canvas id="view-chart"></canvas>');
+        var article = $('#select-cate').val();
+            $.ajax({
+                url : "/admin/ajax/chart/get-count-view-by-category",
+                method : 'GET',
+                datatype: "json",
+                success : function(data){
+                    var dataFormat = JSON.parse(data);
+                    var ViewByCate = [];
+                    var name = [];
+                    for(var i = 0; i < Objectsize(dataFormat); i++){
+                        ViewByCate[i]=dataFormat[i].total
+                        name[i] = dataFormat[i].name;
+                    }  
+                    setChart(ViewByCate, 'pie', Lang.get('messages.name_chart.articlebycate'),'view-chart',name,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
+                }
+            });      
+    });
     $("#select-month").change(function(){
-      $("canvas#Comment-chart").remove();
-      $("div#panel-body").append('<canvas id="Comment-chart"></canvas>');
-      var month = $("#select-month").val();
+        $('#change-panel').html("Top 10 bài viết được bình luận nhiều nhất");
+        $("canvas#Comment-chart").remove();
+        $("div#panel-body").append('<canvas id="Comment-chart"></canvas>');
+        var month = $("#select-month").val();
         $.ajax({
           url: "/admin/ajax/chart/get-number-comment-by-month/" + month,
           method: "GET",

@@ -94,7 +94,7 @@ return [
         'useryearago'=>'Total number of users registered',
         'view' => 'Total views of the months in this year',
         'topview' => 'Top 10 article view in this year',
-        'topviewchoose' => 'Top 10 article view ',
+        'topviewchoose' => 'Top article view ',
         'comment' => 'Total comment of the months in this year',
         'commentmonth' => 'Top 10 article comment of this months',
         'article' => 'Total article of the month in this year',
@@ -106,5 +106,10 @@ return [
         'row_name' => 'ID article',
         'row_name_Top_Mod' => 'Mod Username',
         'topMod' => 'Top 10 Mod in this year',
-    ],    
+    ],
+    'login'=>[
+        'success' => 'Login success',
+        'lock-user' => 'Your account is locked',
+        'wrong-pass' => 'Invalid username or password',
+    ],  
 ];

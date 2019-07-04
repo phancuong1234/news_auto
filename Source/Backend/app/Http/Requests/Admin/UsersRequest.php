@@ -21,6 +21,7 @@ class UsersRequest extends FormRequest
             'email'=>'required|email|unique:users,email',
             'password'=>'required|min:8',
             'repass'=>'required|same:password',
+            'id_role' =>'required'
         ];
     }
     public function messages()
@@ -39,8 +40,10 @@ class UsersRequest extends FormRequest
             'password.required'=>trans('validation_admin.user.required.password'),
             'password.min'=>trans('validation_admin.user.minlenght.password'),
 
-            're-pass.required'=>trans('validation_admin.user.required.re-pass'),
-            're-pass.same'=>trans('validation_admin.user.re-pass.same'),
+            'repass.required'=>trans('validation_admin.user.required.repass'),
+            'repass.same'=>trans('validation_admin.user.re-pass.same'),
+
+            'id_role.required' => trans('validation_admin.user.required.id_role'),
         ];
     }
 }

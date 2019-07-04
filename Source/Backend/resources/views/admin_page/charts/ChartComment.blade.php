@@ -6,8 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Số Bài Viết Nhiều Comment Nhất</div>
-
+                <div class="panel-heading" id="change-panel">Tổng số comment của các tháng trong năm</div>
                 <div class="panel-body" id="panel-body">
                     <canvas id="Comment-chart"></canvas>
                 </div>

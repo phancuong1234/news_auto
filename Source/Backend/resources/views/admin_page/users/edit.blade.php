@@ -25,14 +25,22 @@
                             {!! Form::text('fullname', $oldModUser->fullname , ['class'=>'form-control', 'placeholder'=>'FullName']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('password', 'Password') !!} 
-                            {!! Form::input('password','password',$oldModUser->password, ['class'=>'form-control', 'placeholder'=>'Password']) !!}
+                            <a type="button" class="btn btn-primary btn-sm" id="show-change-pass">
+                                Change Password
+                            </a>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="showpass" style="display:none">
+                            <button type="button" class="close mb-3" id="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {!! Form::label('password', 'Password') !!} 
+                            {!! Form::input('password','password',$oldModUser->password, ['class'=>'form-control', 'placeholder'=>'New Password']) !!}
+                        </div>
+                        <div class="form-group" id="showrepass" style="display:none">
                             {!! Form::label('repass', 'Re-Password') !!} 
                             {!! Form::input('password','repass',$oldModUser->password, ['class'=>'form-control', 'placeholder'=>'Re-Password']) !!}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             {!! Form::label('phone', 'Phone') !!}
                             {!! Form::text('phone',$oldModUser->phone, ['class'=>'form-control', 'placeholder'=>'Phone']) !!}
                         </div>
@@ -58,7 +66,7 @@
                         </div>
                        
                         {!! Form::submit('submit',['class' => 'btn btn-gradient-primary mr-2']) !!}
-                        {!! Form::button('cancel',['class' => 'btn btn-light']) !!}
+                        <a class="btn btn-light" href = "{{route('ModManager')}}" >cancel</a>
                     {!! Form::close() !!}
                     @endforeach
                 </div>
