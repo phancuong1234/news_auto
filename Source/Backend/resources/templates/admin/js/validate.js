@@ -456,14 +456,14 @@ $(document).ready(function() {
                         var userByYearArr = [];
                             for(let i = 1; i <= 12; i++){
                                 if(userByYear[i]==null){
-                                    userByYearArr.push(0);
+                                    userByYearArr.push(0);      
                                 }else{
                                     userByYearArr.push(userByYear[i]);
                                 }
                             }
                         setChart(userByYearArr, 'line', Lang.get('messages.name_chart.useryearago'),'user-chart', 0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
                     }
-                });
+                });  
         },
     });
     $("#form-view").validate({
@@ -492,14 +492,14 @@ $(document).ready(function() {
                     var viewByYearArr = [];
                         for(let i = 1; i <= 12; i++){
                             if(viewByYear[i]==null){
-                                viewByYearArr.push(0);
+                                viewByYearArr.push(0);      
                             }else{
                                 viewByYearArr.push(viewByYear[i]);
                             }
                         }
                     setChart(viewByYearArr, 'line', Lang.get('messages.name_chart.view'),'view-chart', 0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
                 }
-            });
+            });      
         }
     });
     $("#form-art").validate({
@@ -528,14 +528,14 @@ $(document).ready(function() {
                     var articleByYearArr = [];
                         for(let i = 1; i <= 12; i++){
                             if(articleByYear[i]==null){
-                                articleByYearArr.push(0);
+                                articleByYearArr.push(0);      
                             }else{
                                 articleByYearArr.push(articleByYear[i]);
                             }
                         }
                     setChart(articleByYearArr, 'bar', Lang.get('messages.name_chart.article'),'Article-chart',0,Lang.get('messages.name_chart.default_col_name'),Lang.get('messages.name_chart.default_row_name'));
                 }
-            });
+            });          
         }
     });
     //reject special char
