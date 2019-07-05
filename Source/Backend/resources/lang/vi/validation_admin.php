@@ -52,7 +52,7 @@ return [
             'repass' => 'vui lòng xác nhận mật khẩu',
             'id_role'=> 'vui lòng chọn id_role',
         ],
-        'minlenght' => [
+        'minlength' => [
             'username' => 'tên người dùng không được ít hơn 8 ký tự',
             'fullname' => 'họ và tên dùng không được ít hơn 8 ký tự',
             'password' => 'mật khẩu dùng không được ít hơn 8 ký tự',

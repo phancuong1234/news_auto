@@ -23,9 +23,10 @@
                         <div class="brand-logo center-align">
                             <img src="{{ asset('/templates/images/login.png') }}">
                         </div>
+                        @include('common.error')
                         <h4>Mới ở đây?</h4>
                         <h6 class="font-weight-light">Đăng ký rất dễ dàng. Chỉ mất vài bước</h6>
-                        {!! Form::open(['method' => 'POST','id'=>'register', 'route' => 'register.store', 'class' => 'pt-3']) !!}
+                        {!! Form::open(['method' => 'POST','id'=>'register' , 'route' => 'register.store', 'class' => 'pt-3']) !!}
                         <div class="form-group">
                             {!! Form::text('username', '', ['class'=>'form-control form-control-lg', 'placeholder'=>'Tên tài khoản', 'id' => 'username', 'autocomplete' => 'off']) !!}
                         </div>
@@ -47,10 +48,10 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="javascript:void(0)" id="btn-register">Đăng Nhập</a>
+                            <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="javascript:void(0)" id="btn-register">Đăng Ký</a>
                         </div>
                         <div class="text-center mt-4 font-weight-light">
-                            Bạn đã có tài khoản? <a href="login.html" class="text-primary">Đăng nhập</a>
+                            Bạn đã có tài khoản? <a href="{{route('login.index')}}" class="text-primary">Đăng nhập</a>
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -63,6 +64,8 @@
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.base.js')) }}
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.addons.js')) }}
 {{ Html::script(asset('/templates/admin/js/off-canvas.js')) }}
+{{ Html::script(asset('/templates/admin/js/validate.js')) }}
+{{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
 {{ Html::script(asset('/templates/admin/js/misc.js')) }}
 {{ Html::script(asset('/templates/common/js/myjs.js')) }}
 </body>

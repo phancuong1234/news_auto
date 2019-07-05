@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -41,6 +42,23 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('editor', function($user){
             return $user->id_role != config("setting.role.editor");
         });
-        //
+        //phân quyền add article (mod)
+        Gate::define('add-article', function($user){
+            $function = Auth::user()->function;
+            $AllowAdd = substr($function,config('setting.function.add'),config('setting.function.cut'));
+            return $AllowAdd == config('setting.function.allow');
+        });
+        //phân quyền edit article (mod)
+        Gate::define('edit-article', function($user){
+            $function = Auth::user()->function;
+            $AllowAdd = substr($function,config('setting.function.edit'),config('setting.function.cut'));
+            return $AllowAdd == config('setting.function.allow');
+        });
+        //phân quyền del article (mod)
+            Gate::define('del-article', function($user){
+                $function = Auth::user()->function;
+                $AllowAdd = substr($function,config('setting.function.del'),config('setting.function.cut'));
+                return $AllowAdd == config('setting.function.allow');
+        });
     }
 }

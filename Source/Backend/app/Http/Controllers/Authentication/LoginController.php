@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Authentication;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,15 +12,10 @@ class LoginController extends Controller
 {
     public function index()
     {
-        if (Auth::check()){
-            return redirect()->route('dashboard.index');
-        }
-        else {
-            return view('authentication.login');
-        }
+        return view('authentication.login');
     }
 
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
         $username = $request->username;
         $password = $request->password;

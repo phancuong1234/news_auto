@@ -349,7 +349,7 @@ function liveSearch(type){
 };
 $("#show-change-pass").click(function(){
     $("#show-change-pass").hide();
-    $('#showpass').show();
+    $('#showpass').show();    
     $('#showrepass').show();
 });
 $("#close").click(function(){
@@ -357,4 +357,3 @@ $("#close").click(function(){
     $('#showpass').hide();
     $('#showrepass').hide();
 });
-

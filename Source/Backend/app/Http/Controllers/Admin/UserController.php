@@ -63,15 +63,41 @@ class UserController extends Controller
     public function edit($id)
     {
         $oldModUser = User::where('id', $id)->get();
-
-        return view ('admin_page.users.edit', compact('oldModUser'));
+        foreach($oldModUser as $key => $value){
+            $add = substr($value->function,config('setting.function.add'),config('setting.function.cut'));
+            $edit = substr($value->function,config('setting.function.edit'),config('setting.function.cut'));
+            $del = substr($value->function,config('setting.function.del'),config('setting.function.cut'));
+        }
+        return view ('admin_page.users.edit', compact('oldModUser','add','edit','del'));
     }
 
     public function update(EditUserRequest $request, $id)
     {
+        $checkpass =  User::where('id', $id)->first()->password;
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        unset($input['_method'],$input['_token'],$input['repass']);
+        if($input['password'] === $checkpass){
+            $input['password'] = $input['password'];
+        }else{
+            $input['password'] = Hash::make($input['password']);
+        }
+        if(isset($input['edit'])){
+            $edit = config('setting.function.allow');
+        }else{
+            $edit = config('setting.function.denie');
+        }
+        if(isset($input['add'])){
+            $add = config('setting.function.allow');
+        }else{
+            $add = config('setting.function.denie');
+        }
+        if(isset($input['del'])){
+            $del = config('setting.function.allow');
+        }else{
+            $del = config('setting.function.denie');
+        }
+        $function = $add . $edit . $del;
+        $input['function'] = $function;
+        unset($input['_method'],$input['add'],$input['edit'],$input['del'],$input['_token'],$input['repass']);
         if($input['password'] == null) {
             unset($input['password']);
         }
@@ -81,10 +107,10 @@ class UserController extends Controller
         $status = User::where('id', $id)->update($input);
         if($status){
 
-            return redirect()->route('users.index')->with('messageSuccess', trans('messages.user.edit.success'));
+            return redirect()->route('ModManager')->with('messageSuccess', trans('messages.user.edit.success'));
         } else {
 
-            return redirect()->route('users.index')->with('messageFail', trans('messages.user.edit.fail'));
+            return redirect()->route('ModManager')->with('messageFail', trans('messages.user.edit.fail'));
         }
     }
 

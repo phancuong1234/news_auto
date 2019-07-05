@@ -63,7 +63,48 @@
                         <div class="form-group">
                             {!! Form::label('address', 'Address') !!}
                             {!! Form::text('address', $oldModUser->address , ['class'=>'form-control', 'placeholder'=>'Location']) !!}
-                            
+                        </div>
+                        <div class="form-group">
+                            <!-- Rounded switch -->
+                            @if($add == 0)
+                                <label for="add" class="mt-2">Add:</label>
+                                <label class="switch ml-2">
+                                <input type="checkbox" name="add" id="add">
+                                <span class="slider round"></span>
+                                </label>
+                            @else
+                                <label for="add" class="mt-2">Add:</label>
+                                <label class="switch ml-2">
+                                <input type="checkbox" name="add" id="add" checked>
+                                <span class="slider round"></span>
+                                </label>
+                            @endif
+                            @if($edit == 0)
+                                <label for="edit" class="mt-2 ml-5">Edit:</label>
+                                <label class="switch ml-2">
+                                <input type="checkbox" name="edit" id="edit">
+                                <span class="slider round"></span>
+                                </label>
+                            @else
+                                <label for="edit" class="mt-2 ml-5">Edit:</label>
+                                <label class="switch ml-2">
+                                <input type="checkbox" name="edit" id="edit"checked>
+                                <span class="slider round"></span>
+                                </label>
+                            @endif
+                            @if($del ==0)
+                                <label for="Delete" class="mt-2 ml-5">Delete:</label>
+                                <label class="switch ml-2">
+                                <input type="checkbox" name="del" id="delete">
+                                <span class="slider round"></span>
+                                </label>
+                            @else
+                                <label for="Delete" class="mt-2 ml-5">Delete:</label>
+                                <label class="switch ml-2">
+                                <input type="checkbox" id="delete" name="del" checked>
+                                <span class="slider round"></span>
+                                </label>
+                            @endif
                         </div>
                         {!! Form::submit('submit',['class' => 'btn btn-gradient-primary mr-2']) !!}
                         <a class="btn btn-light" href = "{{route('ModManager')}}" >cancel</a>

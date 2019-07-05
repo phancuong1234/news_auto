@@ -88,9 +88,10 @@ class NewsController extends Controller
             $news = News::where(['id' => $id])->first();
             $idCategory = Category::pluck('name_category', 'id');
             $typeURL = $this->explodeStr($news->image);
-
+           
             return view('admin_page.news.edit', compact('news', 'idCategory', 'typeURL'));
         }
+        
     }
     #explode string
     public function explodeStr($str)

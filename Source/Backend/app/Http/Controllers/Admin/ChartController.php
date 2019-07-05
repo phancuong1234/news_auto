@@ -117,7 +117,7 @@ class ChartController extends Controller
     }
 
     public function countComment(){
-    	$comment = Comment::select('id_new', 'created_at')
+    	$comment = Comment::select('id_news', 'created_at')
     			->get()
     			->groupBy(function($date) {
 	    		return Carbon::parse($date->created_at)->format('m');
@@ -132,9 +132,9 @@ class ChartController extends Controller
 
     public function commentChartByMonth($month){
 		$view = Comment::where(DB::raw('MONTH(comments.created_at)'), $month)
-			->join('news', 'news.id', '=', 'comments.id_new')
-			->select('comments.id_new', 'news.title', 'comments.id_user', DB::raw('COUNT(comments.id) as total'))
-			->groupBy('comments.id_new', 'comments.id_user')
+			->join('news', 'news.id', '=', 'comments.id_news')
+			->select('comments.id_news', 'news.title', 'comments.id_user', DB::raw('COUNT(comments.id) as total'))
+			->groupBy('comments.id_news', 'comments.id_user')
 			->orderBy(DB::raw('COUNT(comments.id)'), 'DESC')
 			->limit(10)
 			->get();
@@ -210,9 +210,9 @@ class ChartController extends Controller
 	public function countArticleRate()
 	{
 		$articlerate = News::select(DB::raw('categories.name_category AS name , COUNT(news.id) AS total'))
-				->join('categories','news.id_category','=','categories.id')
+				->join('categories','news.list_id_category','=','categories.id')
 				->whereYear('news.created_at',date('Y'))
-				->groupBy('news.id_category')
+				->groupBy('news.list_id_category')
 				->get();
 		$countArticleRate = [];
 		$total = 0;
