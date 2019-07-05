@@ -22265,4 +22265,21 @@ dl li {
   margin-left: 2%;
   display: inline;
 }
+.img-in-list {
+    width: 150px !important;
+    height: 100px !important;
+    border-radius: 1% !important;
+}
+body {
+    font-family: "Times New Roman", Times, serif !important;
+}
+.table thead th {
+    font-family: "Times New Roman", Times, serif !important;
+}
+body h1, h2, h3, h4, h5, h6 , span, p, td , tr , td {
+    font-family: "Times New Roman", Times, serif !important;
+}
+.inline-block {
+    display: inline-block;
+}
 /*# sourceMappingURL=maps/style.css.map */

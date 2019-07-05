@@ -22,8 +22,12 @@ class CreateNewsTable extends Migration
             $table->longText('content')->nullable();
             $table->text('image')->nullable();
             $table->text('url_news')->nullable();
+            $table->text('name_page_crawled')->nullable();
+            $table->tinyInteger('type')->default(0);
             $table->bigInteger('number_view')->default(0);
             $table->tinyInteger('is_active')->default(1);
+            $table->date('date_start')->nullable();
+            $table->date('date_end')->nullable();
             $table->timestamps();
         });
     }

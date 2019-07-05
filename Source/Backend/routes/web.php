@@ -49,13 +49,15 @@ Route::prefix('admin')->group(function () {
         Route::resource('crawler','CrawlController');
         # commment
         Route::resource('comments', 'CommentController');
+        #news_rss
+        Route::resource('rss','RSSController');
         #index pending news
         Route::get('/pending/news',[
             'as' => 'pending.news',
             'uses' => 'NewsController@pendingIndex',
         ]);
         #pending preview
-        Route::get('/pending/news/preview/{id}',[
+        Route::get('/pending/news/preview/{id}/type={type}',[
             'as' => 'pending.news.preview',
             'uses' => 'NewsController@pendingPreview',
         ]);
@@ -84,6 +86,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/viewer/search/{text}',[
             'as' => 'search.viewer',
             'uses' => 'UserManagerController@getSearchViewerAjax',
+        ]);
+        Route::get('/rss/search/{text}',[
+            'as' => 'search.rss',
+            'uses' => 'RSSController@getSearchAjax',
         ]);
         # crawl auto
         Route::resource('crawler','CrawlController');

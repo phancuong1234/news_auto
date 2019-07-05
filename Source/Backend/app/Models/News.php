@@ -18,8 +18,12 @@ class News extends Model
         'content',
         'image',
         'url_news',
+        'name_page_crawled',
+        'type',
         'number_view',
-        'is_active'
+        'is_active',
+        'date_start',
+        'date_end'
     ];
 
     public function user()

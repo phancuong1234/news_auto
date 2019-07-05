@@ -55,10 +55,12 @@ $(document).ready(function() {
                         btn.innerHTML = Lang.get('messages.button.start');
                         $('#info-of-crawl').html(data); //nhận dữ liệu dạng html và gán vào thẻ có id là info-of-crawl
                         loader.success();
+                        $('#btn-start-crawl').attr("disabled", false);
                     },
                     error: function () {
                         loader.error();
                         btn.innerHTML = Lang.get('messages.button.start');
+                        $('#btn-start-crawl').attr("disabled", false);
                     },
                 });
             }, 2000);
@@ -90,10 +92,12 @@ $(document).ready(function() {
                             btnCrawlRSS.value = Lang.get('messages.button.start');
                             $('#screen-info').html(data);  // show response from the php script.
                             loader.success();
+                            $('#btn-start-crawl-by-rss').attr("disabled", false);
                         },
                         error: function () {
                             loader.error();
                             btnCrawlRSS.value = Lang.get('messages.button.start');
+                            $('#btn-start-crawl-by-rss').attr("disabled", false);
                         },
                     });
                 }, 2000);
@@ -146,6 +150,13 @@ $(document).ready(function() {
             window.location.href = "/admin/ViewerManager?page=" + number;
         }
     });
+    $('#text-paginate-rss').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $('#text-paginate-rss').val();
+            window.location.href = "/admin/rss?page=" + number;
+        }
+    });
     //btn change picture
     $imgSrc = $('#img-preview').attr('src');
     $('#btnChangePicture').on('click', function () {
@@ -192,6 +203,12 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+    $('.datepicker').datepicker({
+        format: 'dd-mm-yyyy',
+        endDate: '+0d',
+        todayHighlight: true,
+        autoclose: true,
     });
     CKEDITOR.replace('content');
 });
@@ -316,6 +333,15 @@ function liveSearch(type){
                 method: "GET", // phương thức gửi dữ liệu.
                 success: function (data) { //dữ liệu nhận về
                     $('#viewer').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là Users
+                }
+            });
+        }
+        if (type == 'rss'){
+            $.ajax({
+                url: "/admin/rss/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                method: "GET", // phương thức gửi dữ liệu.
+                success: function (data) { //dữ liệu nhận về
+                    $('#rss').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là Users
                 }
             });
         }

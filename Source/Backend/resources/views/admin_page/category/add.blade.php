@@ -17,7 +17,7 @@
                             {!! Form::text('name_category', '', ['id' => 'name_category', 'class' => 'form-control', 'placeholder' => 'Tên danh mục']) !!}
                         </div>
                         {!! Form::submit("Thêm", ['class' => 'btn btn-gradient-primary mr-2 btn-sm', 'id' => 'btnAddCt']) !!}
-                        <a href="{{ route('category.index') }}" class="btn btn-light btn-sm">Hủy</a>
+                        <a href="{{ route('categories.index') }}" class="btn btn-light btn-sm">Hủy</a>
                     {!! Form::close() !!}
                 </div>
             </div>

@@ -18,6 +18,9 @@ class NewsController extends Controller
     public function index()
     {
         $listNews = News::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
+        foreach ($listNews as $key => $value){
+            $value['typeURL'] = $this->explodeStr($value['image']);
+        }
 
         return view('admin_page.news.index', compact('listNews'));
     }
@@ -72,9 +75,9 @@ class NewsController extends Controller
     {
         $news = News::where(['id' => $id])->first();
         $idCategory = Category::pluck('name_category', 'id');
-        $typeURL = $this->explodeStr($news->image);
+        $news['typeURL'] = $this->explodeStr($news->image);
 
-        return view('admin_page.news.edit', compact('news', 'idCategory', 'typeURL'));
+        return view('admin_page.news.edit', compact('news', 'idCategory'));
     }
     #explode string
     public function explodeStr($str)
@@ -90,12 +93,12 @@ class NewsController extends Controller
         return $typeURL;
     }
     #pending_preview
-    public function pendingPreview($id)
+    public function pendingPreview($id, $typePreview)
     {
         $news = News::where(['id' => $id])->first();
         $typeURL = $this->explodeStr($news->image);
 
-        return view('admin_page.news.preview_news', compact('news', 'typeURL'));
+        return view('admin_page.news.preview_news', compact('news', 'typeURL', 'typePreview'));
     }
     public function edit($id)
     {

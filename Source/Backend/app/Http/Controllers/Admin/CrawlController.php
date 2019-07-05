@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\RSS;
 use Goutte\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -118,12 +119,48 @@ class CrawlController extends Controller
     #crawl page xml
     function CrawlByRSS(Request $request){
         $url = $request->url;
+        #explode string to get link web
+        $link = explode("/", $url);
+        if ($link[2] == config('setting.url_crawl.dan_tri')){
+            if ($link[3] != config('setting.url_denine.dan_tri')){
+                if (count($link) > 4){
+                    $newLink = config('setting.url_crawl.dan_tri_page').$link[3].'.rss';
+                    $getCate = RSS::where('link_page', $newLink)->first()->category;
+                    $contentXML = $this->handleCrawlRSS($url, $getCate);
+                }
+                else {
+                    $contentXML = $this->handleCrawlRSS($url, null);
+                }
+            }
+        }
+
+        return view('ajax.admin.crawl.index_crawl_xml', compact('contentXML'));
+    }
+    public function handleCrawlRSS($url, $cate){
         $context  = stream_context_create(array('http' => array('header' => 'Accept: application/xml')));
         $xml = file_get_contents($url, false, $context);
         $xml = str_replace('<?xml version="1.0" encoding="utf-16"?>', '<?xml version="1.0" encoding="UTF-8"?>', $xml);
         $xml = simplexml_load_string($xml);
         $contentXML = json_decode( json_encode($xml) , 1);
+        foreach ($contentXML['channel']['item'] as $key => $value){
+            $rssExists = RSS::where('title', $value['title'])->count();
+            if ($rssExists < 1){
+                $input[$key]['name_page'] = $contentXML['channel']['copyright'];
+                $input[$key]['link_page'] = $url;
+                if (isset($cate)){
+                    $input[$key]['category'] = $cate;
+                    $input[$key]['sub_category'] = $contentXML['channel']['description'];
+                }
+                else {
+                    $input[$key]['category'] = $contentXML['channel']['description'];
+                }
+                $input[$key]['title'] = $value['title'];
+                $input[$key]['description'] = $value['description'];
+                RSS::create($input[$key]);
+            }
 
-        return view('ajax.admin.crawl.index_crawl_xml', compact('contentXML'));
+        }
+
+        return $contentXML;
     }
 }

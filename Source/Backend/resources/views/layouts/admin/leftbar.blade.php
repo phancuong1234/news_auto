@@ -59,12 +59,13 @@
                 <a class="nav-link" data-toggle="collapse" href="#ui-news-basic" aria-expanded="false" aria-controls="ui-news-basic">
                     <span class="menu-title">Quản Lý Bài Viết</span>
                     <i class="menu-arrow"></i>
-                    <i class="mdi mdi mdi-newspaper menu-icon"></i>
+                    <i class="mdi mdi-newspapermenu-icon"></i>
                 </a>
                 <div class="collapse" id="ui-news-basic">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('news.index') }}">Danh Sách Bài Viết</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('pending.news') }}">Bài Viết Đang Chờ Duyệt</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('news.index') }}">Danh Sách Bài Viết</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('pending.news') }}">Bài Viết Đang Chờ Duyệt</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('rss.index') }}">Quản Lý RSS</a></li>
                     </ul>
                 </div>
             </li>
