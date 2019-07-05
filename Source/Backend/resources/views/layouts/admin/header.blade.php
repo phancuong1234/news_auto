@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     {{ Html::style(asset('/templates/admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css')) }}
     {{ Html::style(asset('/templates/admin/vendors/css/vendor.bundle.base.css')) }}
     {{ Html::style(asset('/templates/admin/css/style.css')) }}
     {{ Html::style(asset('/templates/admin/images/favicon.png')) }}
     {{ Html::style(asset('/css/bootstrap-datepicker.css')) }}
     {{ Html::style(asset('/templates/common/css/mystyle.css')) }}
-
 </head>
 <body>
 <div class="container-scroller">

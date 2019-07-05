@@ -33,6 +33,7 @@ class UserController extends Controller
     {
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
+        $input['function'] = config('setting.function.full');
         $status = User::create($input);
         if($status){
             return redirect()->route('users.create')->with('messageSuccess', trans('messages.user.add.success'));

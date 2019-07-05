@@ -28,7 +28,7 @@ class LoginController extends Controller
         {   
             if(auth()->user()->active == config('setting.is_active.active'))
             {
-                if(auth()->user()->id_role == config('setting.role.admin'))
+                if(auth()->user()->id_role == config('setting.role.admin') || auth()->user()->id_role == config('setting.role.editor') || auth()->user()->id_role == config('setting.role.mod'))
                 {
                     return redirect()->route('dashboard.index')->with('alert',trans('messages.login.success'));
                 } else {

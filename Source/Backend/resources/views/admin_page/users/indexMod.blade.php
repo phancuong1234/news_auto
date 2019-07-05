@@ -57,14 +57,19 @@
                                             {{$value->updated_at}}
                                         </td>
                                         <td>
-                                            <a href="javascript:void(0)" style="float: left;" onclick="submitFormDeleteHard('delete-category' + {{$value->id}})">
-                                                <i class="mdi mdi-delete"></i>
-                                            </a>
-                                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy',$value->id], 'id'=>'delete-category'.$value->id]) !!}
-                                            {!! Form::close() !!}
-                                            <a href="{{ route('users.edit',$value->id) }}">
-                                                <i class="mdi mdi-tooltip-edit"></i>
-                                            </a>
+                                            @cannot('mod')
+                                                <a href="javascript:void(0)" style="float: left;" onclick="submitFormDeleteHard('delete-category' + {{$value->id}})">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </a>
+                                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy',$value->id], 'id'=>'delete-category'.$value->id]) !!}
+                                                {!! Form::close() !!}
+                                                <a href="{{ route('users.edit',$value->id) }}">
+                                                    <i class="mdi mdi-tooltip-edit"></i>
+                                                </a>
+                                            @endcannot
+                                            @can("mod")
+                                                No action 
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

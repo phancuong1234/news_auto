@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\EditNewsRequest;
 use App\Http\Requests\Admin\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +18,16 @@ class NewsController extends Controller
     # return view index of news
     public function index()
     {
-        $listNews = News::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
-        foreach ($listNews as $key => $value){
-            $value['typeURL'] = $this->explodeStr($value['image']);
+        $id = Auth::user()->id;
+        $role = Auth::user()->id_role;
+        if($role == config("setting.role.editor")){
+            $listNews = News::where('is_active', config('setting.is_active.active'))
+                            ->where('id_user',$id)
+                            ->paginate(config('setting.paginate'));
         }
-
+        else{
+            $listNews = News::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
+        }
         return view('admin_page.news.index', compact('listNews'));
     }
     #pending page
@@ -72,12 +78,19 @@ class NewsController extends Controller
 
     # return view edit news
     public function show($id)
-    {
-        $news = News::where(['id' => $id])->first();
-        $idCategory = Category::pluck('name_category', 'id');
-        $news['typeURL'] = $this->explodeStr($news->image);
+    {   
+        $id_login = Auth::user()->id;
+        $id_user_new = News::where(['id' => $id])->first()->id_user;
+        if($id_login != $id_user_new ){
+            $this->authorize("editor");
+        }
+        else{
+            $news = News::where(['id' => $id])->first();
+            $idCategory = Category::pluck('name_category', 'id');
+            $typeURL = $this->explodeStr($news->image);
 
-        return view('admin_page.news.edit', compact('news', 'idCategory'));
+            return view('admin_page.news.edit', compact('news', 'idCategory', 'typeURL'));
+        }
     }
     #explode string
     public function explodeStr($str)
@@ -108,7 +121,6 @@ class NewsController extends Controller
     public function update(EditNewsRequest $request, $id)
     {
         $input = $request->all();
-        $input['id_user'] = 1;
         unset($input['_method'], $input['_token']); #  loại bỏ 2 input token và method
         if (isset($input['image'])){
             $input['image'] = $this->saveImg($input['image'], '/images/news/'); # save img to local

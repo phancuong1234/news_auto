@@ -63,8 +63,8 @@
                         <div class="form-group">
                             {!! Form::label('address', 'Address') !!}
                             {!! Form::text('address', $oldModUser->address , ['class'=>'form-control', 'placeholder'=>'Location']) !!}
+                            
                         </div>
-                       
                         {!! Form::submit('submit',['class' => 'btn btn-gradient-primary mr-2']) !!}
                         <a class="btn btn-light" href = "{{route('ModManager')}}" >cancel</a>
                     {!! Form::close() !!}

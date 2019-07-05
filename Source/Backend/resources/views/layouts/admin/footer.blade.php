@@ -13,7 +13,9 @@
 </div>
 <!-- container-scroller -->
 <!-- Include the editors JS -->
+{{ Html::script(asset('/templates/admin/js/jquery.min.js')) }}
 <script src="https://cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- plugins:js -->
 <!-- {{ Html::script(asset('/templates/admin/js/chart.js')) }} -->
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.base.js')) }}
@@ -26,7 +28,6 @@
 {{ Html::script(asset('/templates/admin/js/validate.js')) }}
 {{ Html::script(asset('messages.js')) }}
 {{--{{ Html::script(asset('/templates/admin/js/jquery.js')) }}--}}
-{{ Html::script(asset('/templates/admin/js/jquery.min.js')) }}
 {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
 {{ Html::script(asset('/js/bootstrap-datepicker.js')) }}
 <!-- End custom js for this page-->
