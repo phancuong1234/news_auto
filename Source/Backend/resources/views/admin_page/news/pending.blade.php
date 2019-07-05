@@ -64,16 +64,21 @@
                                         </label>
                                     </td>
                                     <td>
-                                        <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormAcceptNews('accept-news' + {{$news->id}})">
-                                            <i class="mdi mdi-check-circle"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-news' + {{$news->id}})">
-                                            <i class="mdi mdi-delete"></i>
-                                        </a>
-                                        {!! Form::open(['method' => 'PATCH', 'route' => ['pending.accept.news',$news->id], 'id'=>'accept-news'.$news->id]) !!}
-                                        {!! Form::close() !!}
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['news.destroy',$news->id], 'id'=>'delete-news'.$news->id]) !!}
-                                        {!! Form::close() !!}
+                                        @can("editor")
+                                            <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormAcceptNews('accept-news' + {{$news->id}})">
+                                                <i class="mdi mdi-check-circle"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-news' + {{$news->id}})">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+                                            {!! Form::open(['method' => 'PATCH', 'route' => ['pending.accept.news',$news->id], 'id'=>'accept-news'.$news->id]) !!}
+                                            {!! Form::close() !!}
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['news.destroy',$news->id], 'id'=>'delete-news'.$news->id]) !!}
+                                            {!! Form::close() !!} 
+                                        @endcan
+                                        @cannot("editor")
+                                            No action
+                                        @endcannot
                                     </td>
                                 </tr>
                             @endforeach

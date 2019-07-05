@@ -9,7 +9,8 @@ return [
     'role' => [
         'admin' => 1,
         'mod' => 2,
-        'user' => 3
+        'editor' => 3,
+        'user' => 4,
     ],
     'max_time_request' => 20000,
     'url_crawl' => [

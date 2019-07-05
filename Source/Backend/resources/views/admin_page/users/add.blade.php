@@ -37,7 +37,14 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('role', 'Role') !!}
-                            {!! Form::select('id_role', ['' => 'Select role'] + ['2' => 'Mod','3'=>'View User'], null, ['class' => 'form-control']) !!}
+                            <select name="id_role" class = 'form-control'>
+                                <option value="">Select role</option>
+                                @cannot('mod')
+                                    <option value="2">Mod</option>
+                                @endcannot
+                                <option value="3">Editor</option>
+                                <option value="4">View User</option>
+                            </select>
                         </div>
                         {!! Form::submit('Submit',['class' => 'btn btn-gradient-primary mr-2','name'=>'submit']) !!}
                         <a class="btn btn-light" href = "{{route('ModManager')}}" >cancel</a>

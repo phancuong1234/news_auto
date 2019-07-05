@@ -22,35 +22,35 @@ Route::namespace('Authentication')->group(function () {
     #register
     Route::resource('register', 'RegisterController');
 });
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
     Route::namespace('Admin')->group(function () {
         #admin-dashboard
         Route::resource('dashboard','DashBoardController');
         #category
-        Route::resource('categories','CategoryController');
+        Route::resource('categories','CategoryController')->middleware(['can:editor']);
         #users
-        Route::resource('users','UserController');
-
+        Route::resource('users','UserController')->middleware(['can:editor']);
+                
         Route::get('AdminManager', [
             'as'=>'AdminManager',
             'uses'=>'UserManagerController@AdminManager',
-        ]);
+        ])->middleware(['can:editor']);
         Route::get('ModManager', [
             'as'=>'ModManager',
             'uses'=>'UserManagerController@ModManager',
-        ]);
+        ])->middleware(['can:editor']);
         Route::get('ViewerManager', [
             'as'=>'ViewerManager',
             'uses'=>'UserManagerController@ViewerManager',
-        ]);
+        ])->middleware(['can:editor']);
         #news
         Route::resource('news','NewsController');
         #crawler
         Route::resource('crawler','CrawlController');
-        # commment
-        Route::resource('comments', 'CommentController');
         #news_rss
         Route::resource('rss','RSSController');
+        # commment
+        Route::resource('comments', 'CommentController')->middleware(['can:editor']);
         #index pending news
         Route::get('/pending/news',[
             'as' => 'pending.news',
@@ -92,15 +92,18 @@ Route::prefix('admin')->group(function () {
             'uses' => 'RSSController@getSearchAjax',
         ]);
         # crawl auto
-        Route::resource('crawler','CrawlController');
+        Route::resource('crawler','CrawlController')->middleware(['can:admin']);
+        
         Route::get('/crawl-auto',[
             'as' => 'crawl.auto',
             'uses' => 'CrawlController@crawl',
         ]);
+
         Route::get('/index-crawl-by-xml',[
             'as' => 'index.crawl.xml',
             'uses' => 'CrawlController@indexPageCrawlByRSS',
-        ]);
+        ])->middleware(['can:admin']);
+
         Route::post('/crawl-by-xml',[
             'as' => 'crawl.xml',
             'uses' => 'CrawlController@CrawlByRSS',
@@ -109,36 +112,35 @@ Route::prefix('admin')->group(function () {
         Route::get('ChartUser', [
             'as'=>'ChartUser',
             'uses'=>'ChartController@index',
-        ]);
-
+        ])->middleware(['can:editor']);
 
         Route::get('ChartView',[
             'as'=>'ChartView',
             'uses'=>'ChartController@indexView',
-        ]);
+        ])->middleware(['can:editor']);
 
         Route::get('ChartComment',[
             'as'=>'ChartComment',
             'uses'=>'ChartController@indexComment',
-        ]);
+        ])->middleware(['can:editor']);
 
         Route::get('ChartArticle',[
             'as'=>'ChartArticle',
             'uses'=>'ChartController@indexArticle',
-        ]);
+        ])->middleware(['can:editor']);
         Route::get('ChartArticleRate',[
             'as'=>'ChartArticleRate',
             'uses'=>'ChartController@indexArticleRate',
-        ]);
+        ])->middleware(['can:editor']);
         Route::get('ChartArticleTopView',[
             'as'=>'ChartArticleTopView',
             'uses'=>'ChartController@indexArticleTopView',
-        ]);
+        ])->middleware(['can:editor']);
 
         Route::get('ChartTopMod',[
             'as'=>'ChartTopMod',
             'uses'=>'ChartController@indexChartTopMod',
-        ]);
+        ])->middleware(['can:editor']);
         //ajax chart
         Route::get('/ajax/chart/get-number-user-every-month',[
             'uses' => 'ChartController@countUser',
