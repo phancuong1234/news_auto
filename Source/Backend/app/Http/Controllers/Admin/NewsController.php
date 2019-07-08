@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,10 @@ class NewsController extends Controller
         else{
             $listNews = News::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
         }
+        foreach ($listNews as $key => $value ){
+            $value['typeURL'] = $this->explodeStr($value->image);
+        }
+
         return view('admin_page.news.index', compact('listNews'));
     }
     #pending page
@@ -61,17 +66,23 @@ class NewsController extends Controller
     public function store(NewsRequest $request)
     {
         $input = $request->all();
-        $input['id_user'] = 1;
-        if (isset($input['image'])){
-            $input['image'] = $this->saveImg($input['image'], '/images/news/'); # save img to local
+        $input['id_user'] = Auth::user()->id;
+        $input['date_start'] = Carbon::now()->format('Y-m-d');
+        $input['date_end'] = date("Y-m-d", strtotime($input['date_end']));
+        if (strtotime( $input['date_end']) - strtotime( $input['date_start']) > 0){
+            if (isset($input['image'])){
+                $input['image'] = $this->saveImg($input['image'], '/images/news/'); # save img to local
+            }
+            $status = News::create($input);
+            if($status){
+
+                return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.add.success'));
+            } else {
+
+                return redirect()->route('news.index')->with('messageFail', trans('messages.news.add.fail'));
+            }
         }
-        $status = News::create($input);
-
-        if($status){
-
-            return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.add.success'));
-        } else {
-
+        else {
             return redirect()->route('news.index')->with('messageFail', trans('messages.news.add.fail'));
         }
     }
@@ -123,6 +134,7 @@ class NewsController extends Controller
     {
         $input = $request->all();
         unset($input['_method'], $input['_token']); #  loại bỏ 2 input token và method
+        $input['date_end'] = date("Y-m-d", strtotime($input['date_end']));
         if (isset($input['image'])){
             $input['image'] = $this->saveImg($input['image'], '/images/news/'); # save img to local
         }

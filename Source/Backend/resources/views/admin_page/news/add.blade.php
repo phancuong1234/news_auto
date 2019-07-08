@@ -22,7 +22,8 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('id_category', 'Danh mục') !!}
-                            {!! Form::select('id_category', $idCategory, null, ['id' => 'is_active', 'class' => 'form-control']) !!}
+
+                            {!! Form::select('id_category', $idCategory, null, ['id' => 'is_active', 'class' => 'selectpicker form-control', 'data-live-search' => 'true' , 'data-size' => '6']) !!}
                         </div>
                         <div class="form-group">
                             <label>Ảnh tải lên</label>
@@ -39,6 +40,10 @@
                         <div class="form-group">
                             {!! Form::label('content', 'Nội dung bài viết') !!}
                             {!! Form::textarea('content', null, ['id' => 'content']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('date_end', 'Ngày hết hạn') !!}
+                            {!! Form::text('date_end', '', ['class' => 'datepicker-end-date form-control', 'autocomplete' => 'off']) !!}
                         </div>
                         {!! Form::submit("Thêm", ['class' => 'btn btn-gradient-primary mr-2 btn-sm', 'id' => 'btnAddNews']) !!}
                         <a href="{{ route('news.index') }}" class="btn btn-light btn-sm">Hủy</a>

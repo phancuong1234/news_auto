@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Authentication;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 
 class LoginController extends Controller
 {
@@ -26,6 +28,7 @@ class LoginController extends Controller
             {
                 if(auth()->user()->id_role == config('setting.role.admin') || auth()->user()->id_role == config('setting.role.editor') || auth()->user()->id_role == config('setting.role.mod'))
                 {
+
                     return redirect()->route('dashboard.index')->with('alert',trans('messages.login.success'));
                 } else {
 

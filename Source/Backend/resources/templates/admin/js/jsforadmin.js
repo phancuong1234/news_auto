@@ -204,13 +204,21 @@ $(document).ready(function() {
             });
         }
     });
+    // date picker
     $('.datepicker').datepicker({
         format: 'dd-mm-yyyy',
         endDate: '+0d',
         todayHighlight: true,
         autoclose: true,
     });
+    $('.datepicker-end-date').datepicker({
+        format: 'dd-mm-yyyy',
+        startDate: '+0d',
+        todayHighlight: true,
+        autoclose: true,
+    });
     CKEDITOR.replace('content');
+    $('.selectpicker').selectpicker();
 });
 // preview img
 function readURLPicTure(input) {

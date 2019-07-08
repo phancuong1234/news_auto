@@ -22,13 +22,13 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('id_category', 'Danh mục') !!}
-                        {!! Form::select('id_category', $idCategory, $news->id_category, ['id' => 'is_active', 'class' => 'form-control']) !!}
+                        {!! Form::select('id_category', $idCategory, $news->id_category, ['id' => 'is_active', 'class' => 'selectpicker form-control', 'data-live-search' => 'true' , 'data-size' => '6']) !!}
                     </div>
                     <div class="form-group">
                         <label>Ảnh tải lên</label>
                         <div>
-                            <a id="img-preview-tag-a" href="{{ ($news->typeURL == 1)?$news->image:asset('images/news/'.$news->image) }}">
-                                <img class="img-preview" id="img-preview" src="{{ ($news->typeURL == 1)?$news->image:asset('images/news/'.$news->image) }}"/>
+                            <a id="img-preview-tag-a" href="{{ ($typeURL == config('setting.URL_image.type_url.crawl'))?$news->image:asset('images/news/'.$news->image) }}">
+                                <img class="img-preview" id="img-preview" src="{{ ($typeURL == config('setting.URL_image.type_url.crawl'))?$news->image:asset('images/news/'.$news->image) }}"/>
                             </a>
                         </div>
                         <div class="input-group col-xs-12">
