@@ -23,7 +23,7 @@
                         @include('common.error')
                         <h4>Xin chào! Bắt đầu ngay nào.</h4>
                         <h6 class="font-weight-light">Đăng nhập để tiếp tục.</h6>
-                        {!! Form::open(['method' => 'POST','id'=>'add-user', 'route' => 'login.store', 'class' => 'pt-3']) !!}
+                        {!! Form::open(['method' => 'POST','id'=>'login', 'route' => 'login.store', 'class' => 'pt-3']) !!}
                             <div class="form-group">
                                 {!! Form::text('username', '', ['class'=>'form-control form-control-lg', 'placeholder'=>'Username', 'id' => 'username', 'autocomplete' => 'off']) !!}
                             </div>
@@ -43,7 +43,7 @@
                                 <a href="#" class="auth-link text-black">Quên mật khẩu ?</a>
                             </div>
                             <div class="text-center mt-4 font-weight-light">
-                                Bạn chưa có tài khoản ? <a href="register.html" class="text-primary">Đăng kí</a>
+                                Bạn chưa có tài khoản ? <a href="{{route('register.index')}}" class="text-primary">Đăng kí</a>
                             </div>
                         {!! Form::close() !!}
                     </div>
@@ -56,9 +56,12 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
+
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.base.js')) }}
 {{ Html::script(asset('/templates/admin/vendors/js/vendor.bundle.addons.js')) }}
 {{ Html::script(asset('messages.js')) }}
+{{ Html::script(asset('/templates/admin/js/validate.js')) }}
+{{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
 {{ Html::script(asset('/templates/admin/js/off-canvas.js')) }}
 {{ Html::script(asset('/templates/admin/js/misc.js')) }}
 <!-- endinject -->

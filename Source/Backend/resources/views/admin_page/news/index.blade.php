@@ -9,10 +9,12 @@
                     <h4 class="card-title">Danh sách bài viết</h4>
                     @include('common.error')
                     <div>
-                        <a href="{{ route('news.create') }}" class="btn btn-gradient-info btn-sm">
-                            <i class="mdi mdi-library-plus"></i>
-                            Thêm
-                        </a>
+                        @can("add-article")
+                            <a href="{{ route('news.create') }}" class="btn btn-gradient-info btn-sm">
+                                <i class="mdi mdi-library-plus"></i>
+                                Thêm
+                            </a>
+                        @endcan
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('news')">
                         <div class="btn-next-prev">
                             <span class="text-total-news">{{ ($listNews->count() > 0) ? $listNews->firstItem().' - '.$listNews->lastItem().' trong tổng số '.$listNews->total().' tin tức':"" }} </span>
@@ -72,12 +74,16 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('news.show', $news->id) }}">
-                                            <i class="mdi mdi-tooltip-edit"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-news' + {{$news->id}})">
-                                            <i class="mdi mdi-delete"></i>
-                                        </a>
+                                        @can("edit-article")
+                                            <a href="{{ route('news.show', $news->id) }}">
+                                                <i class="mdi mdi-tooltip-edit"></i>
+                                            </a>
+                                        @endcan  
+                                        @can("del-article")  
+                                            <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-news' + {{$news->id}})">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+                                        @endcan
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['news.destroy',$news->id], 'id'=>'delete-news'.$news->id]) !!}
                                         {!! Form::close() !!}
                                     </td>

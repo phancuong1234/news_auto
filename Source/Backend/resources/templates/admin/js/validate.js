@@ -147,9 +147,6 @@ $(document).ready(function() {
             address: {
                 minlength: 10,
             }
-            // image: {
-            //     extension: "jpeg"
-            // }
         },
         messages: {
             username: {
@@ -179,9 +176,6 @@ $(document).ready(function() {
             address: {
                 minlength: Lang.get('validation_admin.user.minlength.address'),
             }
-            // image: {
-            //     extension: Lang.get('validation_admin.user.image.mines'),
-            // }
 
         },
 
@@ -236,6 +230,51 @@ $(document).ready(function() {
         },
     });
     //validate form edit news
+        $("#add-news").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            title: {
+                required: true,
+                minlength: 10,
+                maxlength: 180,
+            },
+            short_description : {
+                required: true,
+                minlength: 10,
+                maxlength: 180,
+            },
+            content : {
+                required: true,
+                minlength: 10
+            },
+            text_image : {
+                required: true,
+            }
+        },
+        messages: {
+            title: {
+                required: Lang.get('validation_admin.new.title.required'),
+                minlength: Lang.get('validation_admin.new.title.minlenght'),
+                maxlength: Lang.get('validation_admin.new.title.maxlenght')
+            },
+            short_description : {
+                required: Lang.get('validation_admin.new.short_description.required'),
+                minlength: Lang.get('validation_admin.new.short_description.required'),
+                maxlength: Lang.get('validation_admin.new.short_description.required')
+            },
+            content : {
+                required: Lang.get('validation_admin.new.content.required'),
+            },
+            image : {
+                required: Lang.get('validation_admin.new.image.required')
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
     $("#edit-news").validate({
         rules: {
             title: {
@@ -304,6 +343,74 @@ $(document).ready(function() {
                 minlength: Lang.get('validation_admin.user.minlenght.address'),
                 maxlength: Lang.get('validation_admin.user.maxlenght.address')
             },
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
+    // validate form login
+    $("#login").validate({
+        rules: {
+            username:{
+                required:true,
+                minlength: 8,
+            },
+            password:{
+                required:true,
+                minlength: 8,
+            }
+        },
+        messages :{
+            username: {
+                required: Lang.get('validation_admin.user.required.username'),
+                minlength: Lang.get('validation_admin.user.minlength.username'),
+            },
+            password: {
+                required: Lang.get('validation_admin.user.required.password'),
+                minlength: Lang.get('validation_admin.user.minlength.password'),
+            },
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+    });
+    //validate form register
+    $("#register").validate({
+        rules: {
+            username:{
+                required:true,
+                minlength: 8,
+            },
+            password:{
+                required:true,
+                minlength: 8,
+            },
+            email:{
+                required: true,
+                email: true,
+            },
+            repassword:{
+                required: true,
+                equalTo : "#password",
+            },
+        },
+        messages :{
+            username: {
+                required: Lang.get('validation_admin.user.required.username'),
+                minlength: Lang.get('validation_admin.user.minlength.username'),
+            },
+            password: {
+                required: Lang.get('validation_admin.user.required.password'),
+                minlength: Lang.get('validation_admin.user.minlength.password'),
+            },
+            email: {
+                required: Lang.get('validation_admin.user.required.email'),
+                email: Lang.get('validation_admin.user.email.email'),
+            },
+            repassword:{
+                required: Lang.get('validation_admin.user.required.repass'),
+                equalTo: Lang.get('validation_admin.user.repass.same'),
+            }
         },
         submitHandler: function(form) {
             form.submit();

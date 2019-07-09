@@ -43,5 +43,14 @@ return [
     'type_preview' => [
         'preview_of_news_pending' => 'news_pending_preview',
         'preview_of_news' => 'news_preview',
-    ]
+    ],
+    'function'=>[
+        'full'=>000,
+        'cut' =>1,
+        'add'=>0,
+        'edit'=>1,
+        'del'=>2,
+        'allow'=>1,
+        'denie'=>0,
+    ],
 ];

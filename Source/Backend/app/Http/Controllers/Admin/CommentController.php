@@ -21,7 +21,7 @@ class CommentController extends Controller
         $list_comments = Comment::select('comments.*', 'users.username', 'news.title as title_news')
             ->join('users', 'users.id', '=', 'comments.id_user')
             ->join('news', 'news.id', 'comments.id_news')
-            ->paginate(config('setting.paginate'));
+            ->paginate(config('setting.paginate'));  
         foreach ($list_comments as $key => $value){
             $listCate = Comment::join('news', 'news.id', 'comments.id_news')->first()->list_id_category;
             $nameCate = Category::whereIn('id', json_decode($listCate))->first()->name_category;

@@ -28,7 +28,7 @@ return [
             'repass' => 'please enter re-password',
             'id_role'=> 'please choose id_role',
         ],
-        'minlenght' => [
+        'minlength' => [
             'username' => 'username cannot be less than 8 characters',
             'fullname' => 'fullname cannot be less than 8 characters',
             'password' => 'password cannot be less than 8 characters',
