@@ -12,25 +12,45 @@
 */
 #profile
 Route::resource('profile','MyProfileController');
+Route::patch('home/changeprofile/{id}', [
+    'as'=>'change.profile',
+    'uses'=>'MyProfileController@ChangeProfile',
+]);
+Route::patch('changepass/{id}', [
+    'as'=>'change.pass',
+    'uses'=>'MyProfileController@ChangePass',
+]);
 #ajax load form
 Route::get('/ajax/profile',[
     'uses' => 'MyProfileController@ajaxLoad',
 ]);
-Route::prefix('user')->group(function () {
-    Route::namespace('User')->group(function () {
-        Route::get('home-page',[
-            'as'=>'home-page',
-            'uses'=>'UserController@home',
-        ]);
-        Route::get('detail/{id}',[
-            'as'=>'detail',
-            'uses'=>'UserController@detail',
-        ]);
-        Route::get('category/{id}',[
-            'as'=>'category',
-            'uses'=>'UserController@category',
-        ]);
-    });
+
+Route::namespace('User')->group(function () {
+    Route::get('/',[
+        'as'=>'home-page',
+        'uses'=>'NewsController@home',
+    ]);
+
+    Route::get('detail/{id}',[
+        'as'=>'detail',
+        'uses'=>'NewsController@detail',
+    ]);
+
+    Route::get('category/{id}',[
+        'as'=>'category',
+        'uses'=>'NewsController@category',
+    ]);
+
+    Route::resource('comment', 'CommentController');
+
+    Route::get('/loadmore/cmt/{position}-{id}', [
+        'as'=>'loadmore.cmt',
+        'uses'=>'CommentController@getMore',
+    ]);
+    //ajax send form data (comment)
+    Route::POST('/ajax/form/comment-form',[
+        'uses' => 'CommentController@postComment',
+    ]);
 });
 Route::namespace('Authentication')->group(function () {
     #login

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ModalRequest;
 use App\Http\Controllers\Controller;
 use App\Traits\Upload;
-
+use Hash;
 class MyProfileController extends Controller
 {
     use Upload;
@@ -38,4 +40,26 @@ class MyProfileController extends Controller
     public function ajaxLoad(){
         return view('ajax.profile.loadform');
     }
+
+    public function ChangeProfile(Request $request , $id){
+        $input = $request->all();
+        if(isset($input['image'])){
+            $input['image'] = $this->saveImg($input['image'],'images/avatars/');
+        }
+
+        $create = User::find($id)->update($input);
+    }
+    public function ChangePass(ModalRequest $request , $id){
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        if(Hash::check($input['oldpass'], Auth::user()->password)){
+            $create = User::find($id)->update(['password' => $input['password']]);
+            return "success";
+        }
+        else{
+            return "fail";
+        }
+
+    }
+
 }

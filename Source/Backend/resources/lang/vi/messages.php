@@ -114,4 +114,10 @@ return [
         'wrong-pass' => 'Sai username hoặc password',
     ],
     'agree_rule' => 'bạn chưa đồng ý các điều khoản ?',
+    'error' => [
+        'no_login'=>'Xin mời đăng nhập hoặc kiểm tra bình luận của bạn',
+        'no_cmt' => 'Bài viết chưa có bình luận',
+        'susscess'=>'Thay đổi thành công',
+        'fail'=>'Vui lòng kiểm tra dữ liệu nhập vào , Password phải nhiều hơn 8 kí tự',
+    ],
 ];

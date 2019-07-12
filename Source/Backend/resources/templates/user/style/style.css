@@ -217,7 +217,7 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 
 .right-login {
     position: absolute;
-    left: 80%;
+    left: 71%;
     width: 50%;
     font-size: 16px;
     display: inherit;
@@ -229,6 +229,95 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 
 .img-news {
     width: 86%;
+}
+
+.img-cmt {
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.img-cmt img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.content-cmt {
+    float: right;
+    width: 83%;
+    margin-left: 2%;
+    border-bottom: 1px solid #e3e4e6;
+    margin-bottom: 15px;
+}
+
+.img-cmt-new {
+    width: 10%;
+    float: left;
+    height: 60px;
+    margin-left: 15px;
+}
+
+.form-cmt {
+    width: 100%;
+}
+
+.text-comment {
+    width: 86%;
+    height: 60px;
+}
+
+.submit-cmt {
+    width: 86.1%;
+    height: 50px;
+    margin-left: 11.9%;
+    border: 1px solid #c4c7cc;
+    background-color: #f0f1f2;
+}
+
+.submit-btn {
+    float: right;
+    margin: 10px 30px;
+}
+
+.btn-change-profile {
+    width: 27%;
+    float: right;
+}
+
+.label-modal {
+    margin-left: 5%;
+}
+
+.label-modal-2 {
+    margin-left: 37%;
+}
+
+.img-modal {
+    float: left;
+    width: 33%;
+}
+
+.inp-profile {
+    width: 63%;
+    margin-left: 37%;
+}
+
+.btn-change-pass {
+    margin-left: 37%;
+}
+
+.content-cmt p {
+    margin-bottom: 0.5rem !important;
+}
+
+.paginate {
+    margin-left: 50%;
+}
+
+.title-detail {
+    width: 98%;
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px) {

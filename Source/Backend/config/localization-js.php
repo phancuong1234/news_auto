@@ -15,6 +15,7 @@ return [
         'validation_admin',
         'messages',
         'button',
+        'validate_user'
     ],
 
     /*
