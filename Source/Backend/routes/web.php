@@ -16,6 +16,22 @@ Route::resource('profile','MyProfileController');
 Route::get('/ajax/profile',[
     'uses' => 'MyProfileController@ajaxLoad',
 ]);
+Route::prefix('user')->group(function () {
+    Route::namespace('User')->group(function () {
+        Route::get('home-page',[
+            'as'=>'home-page',
+            'uses'=>'UserController@home',
+        ]);
+        Route::get('detail/{id}',[
+            'as'=>'detail',
+            'uses'=>'UserController@detail',
+        ]);
+        Route::get('category/{id}',[
+            'as'=>'category',
+            'uses'=>'UserController@category',
+        ]);
+    });
+});
 Route::namespace('Authentication')->group(function () {
     #login
     Route::resource('login', 'LoginController');

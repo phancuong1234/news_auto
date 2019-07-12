@@ -648,8 +648,8 @@ $(document).ready(function() {
     //reject special char
     $.validator.addMethod("validateSpecial", function(value, element) {
         return this.optional( element ) || /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$/.test( value );
-    }, Lang.get('validation_admin.no_special_char'));
+    },Lang.get('validation_admin.no_special_char'));
     jQuery.validator.addMethod("validateUsername", function(value, element) {
         return this.optional( element ) || /^[a-zA-Z][a-zA-Z0-9]{4,50}$/.test( value );
-    }, Lang.get('validation_admin.user.valid_user'));
+    },Lang.get('validation_admin.user.valid_user'));
 });

@@ -1,0 +1,262 @@
+/* add Roboto fonts */
+
+
+/* default version */
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.ttf');
+    src: local('Roboto Font'), local('Roboto-Font'), url('fonts/Roboto-Regular.ttf') format('opentype');
+}
+
+
+/*bold version*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Bold.ttf');
+    src: local('Roboto Font Bold'), local('Roboto-Font-Bold'), url('fonts/Roboto-Bold.ttf') format('opentype');
+    font-weight: bold;
+}
+
+
+/*medium version*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Medium.ttf');
+    src: local('Roboto Font Medium'), local('Roboto-Font-Medium'), url('fonts/Roboto-Medium.ttf') format('opentype');
+    font-weight: medium;
+}
+
+
+/*Light Italic version*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-LightItalic.ttf');
+    src: local('Roboto Font Light Italic'), local('Roboto-Font-Medium-Italic'), url('fonts/Roboto-LightItalic.ttf') format('opentype');
+    font-weight: lighter;
+    font-style: italic;
+}
+
+
+/* Custom CSS */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+nav.navbar div.container .nav__logo--impact {
+    font-size: 34px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+nav.navbar div.container div.collapse .navbar__item--roboto {
+    font-size: 16px;
+    font-weight: medium;
+}
+
+nav.navbar div.container div.collapse form.form-inline .form-search__placeholder {
+    font-size: 13px;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.inner-addon {
+    position: relative;
+}
+
+.inner-addon .fas {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+.right-addon .fas {
+    right: 10px;
+    color: rgb(212, 197, 197);
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
+.copy-right .container .row .font {
+    font-size: 14px;
+    color: rgb(78, 69, 69);
+}
+
+.footer .container .row h3 {
+    font-size: 21px;
+    font-weight: medium;
+}
+
+.content__card .card__title {
+    font-size: 24px;
+    font-weight: medium;
+}
+
+.content__card .card__desc {
+    font-size: 15px;
+}
+
+.media-body__title {
+    font-size: 14px;
+    font-weight: medium;
+    line-height: 20px;
+    color: black;
+}
+
+.image__sidebar {
+    width: 100%;
+}
+
+.category__name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.content__title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.font__desc {
+    font-size: 13px;
+}
+
+.read_most {
+    width: 100%;
+}
+
+.read_most h5 {
+    font-size: 21px;
+    font-weight: medium;
+}
+
+.main__aside .media-body__title {
+    font-size: 15px;
+    font-weight: medium;
+}
+
+.image--size {
+    max-width: 125px;
+    width: 100%;
+    height: 80px;
+}
+
+.footer p {
+    font-size: 15px;
+}
+
+.cate__tittle {
+    font-size: 20px;
+}
+
+.cate__time {
+    font-size: 12px;
+}
+
+.cate__desc {
+    font-size: 13px;
+}
+
+.cate__img {
+    height: 125px;
+    width: 100%;
+}
+
+.pagination a {
+    color: black !important;
+}
+
+.pagination li.active a {
+    color: white !important;
+}
+
+.category__name a {
+    color: white;
+}
+
+.main__titile {
+    font-size: 30px;
+    font-weight: medium;
+}
+
+.main__content p {
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+    line-height: 20px;
+}
+
+.carousel__title {
+    font-size: 21px;
+    font-weight: medium;
+}
+
+.img--full {
+    width: 100%;
+    height: auto;
+}
+
+.font-white {
+    color: white;
+}
+
+.breadcrumb {
+    position: relative;
+}
+
+.right {
+    position: absolute;
+    left: 90%;
+    width: 20%;
+    font-size: 16px;
+}
+
+.right-login {
+    position: absolute;
+    left: 80%;
+    width: 50%;
+    font-size: 16px;
+    display: inherit;
+}
+
+.img-main {
+    width: 100%;
+}
+
+.img-news {
+    width: 86%;
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .right-addon .fas {
+        right: 67%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .right-addon .fas {
+        right: 75%;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1189px) {
+    .right-addon .fas {
+        right: 81%;
+    }
+}
+
+@media screen and (max-width: 1189px) {
+    #main-content {
+        border-right: none !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .w100 {
+        width: 100%;
+    }
+}

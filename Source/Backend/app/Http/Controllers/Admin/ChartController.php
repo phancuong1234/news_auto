@@ -210,9 +210,9 @@ class ChartController extends Controller
 	public function countArticleRate()
 	{
 		$articlerate = News::select(DB::raw('categories.name_category AS name , COUNT(news.id) AS total'))
-				->join('categories','news.list_id_category','=','categories.id')
+				->join('categories','news.id_category','=','categories.id')
 				->whereYear('news.created_at',date('Y'))
-				->groupBy('news.list_id_category')
+				->groupBy('news.id_category')
 				->get();
 		$countArticleRate = [];
 		$total = 0;
@@ -225,6 +225,8 @@ class ChartController extends Controller
 		foreach($countArticleRate as $key => $value){
 			$countArticleRate[$key]['countall'] = $total;
 		}
+
+		dd($countArticleRate);
 
 		return json_encode($countArticleRate);
 
