@@ -53,4 +53,13 @@ return [
         'allow'=>1,
         'denie'=>0,
     ],
+    'viewUser'=>[
+        'paginate-cate' => 9,
+        'paginate-new' => 4,
+        'limit'=>1,
+        'limit-top-view'=>8,
+        'limit-title'=>6,
+        'limit-list-new'=>50,
+        'limit-list-id-new'=>3,
+    ],
 ];

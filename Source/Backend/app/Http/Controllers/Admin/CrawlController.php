@@ -7,6 +7,7 @@ use App\Models\RSS;
 use Goutte\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CrawlController extends Controller
 {
@@ -34,8 +35,10 @@ class CrawlController extends Controller
         $list_category = Category::all();
         if($list_category->count() > 0){
             foreach ($list_category as $list_category => $value){
-                if(trim($value->name_category) != config('setting.detect_name_crawl.name_1') && trim($value->name_category) != config('setting.detect_name_crawl.name_2') && trim($value->name_category) != ''){
-                    $this->crawlPost($value->url_cate); # crawl post
+                if(isset($value->url_cate)){
+                    if(trim($value->name_category) != config('setting.detect_name_crawl.name_1') && trim($value->name_category) != config('setting.detect_name_crawl.name_2') && trim($value->name_category) != ''){
+                        $this->crawlPost($value->url_cate); # crawl post
+                    }
                 }
             }
         }
@@ -53,11 +56,11 @@ class CrawlController extends Controller
         if( $newUrl[1] == str_replace(".htm","",$newUrl[1])){ #xử lí để lấy lại url của danh mục
             $urlFormat = $urlFormat.'.htm';
         }
-        $list_id_category = Category::where('url_cate', $urlFormat)->first()->id; # lấy id danh mục
-        $crawler->filter('.mt3')->each(function ($node) use ($list_id_category){
+        $id_category = Category::where('url_cate', $urlFormat)->first()->id; # lấy id danh mục
+        $crawler->filter('.mt3')->each(function ($node) use ($id_category){
             $data['title'] = $node->filter('.mr1 > h2 > a')->eq(0)->text(); # lấy được title
             $data['url_news'] = $node->filter('.mr1 > h2 > a')->eq(0)->attr('href');
-            $data['id_user'] = 1;
+            $data['id_user'] = Auth::user()->id;
             $temp = trim($node->filter('.fon5')->eq(0)->text()); # lấy ra description
             $posWantDel = strpos($temp, '>>'); # bắt đầu lọc description
             if($posWantDel === false){
@@ -69,19 +72,8 @@ class CrawlController extends Controller
             }
             $data['image'] = $node->filter('a > img')->eq(0)->attr('src'); # lấy được link ảnh
             $countPostDuplicate = News::where(['title' => $data['title']])->get(); # tìm tin tức trùng
-            if ($countPostDuplicate->count() > 0){ # nếu trùng tin tức thì thực hiện
-                $getPost = News::where('title', $data['title'])->first();
-                $arr = json_decode($getPost->list_id_category);
-                if(!in_array($list_id_category,$arr)){
-                    array_push($arr,$list_id_category);
-                    $data['list_id_category'] = json_encode($arr);
-                    News::find($getPost->id)->update($data);
-                }
-            }
-            else {
-                $arrIdCategory = array();
-                array_push($arrIdCategory,$list_id_category);
-                $data['list_id_category'] = json_encode($arrIdCategory);
+            if ($countPostDuplicate->count() == 0){ 
+                $data['id_category'] = $id_category;
                 News::create($data);
             }
         });
