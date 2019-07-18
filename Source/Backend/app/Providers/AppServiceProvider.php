@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Role;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Support\Facades\View;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,9 +34,10 @@ class AppServiceProvider extends ServiceProvider
                             ->get();
             $title_news = News::orderBy('number_view','DESC')
                             ->limit(config('setting.viewUser.limit-title'))
-                            ->get(); 
+                            ->get();
             View::share('list_category', $list_category);
             View::share('top_view', $top_view);
             View::share('title_news', $title_news);
     }
+
 }

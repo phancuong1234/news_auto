@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->integer('id_role');
             $table->string('function')->default('000');
-            $table->string('image')->default('default.png');
+            $table->string('image')->default('no-image.png');
             $table->tinyInteger('active')->default(1);
             $table->rememberToken();
             $table->timestamps();

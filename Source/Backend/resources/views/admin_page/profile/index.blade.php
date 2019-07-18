@@ -10,7 +10,7 @@
                         @include('common.error')
                         <div class="d-flex justify-content-start">
                             <div class="image-container">
-                                <img src="{{ (isset(Auth::user()->image))? asset('images/avatars/'.Auth::user()->image):'http://placehold.it/150x150' }}" id="img-preview" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                <img src="{{ (Auth::user()->image != 'no-image.png')?asset('images/avatars/'.Auth::user()->image):asset('templates/images/no-image.png') }}" id="img-preview" style="width: 150px; height: 150px" class="img-thumbnail" />
                                 <div class="middle">
                                     {!! Form::open(['method' => 'PATCH', 'route' => ['profile.update', Auth::user()->id], 'files' => true, 'id' => 'changeAva']) !!}
                                         <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Thay Đổi" />

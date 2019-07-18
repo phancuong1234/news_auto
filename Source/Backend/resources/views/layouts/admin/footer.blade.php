@@ -30,6 +30,7 @@
 {{--{{ Html::script(asset('/templates/admin/js/jquery.js')) }}--}}
 {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
 {{ Html::script(asset('/js/bootstrap-datepicker.js')) }}
+{{ Html::script(asset('/js/bootstrap-select.js')) }}
 <!-- End custom js for this page-->
 </body>
 
