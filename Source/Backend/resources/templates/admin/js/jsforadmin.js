@@ -84,7 +84,7 @@ $(document).ready(function() {
                 }, 200);
                 setTimeout(() => {
                     $.ajax({
-                        type: "POST",
+                        type: form.attr('method'),
                         url: url,
                         data: form.serialize(), // serializes the form's elements.
                         success: function(data)
@@ -209,6 +209,20 @@ $(document).ready(function() {
                     window.location.href = "/admin/activities?page=" + total;
                 } else {
                     window.location.href = "/admin/activities?page=" + number;
+                }
+            }
+        }
+    });
+    $('#text-paginate-notify').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0) {
+                if (number > total) {
+                    window.location.href = "/admin/all-notify?page=" + total;
+                } else {
+                    window.location.href = "/admin/all-notify?page=" + number;
                 }
             }
         }
@@ -430,3 +444,14 @@ $("#close").click(function(){
     $('#showpass').hide();
     $('#showrepass').hide();
 });
+function maskAsRead(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/admin/read-notify/" + id,
+        method: "PATCH",
+    });
+}

@@ -16,7 +16,7 @@
                         <p>{{ $news->short_description }}</p>
                         <p>{!! $html = html_entity_decode($news->content) !!}</p>
                     </div>
-                    @if($typePreview == config('setting.type_preview.preview_of_news_pending'))
+                    @if($typePreview == config('setting.type_preview.preview_of_news_pending') && auth()->user()->id_role != config('setting.role.editor'))
                         <a href="javascript:void(0)" style="" onclick="submitFormAcceptNews('accept-news' + {{$news->id}})" class="btn btn-gradient-success btn-rounded btn-sm">
                             <i class="mdi mdi-check-circle"></i>
                             Chấp Nhận

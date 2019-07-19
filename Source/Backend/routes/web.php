@@ -55,6 +55,10 @@ Route::namespace('User')->group(function () {
 Route::namespace('Authentication')->group(function () {
     #login
     Route::resource('login', 'LoginController');
+    #get current user
+    Route::get('/getUserLogin', function() {
+        return Auth::user();
+    });
     #register
     Route::resource('register', 'RegisterController');
 });
@@ -66,7 +70,7 @@ Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
         Route::resource('categories','CategoryController')->middleware(['can:editor']);
         #users
         Route::resource('users','UserController')->middleware(['can:editor']);
-        #config_rss_link
+        #activity
         Route::resource('activities','ActivityController');
         Route::get('AdminManager', [
             'as'=>'AdminManager',
@@ -86,6 +90,8 @@ Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
         Route::resource('crawler','CrawlController');
         #news_rss
         Route::resource('rss','RSSController');
+        #config_link_rss
+        Route::resource('config','ConfigLinkRSSController');
         # commment
         Route::resource('comments', 'CommentController')->middleware(['can:editor']);
         #index pending news
@@ -94,7 +100,7 @@ Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
             'uses' => 'NewsController@pendingIndex',
         ]);
         #pending preview
-        Route::get('/pending/news/preview/{id}/type={type}',[
+        Route::get('/pending/news/preview/{id}',[
             'as' => 'pending.news.preview',
             'uses' => 'NewsController@pendingPreview',
         ]);
@@ -241,6 +247,22 @@ Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
 
         Route::get('/ajax/chart/get-top-mod-in-choose-time/{year}-{month}/{amount}',[
             'uses' => 'ChartController@topModChooseTime',
+        ]);
+        #load notify
+        Route::get('/load-notify', [
+            'uses' => 'NotifyController@loadLimit',
+        ]);
+        Route::get('/num-notify-unread', [
+            'uses' => 'NotifyController@numberNotifyUnread',
+        ]);
+        Route::patch('/read-notify/{id}', [
+            'uses' => 'NotifyController@readNotification',
+        ]);
+        Route::get('/load-notify/{id}', [
+            'uses' => 'NotifyController@loadOneNotify',
+        ]);
+        Route::get('/all-notify', [
+            'uses' => 'NotifyController@index',
         ]);
     });
 });

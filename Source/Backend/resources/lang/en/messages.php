@@ -44,6 +44,9 @@ return [
             'success' => 'approved successful news',
             'fail' => 'approved fail news',
         ],
+        'pending' => [
+            'no_exists' => 'That news is not exists'
+        ]
     ],
     'user' => [
         'add' => [
@@ -118,5 +121,19 @@ return [
         'no_cmt' => 'No comment in this post',
         'susscess'=>'Change Susscess',
         'fail'=>'Please check your data , password cannot be less than 8 characters',
+    ],
+    'config' => [
+        'add' => [
+            'success' => 'Successfully added 1 link configuration',
+            'fail' => 'Failure added 1 link configuration',
+        ],
+        'del' => [
+            'success' => 'Successfully deleted 1 link configuration',
+            'fail' => 'Failure deleted 1 link configuration',
+        ],
+        'edit' => [
+            'success' => 'Successfully edited 1 link configuration',
+            'fail' => 'Failure edited 1 link configuration',
+        ]
     ],
 ];

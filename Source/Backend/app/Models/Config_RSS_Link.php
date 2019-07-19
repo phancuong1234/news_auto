@@ -13,6 +13,8 @@ class Config_RSS_Link extends Model
     protected $fillable = [
         'name_page',
         'name_cate',
+        'link',
         'parent_id',
+        'is_active',
     ];
 }

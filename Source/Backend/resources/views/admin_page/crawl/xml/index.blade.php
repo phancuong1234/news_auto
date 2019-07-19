@@ -15,7 +15,11 @@
                     <div>
                         <div class="form-group">
                             {!! Form::label('url', 'Bước 1 : nhập trang web cần crawl ( hiện tại chỉ hổ trợ mỗi trang dân trí )') !!}
-                            {!! Form::text('url', '', ['id' => 'urlRSS', 'class' => 'form-control']) !!}
+                            @if(isset($listIdConfigRSS))
+                                {!! Form::select('url', $listIdConfigRSS, null, ['id' => 'urlRSS', 'class' => 'selectpicker form-control show-tick', 'data-live-search' => 'true' , 'data-size' => '6']) !!}
+                            @else
+                                {!! Form::text('no-infomation', 'Không có cấu hình nào được cài đặt sẵn', ['class' => 'form-control', 'disabled' => true]) !!}
+                            @endif
                         </div>
                     </div>
                     <div class="screen-loader" id="screen-loader">
@@ -36,7 +40,9 @@
 
                         </div>
                     </div>
-                    {!! Form::submit("Bắt đầu", ['class' => 'btn btn-gradient-primary mr-2 btn-sm', 'id' => 'btn-start-crawl-by-rss']) !!}
+                    @if(isset($listIdConfigRSS))
+                        {!! Form::submit("Bắt đầu", ['class' => 'btn btn-gradient-primary mr-2 btn-sm', 'id' => 'btn-start-crawl-by-rss']) !!}
+                    @endif
                     {!! Form::close() !!}
                 </div>
             </div>

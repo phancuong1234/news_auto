@@ -17,7 +17,9 @@ class CreateTableConfigRssLink extends Migration
             $table->bigIncrements('id');
             $table->string('name_page');
             $table->string('name_cate');
-            $table->integer('parent_id');
+            $table->string('link');
+            $table->integer('parent_id')->default(0);
+            $table->integer('is_active')->default(1);
             $table->timestamps();
         });
     }

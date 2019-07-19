@@ -43,7 +43,11 @@ return [
         'approve' => [
             'success' => 'Phê duyệt tin tức thành công ',
             'fail' => 'Phê duyệt tin tức thất bại',
+        ],
+        'pending' => [
+            'no_exists' => 'Tin tức đã bị xóa'
         ]
+
     ],
     'user' => [
         'add' => [
@@ -119,5 +123,19 @@ return [
         'no_cmt' => 'Bài viết chưa có bình luận',
         'susscess'=>'Thay đổi thành công',
         'fail'=>'Vui lòng kiểm tra dữ liệu nhập vào , Password phải nhiều hơn 8 kí tự',
+    ],
+    'config' => [
+        'add' => [
+            'success' => 'Đã thêm thành công 1 cấu hình liên kết',
+            'fail' => 'Thêm thất bại 1 cấu hình liên kết',
+        ],
+        'del' => [
+            'success' => 'Đã xóa thành công 1 cấu hình liên kết',
+            'fail' => 'Xóa thất bại 1 cấu hình liên kết',
+        ],
+        'edit' => [
+            'success' => 'Đã sửa thành công 1 cấu hình liên kết',
+            'fail' => 'Sửa thất bại 1 cấu hình liên kết',
+        ]
     ],
 ];
