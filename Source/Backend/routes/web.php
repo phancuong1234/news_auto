@@ -66,7 +66,8 @@ Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
         Route::resource('categories','CategoryController')->middleware(['can:editor']);
         #users
         Route::resource('users','UserController')->middleware(['can:editor']);
-                
+        #config_rss_link
+        Route::resource('activities','ActivityController');
         Route::get('AdminManager', [
             'as'=>'AdminManager',
             'uses'=>'UserManagerController@AdminManager',
@@ -103,6 +104,10 @@ Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
             'uses' => 'NewsController@approve',
         ]);
         #livesearch
+        Route::get('/activities/search/{text}',[
+            'as' => 'search.activity',
+            'uses' => 'ActivityController@getSearchAjax',
+        ]);
         Route::get('/categories/search/{text}',[
             'as' => 'search.category',
             'uses' => 'CategoryController@getSearchAjax',

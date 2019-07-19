@@ -10,12 +10,15 @@
                     @include('common.error')
                     <div>
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('comment')">
-                        <div class="btn-next-prev">
-                            <span class="text-total-news">{{ ($list_comments->count() > 0) ? $list_comments->firstItem().' - '.$list_comments->lastItem().' trong tổng số '.$list_comments->total().' bình luận':"" }} </span>
-                            <a href="{{ $list_comments->previousPageUrl() }}" class="previous round {{ ($list_comments->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
-                            <input class="text-paginate" type="text" id="text-paginate-comment" />
-                            <a href="{{ $list_comments->nextPageUrl() }}" class="next round {{ ($list_comments->currentPage() != $list_comments->total())?'btn-active':'' }}">&#8250;</a>
-                        </div>
+                        @if($list_comments->count() > 0)
+                            <input type="hidden" id="total_page" value="{{ $list_comments->lastPage() }}"/>
+                            <div class="btn-next-prev">
+                                <span class="text-total-news">{{ ($list_comments->count() > 0) ? $list_comments->firstItem().' - '.$list_comments->lastItem().' trong tổng số '.$list_comments->total().' hoạt động':"" }} </span>
+                                <a href="{{ ($list_comments->currentPage() > 1) ? $list_comments->previousPageUrl():'javascript:void(0)' }}" class="previous round {{ ($list_comments->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                                <input class="text-paginate" type="number" id="text-paginate-comment" min="1" max="{{ $list_comments->lastPage() }}"/>
+                                <a href="{{ ($list_comments->currentPage() != $list_comments->lastPage()) ? $list_comments->nextPageUrl():'javascript:void(0)' }}" class="next round {{ ($list_comments->currentPage() != $list_comments->lastPage())?'btn-active':'' }}">&#8250;</a>
+                            </div>
+                        @endif
                     </div>
                     <table class="table table-striped">
                         <thead>

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\Activity;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\RSS;
+use Carbon\Carbon;
 use Goutte\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -44,6 +46,11 @@ class CrawlController extends Controller
         }
         # craw detail
         $count = $this->crawlDetailPost();
+        $dataActivities['id_user'] = Auth::user()->id;
+        $dataActivities['content'] = 'Cào thành công '.$count.' Bài viết';
+        $dataActivities['id_news'] = 0;
+        $dataActivities['type_active'] = config('setting.type_active.news.crawl');
+        Activity::create($dataActivities);
 
         return view('ajax.admin.crawl.index', compact('count'));
     }
@@ -61,6 +68,11 @@ class CrawlController extends Controller
             $data['title'] = $node->filter('.mr1 > h2 > a')->eq(0)->text(); # lấy được title
             $data['url_news'] = $node->filter('.mr1 > h2 > a')->eq(0)->attr('href');
             $data['id_user'] = Auth::user()->id;
+            $data['name_page_crawled'] = config('setting.url_crawl.name');
+            $data['type'] = config('setting.type_news.crawl');
+            $dt = Carbon::now('Asia/Ho_Chi_Minh');
+            $data['date_start'] = $dt;
+            $data['date_end'] = $dt->addMonths(10);
             $temp = trim($node->filter('.fon5')->eq(0)->text()); # lấy ra description
             $posWantDel = strpos($temp, '>>'); # bắt đầu lọc description
             if($posWantDel === false){

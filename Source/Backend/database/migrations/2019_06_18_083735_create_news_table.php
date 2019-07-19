@@ -16,7 +16,7 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('id_category')->nullable();
-            $table->bigInteger('id_user')->nullable();
+            $table->integer('id_user')->nullable();
             $table->text('title')->nullable();
             $table->text('short_description')->nullable();
             $table->longText('content')->nullable();
@@ -24,7 +24,7 @@ class CreateNewsTable extends Migration
             $table->text('url_news')->nullable();
             $table->text('name_page_crawled')->nullable();
             $table->tinyInteger('type')->default(0);
-            $table->bigInteger('number_view')->default(0);
+            $table->integer('number_view')->default(0);
             $table->tinyInteger('is_active')->default(1);
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();

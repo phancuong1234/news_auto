@@ -12,7 +12,9 @@ class Activity extends Model
 
     protected $fillable = [
         'id_user',
+        'id_news',
         'content',
+        'type_active',
     ];
 
     public function user()

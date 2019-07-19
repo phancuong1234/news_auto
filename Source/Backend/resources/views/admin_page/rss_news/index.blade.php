@@ -14,12 +14,15 @@
                             Thêm
                         </a>
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('rss')">
-                        <div class="btn-next-prev">
-                            <span class="text-total-news">{{ ($listRSS->count() > 0) ? $listRSS->firstItem().' - '.$listRSS->lastItem().' trong tổng số '.$listRSS->total().' tin tức':"" }} </span>
-                            <a href="{{ $listRSS->previousPageUrl() }}" class="previous round {{ ($listRSS->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
-                            <input class="text-paginate" type="text" id="text-paginate-rss"/>
-                            <a href="{{ $listRSS->nextPageUrl() }}" class="next round {{ ($listRSS->currentPage() != $listRSS->total())?'btn-active':'' }}">&#8250;</a>
-                        </div>
+                        @if($listRSS->count() > 0)
+                            <input type="hidden" id="total_page" value="{{ $listRSS->lastPage() }}"/>
+                            <div class="btn-next-prev">
+                                <span class="text-total-news">{{ ($listRSS->count() > 0) ? $listRSS->firstItem().' - '.$listRSS->lastItem().' trong tổng số '.$listRSS->total().' tin tức rss':"" }} </span>
+                                <a href="{{ ($listRSS->currentPage() > 1) ? $listRSS->previousPageUrl():'javascript:void(0)' }}" class="previous round {{ ($listRSS->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                                <input class="text-paginate" type="number" id="text-paginate-rss" min="1" max="{{ $listRSS->lastPage() }}"/>
+                                <a href="{{ ($listRSS->currentPage() != $listRSS->lastPage()) ? $listRSS->nextPageUrl():'javascript:void(0)' }}" class="next round {{ ($listRSS->currentPage() != $listRSS->lastPage())?'btn-active':'' }}">&#8250;</a>
+                            </div>
+                        @endif
                     </div>
                     <table class="table table-striped">
                         <thead>

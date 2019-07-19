@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentsTable extends Migration
+class CreateTableConfigRssLink extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('config_link_rss', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_news');
-            $table->integer('id_user');
-            $table->text('content');
-            $table->tinyInteger('is_active')->default(1);
+            $table->string('name_page');
+            $table->string('name_cate');
+            $table->integer('parent_id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('config_link_rss');
     }
 }

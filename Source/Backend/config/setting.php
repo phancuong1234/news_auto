@@ -14,6 +14,7 @@ return [
     ],
     'max_time_request' => 20000,
     'url_crawl' => [
+        'name' => 'Báo Dân Trí',
         'dan_tri_page' => 'https://dantri.com.vn/',
         'dan_tri' => 'dantri.com.vn',
     ],
@@ -44,22 +45,30 @@ return [
         'preview_of_news_pending' => 'news_pending_preview',
         'preview_of_news' => 'news_preview',
     ],
-    'function'=>[
-        'full'=>000,
-        'cut' =>1,
-        'add'=>0,
-        'edit'=>1,
-        'del'=>2,
-        'allow'=>1,
-        'denie'=>0,
+    'function' => [
+        'full'=> 000,
+        'cut' => 1,
+        'add' => 0,
+        'edit'=> 1,
+        'del' => 2,
+        'allow' => 1,
+        'denie' => 0,
     ],
-    'viewUser'=>[
+    'viewUser' => [
         'paginate-cate' => 9,
         'paginate-new' => 4,
-        'limit'=>1,
-        'limit-top-view'=>8,
-        'limit-title'=>6,
-        'limit-list-new'=>50,
-        'limit-list-id-new'=>3,
+        'limit'=> 1,
+        'limit-top-view' => 8,
+        'limit-title' => 6,
+        'limit-list-new' => 50,
+        'limit-list-id-new' => 3,
     ],
+    'type_active' => [
+        'news' => [
+            'add' => 1,
+            'edit' => 2,
+            'delete' => 3,
+            'crawl' => 4,
+        ],
+    ]
 ];

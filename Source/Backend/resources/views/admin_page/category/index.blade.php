@@ -14,12 +14,15 @@
                             Thêm
                         </a>
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('category')">
-                        <div class="btn-next-prev">
-                            <span class="text-total-news">{{ ($listCategories->count() > 0) ? $listCategories->firstItem().' - '.$listCategories->lastItem().' trong tổng số '.$listCategories->total().' danh mục':"" }} </span>
-                            <a href="{{ $listCategories->previousPageUrl() }}" class="previous round {{ ($listCategories->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
-                            <input class="text-paginate" type="text" id="text-paginate-cate" />
-                            <a href="{{ $listCategories->nextPageUrl() }}" class="next round {{ ($listCategories->currentPage() != $listCategories->total())?'btn-active':'' }}">&#8250;</a>
-                        </div>
+                        @if($listCategories->count() > 0)
+                            <input type="hidden" id="total_page" value="{{ $listCategories->lastPage() }}"/>
+                            <div class="btn-next-prev">
+                                <span class="text-total-news">{{ ($listCategories->count() > 0) ? $listCategories->firstItem().' - '.$listCategories->lastItem().' trong tổng số '.$listCategories->total().' hoạt động':"" }} </span>
+                                <a href="{{ ($listCategories->currentPage() > 1) ? $listCategories->previousPageUrl():'javascript:void(0)' }}" class="previous round {{ ($listCategories->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                                <input class="text-paginate" type="number" id="text-paginate-cate" min="1" max="{{ $listCategories->lastPage() }}"/>
+                                <a href="{{ ($listCategories->currentPage() != $listCategories->lastPage()) ? $listCategories->nextPageUrl():'javascript:void(0)' }}" class="next round {{ ($listCategories->currentPage() != $listCategories->lastPage())?'btn-active':'' }}">&#8250;</a>
+                            </div>
+                        @endif
                     </div>
                     <table class="table table-striped">
                         <thead>

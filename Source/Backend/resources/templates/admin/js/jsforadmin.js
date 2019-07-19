@@ -118,43 +118,99 @@ $(document).ready(function() {
     $('#text-paginate-news').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $('#text-paginate-news').val();
-            window.location.href = "/admin/news?page=" + number;
+            var number = $(this).val();
+            var total = $('#total_page').val();
+            if (number > total){
+                window.location.href = "/admin/news?page=" + total;
+            }
+            else {
+                window.location.href = "/admin/news?page=" + number;
+            }
         }
     });
     $('#text-paginate-cate').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $('#text-paginate-cate').val();
-            window.location.href = "/admin/categories?page=" + number;
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0){
+                if (number > total){
+                    window.location.href = "/admin/categories?page=" + total;
+                }
+                else {
+                    window.location.href = "/admin/categories?page=" + number;
+                }
+            }
         }
     });
     $('#text-paginate-comment').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $('#text-paginate-comment').val();
-            window.location.href = "/admin/comments?page=" + number;
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0) {
+                if (number > total) {
+                    window.location.href = "/admin/comments?page=" + total;
+                } else {
+                    window.location.href = "/admin/comments?page=" + number;
+                }
+            }
         }
     });
     $('#text-paginate-user').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $('#text-paginate-user').val();
-            window.location.href = "/admin/ModManager?page=" + number;
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0) {
+                if (number > total) {
+                    window.location.href = "/admin/ModManager?page=" + total;
+                } else {
+                    window.location.href = "/admin/ModManager?page=" + number;
+                }
+            }
         }
     });
     $('#text-paginate-viewer').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $('#text-paginate-viewer').val();
-            window.location.href = "/admin/ViewerManager?page=" + number;
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0) {
+                if (number > total) {
+                    window.location.href = "/admin/ViewerManager?page=" + total;
+                } else {
+                    window.location.href = "/admin/ViewerManager?page=" + number;
+                }
+            }
         }
     });
     $('#text-paginate-rss').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $('#text-paginate-rss').val();
-            window.location.href = "/admin/rss?page=" + number;
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0) {
+                if (number > total) {
+                    window.location.href = "/admin/rss?page=" + total;
+                } else {
+                    window.location.href = "/admin/rss?page=" + number;
+                }
+            }
+        }
+    });
+    $('#text-paginate-activity').keyup(function(e) {
+        var enterKey = 13;
+        if (e.which == enterKey){
+            var number = $(this).val();
+            var total = parseInt($('#total_page').val());
+            if (number > 0) {
+                if (number > total) {
+                    window.location.href = "/admin/activities?page=" + total;
+                } else {
+                    window.location.href = "/admin/activities?page=" + number;
+                }
+            }
         }
     });
     //btn change picture
@@ -350,6 +406,15 @@ function liveSearch(type){
                 method: "GET", // phương thức gửi dữ liệu.
                 success: function (data) { //dữ liệu nhận về
                     $('#rss').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là Users
+                }
+            });
+        }
+        if (type == 'activities'){
+            $.ajax({
+                url: "/admin/activities/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                method: "GET", // phương thức gửi dữ liệu.
+                success: function (data) { //dữ liệu nhận về
+                    $('#activities').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là Users
                 }
             });
         }
