@@ -113,4 +113,10 @@ return [
         'wrong-pass' => 'Invalid username or password',
     ],
     'agree_rule' => 'You have not agreed to the terms',
+    'error' => [
+        'no_login'=>'Please login or check your comment',
+        'no_cmt' => 'No comment in this post',
+        'susscess'=>'Change Susscess',
+        'fail'=>'Please check your data , password cannot be less than 8 characters',
+    ],
 ];

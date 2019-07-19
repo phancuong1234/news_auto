@@ -36,9 +36,12 @@
       </div>
     </div>
   </div>
-
   {{ Html::script(asset('templates/user/js/jquery.min.js')) }}
+  {{ Html::script(asset('messages.js')) }}
   {{ Html::script(asset('templates/user/js/popper.min.js')) }}
+  {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
+  {{ Html::script(asset('/templates/user/js/validate-user.js')) }}
+  {{ Html::script(asset('templates/user/js/jsforuser.js')) }}
   {{ Html::script(asset('templates/user/js/bootstrap.min.js')) }}
   {{ Html::script(asset('templates/user/fonts/all.js')) }}
 </body>

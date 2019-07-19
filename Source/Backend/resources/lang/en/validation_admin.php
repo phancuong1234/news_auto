@@ -81,5 +81,6 @@ return [
             'required'=> 'this filed can not be null',
             'number' => 'please enter a number'
         ]
-    ]
+    ],
+
 ];

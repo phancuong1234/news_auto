@@ -82,5 +82,6 @@ return [
             'required'=> 'vui lòng nhập trường này',
             'number' => 'trường này chỉ được nhập số'
         ]
-    ]
+    ],
+
 ];

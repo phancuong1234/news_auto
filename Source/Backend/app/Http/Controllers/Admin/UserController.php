@@ -102,7 +102,7 @@ class UserController extends Controller
             unset($input['password']);
         }
         if(isset($input['image'])){
-            $input['image'] = $this->saveImg($input['image'],'/images/avatars/');
+            $input['image'] = $this->saveImg($input['image'],'public/images/avatars/');
         }
         $status = User::where('id', $id)->update($input);
         if($status){
