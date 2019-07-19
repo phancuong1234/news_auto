@@ -60,7 +60,7 @@
                                         {{ $news->id }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('pending.news.preview', [$news->id, config('setting.type_preview.preview_of_news')]) }}">
+                                        <a href="{{ route('pending.news.preview', $news->id) }}">
                                             {{ $news->title }}
                                         </a>
                                     </td>

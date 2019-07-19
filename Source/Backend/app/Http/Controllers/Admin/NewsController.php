@@ -8,11 +8,13 @@ use App\Models\Activity;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
+use App\Notifications\SendNotify;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Upload;
+use DB;
 
 class NewsController extends Controller
 {
@@ -70,26 +72,46 @@ class NewsController extends Controller
         $input['id_user'] = Auth::user()->id;
         $input['date_start'] = Carbon::now()->format('Y-m-d');
         $input['date_end'] = date("Y-m-d", strtotime($input['date_end']));
-        if (strtotime( $input['date_end']) - strtotime( $input['date_start']) > 0){
-            if (isset($input['image'])){
-                $input['image'] = $this->saveImg($input['image'], '/images/news/'); # save img to local
-            }
-            $status = News::create($input);
-            if($status){
-                $dataActivities['id_user'] = Auth::user()->id;
-                $dataActivities['id_news'] = $status->id;
-                $dataActivities['content'] = 'Bạn vừa tạo thành công 1 Bài viết';
-                $dataActivities['type_active'] = config('setting.type_active.news.add');
-                Activity::create($dataActivities);
-                return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.add.success'));
-            } else {
+        if (Auth::user()->id_role == config('setting.role.editor')){
+            $input['is_active'] = config('setting.is_active.pending');
+        }
+        DB::beginTransaction();
+        try {
+            if (strtotime( $input['date_end']) - strtotime( $input['date_start']) > 0){
+                if (isset($input['image'])){
+                    $input['image'] = $this->saveImg($input['image'], '/images/news/'); # save img to local
+                }
+                $status = News::create($input);
+                if($status){
+                    $dataActivities['id_user'] = Auth::user()->id;
+                    $dataActivities['id_news'] = $status->id;
+                    $dataActivities['content'] = 'Bạn vừa tạo thành công 1 Bài viết';
+                    $dataActivities['type_active'] = config('setting.type_active.news.add');
+                    Activity::create($dataActivities);
+                    if ($status->is_active == config('setting.is_active.pending')){
+                        $userid = User::where('id_role', config('setting.role.admin'))->orWhere('id_role', config('setting.role.mod'))->get();
+                        foreach ($userid as $user) {
+                            $user->notify(new SendNotify($status,$user->id));
+                        }
+                    }
+                    DB::commit();
 
+                    return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.add.success'));
+                } else {
+
+                    return redirect()->route('news.index')->with('messageFail', trans('messages.news.add.fail'));
+                }
+            }
+            else {
                 return redirect()->route('news.index')->with('messageFail', trans('messages.news.add.fail'));
             }
         }
-        else {
+        catch (Exception $e) {
+            DB::rollBack();
+
             return redirect()->route('news.index')->with('messageFail', trans('messages.news.add.fail'));
         }
+
     }
 
     # return view edit news
@@ -123,12 +145,26 @@ class NewsController extends Controller
         return $typeURL;
     }
     #pending_preview
-    public function pendingPreview($id, $typePreview)
+    public function pendingPreview($id)
     {
         $news = News::where(['id' => $id])->first();
-        $typeURL = $this->explodeStr($news->image);
+        if ($news->count() > 0){
+            $typeURL = $this->explodeStr($news->image);
+            if ($news->is_active == config('setting.is_active.pending')){
+                $typePreview = config('setting.type_preview.preview_of_news_pending');
 
-        return view('admin_page.news.preview_news', compact('news', 'typeURL', 'typePreview'));
+                return view('admin_page.news.preview_news', compact('news', 'typeURL', 'typePreview'));
+            }
+            else {
+                $typePreview = config('setting.type_preview.preview_of_news');
+
+                return view('admin_page.news.preview_news', compact('news', 'typeURL', 'typePreview'));
+            }
+        }
+        else {
+            return redirect()->route('pending.news')->with('messageFail', trans('messages.news.pending.no_exists'));
+        }
+
     }
     public function edit($id)
     {
@@ -150,6 +186,8 @@ class NewsController extends Controller
             $dataActivities['id_news'] = $status->id;
             $dataActivities['content'] = 'Bạn vừa sửa thành công 1 Bài viết';
             $dataActivities['type_active'] = config('setting.type_active.news.edit');
+            Activity::create($dataActivities);
+
             return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.edit.success'));
         } else {
 

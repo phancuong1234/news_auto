@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Activity;
 use App\Models\Category;
+use App\Models\Config_RSS_Link;
 use App\Models\News;
 use App\Models\RSS;
 use Carbon\Carbon;
@@ -118,7 +119,21 @@ class CrawlController extends Controller
     }
     #page index crawl by xml link
     function indexPageCrawlByRSS(){
-        return view('admin_page.crawl.xml.index');
+        $ConfigRSS = Config_RSS_Link::where('parent_id', 0)->get();
+        if ($ConfigRSS->count() > 0){
+            foreach ($ConfigRSS as $key => $value){
+                $getChildCate = Config_RSS_Link::where('parent_id', $value->id)->get();
+                $listIdConfigRSS[$value->name_cate][$value->link] = $value->name_cate;
+                foreach($getChildCate as $cate => $valueOfCate){
+                    $listIdConfigRSS[$value->name_cate][$valueOfCate->link] = $valueOfCate->name_cate;
+                }
+            }
+        }
+        else {
+            $listIdConfigRSS = null;
+        }
+
+        return view('admin_page.crawl.xml.index', compact('listIdConfigRSS'));
     }
     #crawl page xml
     function CrawlByRSS(Request $request){
@@ -129,7 +144,7 @@ class CrawlController extends Controller
             if ($link[3] != config('setting.url_denine.dan_tri')){
                 if (count($link) > 4){
                     $newLink = config('setting.url_crawl.dan_tri_page').$link[3].'.rss';
-                    $getCate = RSS::where('link_page', $newLink)->first()->category;
+                    $getCate = Config_RSS_Link::where('link', $newLink)->first()->name_cate;
                     $contentXML = $this->handleCrawlRSS($url, $getCate);
                 }
                 else {
@@ -159,6 +174,9 @@ class CrawlController extends Controller
                     $input[$key]['category'] = $contentXML['channel']['description'];
                 }
                 $input[$key]['title'] = $value['title'];
+                $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                $input[$key]['date_start'] = $dt;
+                $input[$key]['date_end'] = $dt->addMonths(10);
                 $input[$key]['description'] = $value['description'];
                 RSS::create($input[$key]);
             }
