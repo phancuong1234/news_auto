@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->text('name_page_crawled')->nullable();
             $table->tinyInteger('type')->default(0);
             $table->tinyInteger('is_active')->default(1);
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

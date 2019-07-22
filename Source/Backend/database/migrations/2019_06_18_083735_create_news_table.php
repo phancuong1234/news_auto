@@ -28,6 +28,7 @@ class CreateNewsTable extends Migration
             $table->tinyInteger('is_active')->default(1);
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
