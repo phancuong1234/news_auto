@@ -5,10 +5,13 @@
 @include('common.error')
 <div class="row">
     <h2 class="ml-3">Quản Lý Mod</h2>
-    <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('users')">
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                    @include('common.error')
+                    <div>
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('users')">
+                    </div>
                     <h4 class="card-title float-left">Danh Sách Mod </h4>
                     <div class="table-responsive">
                         <table class="table">
@@ -77,12 +80,15 @@
                         </table>
                     </div>
                 </div>
-                <div class="btn-next-prev center">
-                    <span class="text-total-news">{{ ($userMod->count() > 0) ? $userMod->firstItem().' - '.$userMod->lastItem().' trong tổng số '.$userMod->total().' Mod':"" }} </span>
-                    <a href="{{ $userMod->previousPageUrl() }}" class="previous round {{ ($userMod->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
-                    <input class="text-paginate" type="text" id="text-paginate-user" />
-                    <a href="{{ $userMod->nextPageUrl() }}" class="next round {{ ($userMod->currentPage() != $userMod->total())?'btn-active':'' }}">&#8250;</a>
-                </div>
+                @if($userMod->count() > 0)
+                    <input type="hidden" id="total_page" value="{{ $userMod->lastPage() }}"/>
+                    <div class="btn-next-prev">
+                        <span class="text-total-news">{{ ($userMod->count() > 0) ? $userMod->firstItem().' - '.$userMod->lastItem().' trong tổng số '.$userMod->total().' Mod':"" }} </span>
+                        <a href="{{ ($userMod->currentPage() > 1) ? $userMod->previousPageUrl():'javascript:void(0)' }}" class="previous round {{ ($userMod->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                        <input class="text-paginate" type="number" id="text-paginate-user" min="1" max="{{ $userMod->lastPage() }}"/>
+                        <a href="{{ ($userMod->currentPage() != $userMod->lastPage()) ? $userMod->nextPageUrl():'javascript:void(0)' }}" class="next round {{ ($userMod->currentPage() != $userMod->lastPage())?'btn-active':'' }}">&#8250;</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

@@ -16,12 +16,15 @@
                             </a>
                         @endcan
                         <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('news')">
-                        <div class="btn-next-prev">
-                            <span class="text-total-news">{{ ($listNews->count() > 0) ? $listNews->firstItem().' - '.$listNews->lastItem().' trong tổng số '.$listNews->total().' tin tức':"" }} </span>
-                            <a href="{{ $listNews->previousPageUrl() }}" class="previous round {{ ($listNews->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
-                            <input class="text-paginate" type="text" id="text-paginate-news"/>
-                            <a href="{{ $listNews->nextPageUrl() }}" class="next round {{ ($listNews->currentPage() != $listNews->total())?'btn-active':'' }}">&#8250;</a>
-                        </div>
+                        @if($listNews->count() > 0)
+                            <input type="hidden" id="total_page" value="{{ $listNews->lastPage() }}"/>
+                            <div class="btn-next-prev">
+                                <span class="text-total-news">{{ ($listNews->count() > 0) ? $listNews->firstItem().' - '.$listNews->lastItem().' trong tổng số '.$listNews->total().' tin tức':"" }} </span>
+                                <a href="{{ ($listNews->currentPage() > 1) ? $listNews->previousPageUrl():'javascript:void(0)' }}" class="previous round {{ ($listNews->currentPage() > 1)?'btn-active':'' }}">&#8249;</a>
+                                <input class="text-paginate" type="number" id="text-paginate-news" min="1" max="{{ $listNews->lastPage() }}" />
+                                <a href="{{ ($listNews->currentPage() != $listNews->lastPage()) ? $listNews->nextPageUrl():'javascript:void(0)' }}" class="next round {{ ($listNews->currentPage() != $listNews->lastPage())?'btn-active':'' }}">&#8250;</a>
+                            </div>
+                        @endif
                     </div>
                     <table class="table table-striped">
                         <thead>

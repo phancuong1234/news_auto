@@ -51,7 +51,7 @@
                             <i class="mdi mdi-information mr-2 text-danger"></i>
                             Thông tin cá nhân
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('activities.index') }}">
                             <i class="mdi mdi-cached mr-2 text-success"></i>
                             Lịch sử hoạt động
                         </a>

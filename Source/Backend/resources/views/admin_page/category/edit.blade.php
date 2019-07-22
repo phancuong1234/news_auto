@@ -25,7 +25,7 @@
                         {!! Form::select('is_active', [1 => 'Hoạt động', 0 => 'Khóa'], $category->is_active, ['id' => 'is_active', 'class' => 'form-control']) !!}
                     </div>
                     {!! Form::submit("Sửa", ['class' => 'btn btn-gradient-primary mr-2 btn-sm', 'id' => 'btnEditCt']) !!}
-                    <a href="{{ route('category.index') }}" class="btn btn-light btn-sm">Hủy</a>
+                    <a href="{{ route('categories.index') }}" class="btn btn-light btn-sm">Hủy</a>
                     {!! Form::close() !!}
                 </div>
             </div>

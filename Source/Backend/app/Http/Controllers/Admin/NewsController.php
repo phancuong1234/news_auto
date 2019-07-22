@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\EditNewsRequest;
 use App\Http\Requests\Admin\NewsRequest;
+use App\Models\Activity;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
@@ -75,7 +76,11 @@ class NewsController extends Controller
             }
             $status = News::create($input);
             if($status){
-
+                $dataActivities['id_user'] = Auth::user()->id;
+                $dataActivities['id_news'] = $status->id;
+                $dataActivities['content'] = 'Bạn vừa tạo thành công 1 Bài viết';
+                $dataActivities['type_active'] = config('setting.type_active.news.add');
+                Activity::create($dataActivities);
                 return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.add.success'));
             } else {
 
@@ -141,7 +146,10 @@ class NewsController extends Controller
         $status = News::where('id', $id)->update($input);
 
         if($status){
-
+            $dataActivities['id_user'] = Auth::user()->id;
+            $dataActivities['id_news'] = $status->id;
+            $dataActivities['content'] = 'Bạn vừa sửa thành công 1 Bài viết';
+            $dataActivities['type_active'] = config('setting.type_active.news.edit');
             return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.edit.success'));
         } else {
 
@@ -154,6 +162,11 @@ class NewsController extends Controller
     {
         try {
             News::find($id)->delete();
+            $dataActivities['id_user'] = Auth::user()->id;
+            $dataActivities['id_news'] = $id;
+            $dataActivities['content'] = 'Bạn vừa xóa thành công 1 Bài viết';
+            $dataActivities['type_active'] = config('setting.type_active.news.delete');
+            Activity::create($dataActivities);
 
             return redirect()->route('news.index')->with('messageSuccess', trans('messages.news.del.success'));
         }

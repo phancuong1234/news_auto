@@ -13,7 +13,6 @@ class CategoryController extends Controller
     public function index()
     {
         $listCategories = Category::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
-
         return view('admin_page.category.index', compact('listCategories'));
     }
     # return add category view
