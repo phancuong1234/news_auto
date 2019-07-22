@@ -26,5 +26,26 @@ return [
             'equalTo' => 'Xác nhận mật khẩu chưa đúng',
         ],
     ],
+    'changeprofile' => [
+        'error' => 'Thay đổi thất bại, không được để trong các trường (số điện thoại phải là số)',
+        'susscess' => 'Thay đổi thành công',
+        'fullname' => [
+            'validateFullName' => 'Họ và tên chỉ được nhập chữ',
+            'required' => 'Mời nhập họ và tên',
+            'minlength' => 'Họ và tên phải lớn hơn 8 kí tự',
+        ],
+        'phone' => [
+            'validatePhone' => 'Kiểm tra số điện thoại của bạn (10 kí tự và bắt đầù bằng số 0)',
+            'required' => 'Mời nhập số điện thoại',
+        ],
+        'address' => [
+            'required' => 'Mời nhập địa chỉ',
+            'minlength' => 'Địa chỉ phải lớn hơn 8 kí tự',
+        ],
+        'birth_date' => [
+            'validateBirthDay'=> 'Ngày sinh chưa chính xác , hãy kiểm tra lại',
+            'required' => 'Mời nhập ngày sinh',
+        ],
+    ],
 
 ];

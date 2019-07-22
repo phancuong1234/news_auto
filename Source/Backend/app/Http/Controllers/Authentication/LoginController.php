@@ -28,7 +28,6 @@ class LoginController extends Controller
             {
                 if(auth()->user()->id_role == config('setting.role.admin') || auth()->user()->id_role == config('setting.role.editor') || auth()->user()->id_role == config('setting.role.mod'))
                 {
-
                     return redirect()->route('dashboard.index')->with('alert',trans('messages.login.success'));
                 } else {
 
@@ -44,7 +43,6 @@ class LoginController extends Controller
             return redirect()->route('login.index')->with('alert',trans('messages.login.wrong-pass'));
         }
     }
-
     public function create()
     {
         Auth::logout();

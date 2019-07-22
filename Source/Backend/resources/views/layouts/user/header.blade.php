@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <title>VIETSOZ</title>
   <meta charset="utf-8">

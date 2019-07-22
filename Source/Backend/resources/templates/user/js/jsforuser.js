@@ -43,41 +43,22 @@ $('#link-to-change').on('click', function() {
 });
 $('#btn-change-profile').on('click', function() {
     let name = $('#btn-change-profile').text();
-    if (name == 'Change profile') {
+    if (name == 'Sửa thông tin') {
         $('.inp-profile').removeAttr('disabled');
-        $('#btn-change-profile').text('save');
+        $('#btn-change-profile').text('Lưu');
     }
-    if (name == 'save') {
+    if (name == 'Lưu') {
         $('#change-profile-modal').submit();
+        $("input.error").removeClass("error")
+
     }
 });
 $('#image').change(function() {
     readURLPicTure(this);
     $('.inp-profile').removeAttr('disabled');
-    $('#btn-change-profile').text('save');
+    $('#btn-change-profile').text('Lưu');
 });
 
-$("#change-profile-modal").submit(function(e) {
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-    var url = $(this).attr("action");
-    $.ajax({
-        url: url,
-        type: $(this).attr("method"),
-        data: new FormData(this),
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function(data) {
-            alert('Thay đổi thành công');
-            $('.inp-profile').attr('disabled', true);
-            $('#btn-change-profile').text('Change profile');
-        },
-        error: function(e) {
-            alert('Thay đổi thất bại');
-
-        }
-    });
-});
 $('#btn-change-pass').on('click', function() {
     $('#form-change-pass').submit();
     $('.error').css("color", "red");
@@ -87,7 +68,7 @@ $('#btn-change-pass').on('click', function() {
 
 $('.close').on('click', function() {
     $('.inp-profile').attr('disabled', true);
-    $('#btn-change-profile').text('Change profile');
+    $('#btn-change-profile').text('Sửa thông tin');
 });
 
 function readURLPicTure(input) {

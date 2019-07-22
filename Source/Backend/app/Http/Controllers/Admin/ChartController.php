@@ -140,11 +140,11 @@ class ChartController extends Controller
 			->get();
 		$data = array();
 		foreach($view as $key => $value){
-			$username = User::join('news', 'news.id_user', '=', 'users.id')->where('news.id', $value->id_new)->first();
-			$data[$key]['id_new'] = $value->id_new;
+			$username = User::join('news', 'news.id_user', '=', 'users.id')->where('news.id', $value->id_news)->first();
+			$data[$key]['id_new'] = $value->id_news;
 			$data[$key]['title'] = $value->title;
 			$data[$key]['total'] = $value->total;
-			$data[$key]['username'] = $username->username;
+			$data[$key]['username'] = $value->username;
 
 		}
 
