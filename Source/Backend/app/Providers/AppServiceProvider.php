@@ -28,8 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-            $list_category = Category::paginate(config('setting.viewUser.paginate-cate'));
+            $list_category = Category::where('id','!=',config('setting.viewUser.id-video'))
+                                    ->where('is_active',config('setting.is_active.active'))
+                                    ->paginate(config('setting.viewUser.paginate-cate'));
             $top_view = News::orderBy('number_view','DESC')
+                            ->where('is_active',config('setting.is_active.active'))
                             ->limit(config('setting.viewUser.limit-top-view'))
                             ->get();
             $title_news = News::orderBy('number_view','DESC')

@@ -27,7 +27,7 @@ return [
         ],
     ],
     'changeprofile' => [
-        'error' => 'Thay đổi thất bại, không được để trong các trường (số điện thoại phải là số)',
+        'error' => 'Thay đổi thất bại, không được để trống các trường (số điện thoại phải là dãy số 10 kí tự, bắt đầù bằng số 0 và ảnh không được lớn hơn 2MB)',
         'susscess' => 'Thay đổi thành công',
         'fullname' => [
             'validateFullName' => 'Họ và tên chỉ được nhập chữ',

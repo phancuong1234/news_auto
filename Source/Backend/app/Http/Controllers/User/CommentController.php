@@ -17,7 +17,7 @@ class CommentController extends Controller
                 ->select('users.username','users.image','comments.*')
                 ->where('id_news', $input['id_news'])
                 ->orderBy('id','DESC')
-                ->limit(5)
+                ->limit(config('setting.viewUser.limit-show-cmt'))
                 ->get();
         return view('ajax.user.comment.index', compact('listCmt'));
     }

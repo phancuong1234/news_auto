@@ -23,8 +23,8 @@
             </li>
           @endforeach
         </ul>
-        <form class="form-inline my-2 my-lg-0 inner-addon right-addon">
-          <input class="form-search__placeholder form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 inner-addon right-addon" id="search-box" action="{{route('search')}}">
+          <input class="form-search__placeholder form-control mr-sm-2" name="key" type="text" placeholder="Tìm kiếm" aria-label="Search">
           <i class="fa fa-search"></i>
         </form>
       </div>

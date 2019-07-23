@@ -14,7 +14,20 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('authentication.login');
+        if(Auth::check()){
+            if(auth()->user()->active == config('setting.is_active.active'))
+            {
+                return redirect()->route('home-page');
+            }
+            else
+            {
+                Auth::logout();
+                return redirect()->route('login.index')->with('alert',trans('messages.login.lock-user'));
+            }
+        }else{
+            return view('authentication.login');
+        }
+
     }
 
     public function store(LoginRequest $request)
