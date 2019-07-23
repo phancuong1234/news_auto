@@ -59,7 +59,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#ui-news-basic" aria-expanded="false" aria-controls="ui-news-basic">
                     <span class="menu-title">Quản Lý Bài Viết</span>
                     <i class="menu-arrow"></i>
-                    <i class="mdi mdi-newspapermenu-icon"></i>
+                    <i class="mdi mdi-newspaper menu-icon"></i>
                 </a>
                 <div class="collapse" id="ui-news-basic">
                     <ul class="nav flex-column sub-menu">
@@ -87,6 +87,12 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('index.crawl.xml') }}">Thu thập dữ liệu RSS</a></li>
                     </ul>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('config.index') }}">
+                    <span class="menu-title">Cấu hình rss</span>
+                    <i class="mdi mdi-settings menu-icon"></i>
+                </a>
             </li>
         </ul>
     </nav>

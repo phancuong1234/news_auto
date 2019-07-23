@@ -22339,4 +22339,13 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.btn {
+    font-family: "Times New Roman", Times, serif !important;
+}
+.unreadNoti {
+    background-color: #c3dcf7 !important;
+}
+.readNoti {
+    background-color: #fef6ff !important;
+}
 /*# sourceMappingURL=maps/style.css.map */

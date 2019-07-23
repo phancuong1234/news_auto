@@ -15,7 +15,7 @@ return [
     'max_time_request' => 20000,
     'url_crawl' => [
         'name' => 'Báo Dân Trí',
-        'dan_tri_page' => 'https://dantri.com.vn/',
+        'dan_tri_page' => 'http://dantri.com.vn/',
         'dan_tri' => 'dantri.com.vn',
     ],
     'url_denine' => [
