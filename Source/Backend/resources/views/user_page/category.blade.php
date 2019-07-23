@@ -32,28 +32,8 @@
                 </div>
             </div>
             @endforeach
-            <div class="row justify-content-center d-flex align-items-center" style="
-            font-size: 14px;
-            font-family: 'Roboto', sans-serif;
-            ">
-              <label class="mr-2">Trang:</label> 
-              <nav aria-label="Page navigation example" class="mt-2">
-                <ul class="pagination">
-                  <li class="page-item active mx-1">
-                    <a class="page-link bg-success" href="#">1 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="page-item mx-1"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item mx-1"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item mx-1"><a class="page-link" href="#">...</a></li>
-                  <li class="page-item mx-1">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&gt;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+            <div class="row mt-5" style="margin-left: 16%" >{{$all_news_cate->links()}}
+						</div>	
           </div>
         </div> <!-- end content -->
 @endsection

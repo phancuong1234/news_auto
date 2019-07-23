@@ -35,22 +35,28 @@
           </div>
           <div class="modal-body">
             <div class="form-group img-modal">
-            <a href="javascript:void(0)" id="link-to-change"><img src="{{ asset('images/avatars/'.auth()->user()->image) }}" id="img-preview" style="width: 150px; height: 150px" class="img-thumbnail" /></a>
+              <a href="javascript:void(0)" id="link-to-change">            
+                @if(Auth::user()->image == 'no-image.png')
+                  <img style="width: 92%;" id="img-preview" class="no-img-modal"  src="{{ asset('/templates/user/images/user.png') }}" />
+                @else
+                  <img style="width: 75%;" id="img-preview" src="{{asset('/images/avatars/'.Auth::user()->image)}}" />
+                @endif 
+              </a>
             </div>
             {!!Form::open(['method'=>'PATCH', 'id'=>'change-profile-modal', 'route'=>['change.profile', Auth::user()->id]]) !!} 
             {!! Form::file('image', ['id' => 'image', 'style' => 'display:none']) !!}  
-            <div class="form-group">
+              <div class="form-group">
                 {!! Form::label('fullname', 'Họ và tên',['class'=>'label-modal']) !!}
                 {!! Form::text('fullname', Auth::user()->fullname , ['class'=>'form-control inp-profile', 'placeholder'=>'Nhập Họ Tên Đầy Đủ', 'disabled'=>'true']) !!}
                 <label id="address-error" class="error" for="fullname"></label>
               </div>   
               <div class="form-group">
-                {!! Form::label('phone', 'Số điện thoại',['class'=>'label-modal']) !!}
+                {!! Form::label('phone', 'Số điện thoại',['id'=>'label-phone','class'=>'label-modal']) !!}
                 {!! Form::text('phone',Auth::user()->phone, ['class'=>'form-control inp-profile', 'placeholder'=>'Nhập Số Điện thoại', 'disabled'=>'true']) !!}
                 <label id="address-error" class="error no-img" for="phone"></label>
               </div>
               <div class="form-group">
-                {!! Form::label('gender', 'Giới tính',['class'=>'label-modal-2']) !!}
+                {!! Form::label('gender', 'Giới tính',['id'=>'label-gender','class'=>'label-modal-2']) !!}
                 {!! Form::select('gender', ['male' => 'Male', 'female' => 'Female'],Auth::user()->gender,['class' => 'form-control inp-profile','disabled'=>'true']) !!}
                 <label id="address-error" class="error no-img" for="phone"></label>
               </div>

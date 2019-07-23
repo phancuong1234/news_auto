@@ -57,11 +57,17 @@ return [
     'viewUser' => [
         'paginate-cate' => 9,
         'paginate-new' => 4,
-        'limit'=> 1,
-        'limit-top-view' => 8,
-        'limit-title' => 6,
-        'limit-list-new' => 50,
-        'limit-list-id-new' => 3,
+        'limit'=>1,
+        'limit-top-view'=>8,
+        'limit-title'=>6,
+        'limit-list-new'=>50,
+        'limit-list-id-new'=>3,
+        'limit-show-cmt'=>5,
+        'id-video'=>1,
+    ],
+    'chart'=>[
+        'limit-top-10'=>10,
+        'isset-month'=>0,
     ],
     'type_active' => [
         'news' => [

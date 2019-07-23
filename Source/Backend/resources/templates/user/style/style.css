@@ -296,7 +296,13 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
 
 .img-modal {
     float: left;
-    width: 33%;
+    width: 150px;
+    height: 150px;
+}
+
+.img-modal a img {
+    width: 150px;
+    height: 150px;
 }
 
 .inp-profile {
@@ -330,6 +336,16 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
     color: red;
     max-width: 280px;
     margin: 5px 0px 0px 174px;
+}
+
+.img-news-search {
+    width: 80%;
+    height: 122px;
+}
+
+.search-news {
+    border-bottom: 1px solid #dadee6;
+    width: 102%;
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px) {

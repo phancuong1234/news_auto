@@ -49,8 +49,7 @@ $('#btn-change-profile').on('click', function() {
     }
     if (name == 'Lưu') {
         $('#change-profile-modal').submit();
-        $("input.error").removeClass("error")
-
+        $("input.error").removeClass("error");
     }
 });
 $('#image').change(function() {
@@ -64,7 +63,6 @@ $('#btn-change-pass').on('click', function() {
     $('.error').css("color", "red");
 
 });
-
 
 $('.close').on('click', function() {
     $('.inp-profile').attr('disabled', true);

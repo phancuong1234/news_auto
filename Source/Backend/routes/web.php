@@ -25,10 +25,15 @@ Route::get('/ajax/profile',[
     'uses' => 'MyProfileController@ajaxLoad',
 ]);
 
-Route::namespace('User')->group(function () {
+Route::namespace('User')->middleware('CheckActive')->group(function () {
     Route::get('/',[
         'as'=>'home-page',
         'uses'=>'NewsController@home',
+    ]);
+    
+    Route::get('search',[
+        'as'=>'search',
+        'uses'=>'NewsController@search',
     ]);
 
     Route::get('detail/{id}',[

@@ -50,14 +50,14 @@ class AuthServiceProvider extends ServiceProvider
         //phân quyền edit article (mod)
         Gate::define('edit-article', function($user){
             $function = Auth::user()->function;
-            $AllowAdd = substr($function,config('setting.function.edit'),config('setting.function.cut'));
-            return $AllowAdd == config('setting.function.allow');
+            $AllowEdit = substr($function,config('setting.function.edit'),config('setting.function.cut'));
+            return $AllowEdit == config('setting.function.allow');
         });
         //phân quyền del article (mod)
             Gate::define('del-article', function($user){
                 $function = Auth::user()->function;
-                $AllowAdd = substr($function,config('setting.function.del'),config('setting.function.cut'));
-                return $AllowAdd == config('setting.function.allow');
+                $AllowDel = substr($function,config('setting.function.del'),config('setting.function.cut'));
+                return $AllowDel == config('setting.function.allow');
         });
     }
 }

@@ -27,7 +27,7 @@ return [
         ],
     ],
     'changeprofile' => [
-        'error' => 'Changes failed, please complete the fields (phone numbers must be numbers or image not correct)',
+        'error' => 'Changes failed, please complete the fields (phone must have 10 characters and begin with 0 or image not correct (2mb))',
         'susscess' => 'Changes Susscess',
         'fullname' => [
             'validateFullName' => 'Full name is only entered word',

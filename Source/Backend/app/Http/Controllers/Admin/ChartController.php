@@ -132,12 +132,12 @@ class ChartController extends Controller
 
     public function commentChartByMonth($month){
 		$view = Comment::where(DB::raw('MONTH(comments.created_at)'), $month)
-			->join('news', 'news.id', '=', 'comments.id_news')
-			->select('comments.id_news', 'news.title', 'comments.id_user', DB::raw('COUNT(comments.id) as total'))
-			->groupBy('comments.id_news', 'comments.id_user')
-			->orderBy(DB::raw('COUNT(comments.id)'), 'DESC')
-			->limit(10)
-			->get();
+					->join('news', 'news.id', '=', 'comments.id_news')
+					->select('comments.id_news', 'news.title', 'comments.id_user', DB::raw('COUNT(comments.id) as total'))
+					->groupBy('comments.id_news', 'comments.id_user')
+					->orderBy(DB::raw('COUNT(comments.id)'), 'DESC')
+					->limit(config('setting.chart.limit-top-10'))
+					->get();
 		$data = array();
 		foreach($view as $key => $value){
 			$username = User::join('news', 'news.id_user', '=', 'users.id')->where('news.id', $value->id_news)->first();
@@ -226,8 +226,6 @@ class ChartController extends Controller
 			$countArticleRate[$key]['countall'] = $total;
 		}
 
-		dd($countArticleRate);
-
 		return json_encode($countArticleRate);
 
 	}
@@ -240,7 +238,7 @@ class ChartController extends Controller
 		$topview = News::whereYear('created_at',date('Y'))
 				->select('id','number_view')
 				->orderBy('number_view','DESC')
-				->limit(10)
+				->limit(config('setting.chart.limit-top-10'))
 				->get();
 		$topviewArr = [];
 		foreach($topview as $key => $value){
@@ -287,7 +285,7 @@ class ChartController extends Controller
 					->whereYear('news.created_at',date("Y"))
 					->select('users.username',DB::raw("COUNT(news.id) as total"))
 					->groupBy('news.id_user')
-					->limit(10)
+					->limit(config('setting.chart.limit-top-10'))
 					->orderBy('total','DESC')
 					->get();
 		$topMod = [];
@@ -299,7 +297,7 @@ class ChartController extends Controller
 	}
 
 	public function topModChooseTime($year, $month ,$amount){
-		if($month != '0'){
+		if($month != config('setting.chart.isset-month')){
 			$topmodchoosetime = News::whereYear('news.created_at',$year)
 				->whereMonth('news.created_at',$month)
 				->join('users','news.id_user','=','users.id')
