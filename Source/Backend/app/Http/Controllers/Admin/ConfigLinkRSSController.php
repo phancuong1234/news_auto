@@ -31,7 +31,7 @@ class ConfigLinkRSSController extends Controller
     {
         $configRss = Config_RSS_Link::where('parent_id', 0)->get();
         $idCateParent = [];
-        array_push($idCateParent,'Không có danh mục cha');
+        array_push($idCateParent, trans('messages.category.no_parent_cate'));
         foreach ($configRss as $key => $value){
             $idCateParent[$value->id] = $value->name_cate;
         }
@@ -69,7 +69,7 @@ class ConfigLinkRSSController extends Controller
     {
         $configRss = Config_RSS_Link::where('parent_id',0)->where('id','!=', $id)->get();
         $idCateParent = [];
-        array_push($idCateParent,'Không có danh mục cha');
+        array_push($idCateParent, trans('messages.category.no_parent_cate'));
         foreach ($configRss as $key => $value){
             $idCateParent[$value->id] = $value->name_cate;
         }

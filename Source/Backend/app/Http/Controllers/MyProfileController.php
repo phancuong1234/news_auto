@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ProfileUserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ModalRequest;
 use App\Http\Controllers\Controller;
@@ -41,7 +42,7 @@ class MyProfileController extends Controller
         return view('ajax.profile.loadform');
     }
 
-    public function ChangeProfile(Request $request , $id){
+    public function ChangeProfile(ProfileUserRequest $request , $id){
         $input = $request->all();
         if(isset($input['image'])){
             $input['image'] = $this->saveImg($input['image'],'images/avatars/');

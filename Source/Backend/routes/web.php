@@ -62,7 +62,7 @@ Route::namespace('Authentication')->group(function () {
     #register
     Route::resource('register', 'RegisterController');
 });
-Route::prefix('admin')->middleware(['can:login-admin'])->group(function () {
+Route::prefix('admin')->middleware(['CheckLogin','can:login-admin'])->group(function () {
     Route::namespace('Admin')->group(function () {
         #admin-dashboard
         Route::resource('dashboard','DashBoardController');

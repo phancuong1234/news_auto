@@ -25,7 +25,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
         //check accont login admin page
         Gate::define('login-admin', function($user){
             return $user->id_role != config("setting.role.user");

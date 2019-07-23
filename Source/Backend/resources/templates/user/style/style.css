@@ -320,6 +320,18 @@ nav.navbar div.container div.collapse form.form-inline .form-search__placeholder
     width: 98%;
 }
 
+.error {
+    margin: 5px 0px 0px 20px;
+    color: red;
+    font-size: 13px;
+}
+
+.no-img {
+    color: red;
+    max-width: 280px;
+    margin: 5px 0px 0px 174px;
+}
+
 @media screen and (min-width: 576px) and (max-width: 767px) {
     .right-addon .fas {
         right: 67%;

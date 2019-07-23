@@ -25,7 +25,8 @@ return [
         'edit' => [
             'success' => 'Sửa danh mục thành công',
             'fail' => 'Sửa danh mục thất bại',
-        ]
+        ],
+        'no_parent_cate' => 'Không có danh mục cha',
     ],
     'news' => [
         'add' => [

@@ -25,7 +25,8 @@ return [
         'edit' => [
             'success' => 'edit successful category',
             'fail' => 'edit fail category',
-        ]
+        ],
+        'no_parent_cate' => 'No parent category',
     ],
     'news' => [
         'add' => [
