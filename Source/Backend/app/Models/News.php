@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class News extends Model
 {
+    use Sluggable;
+
     protected $table = 'news';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -39,5 +43,14 @@ class News extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
