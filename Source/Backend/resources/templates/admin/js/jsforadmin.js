@@ -118,8 +118,8 @@ $(document).ready(function() {
     $('#text-paginate-news').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
-            var total = $('#total_page').val();
+            var number = parseInt($(this).val());
+            var total = parseInt($('#total_page').val());
             if (number > total){
                 window.location.href = "/admin/news?page=" + total;
             }
@@ -131,7 +131,7 @@ $(document).ready(function() {
     $('#text-paginate-cate').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0){
                 if (number > total){
@@ -146,7 +146,7 @@ $(document).ready(function() {
     $('#text-paginate-comment').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0) {
                 if (number > total) {
@@ -160,7 +160,7 @@ $(document).ready(function() {
     $('#text-paginate-user').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0) {
                 if (number > total) {
@@ -174,7 +174,7 @@ $(document).ready(function() {
     $('#text-paginate-viewer').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0) {
                 if (number > total) {
@@ -188,7 +188,7 @@ $(document).ready(function() {
     $('#text-paginate-rss').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0) {
                 if (number > total) {
@@ -202,7 +202,7 @@ $(document).ready(function() {
     $('#text-paginate-activity').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0) {
                 if (number > total) {
@@ -216,7 +216,7 @@ $(document).ready(function() {
     $('#text-paginate-notify').keyup(function(e) {
         var enterKey = 13;
         if (e.which == enterKey){
-            var number = $(this).val();
+            var number = parseInt($(this).val());
             var total = parseInt($('#total_page').val());
             if (number > 0) {
                 if (number > total) {
@@ -287,7 +287,7 @@ $(document).ready(function() {
         todayHighlight: true,
         autoclose: true,
     });
-    CKEDITOR.replace('content');
+
     $('.selectpicker').selectpicker();
 });
 // preview img

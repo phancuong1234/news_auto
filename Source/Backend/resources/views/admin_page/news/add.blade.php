@@ -52,4 +52,6 @@
             </div>
         </div>
     </div>
+    {{ Html::script(asset('/templates/admin/js/ckeditorConfig.js')) }}
 @endsection
+

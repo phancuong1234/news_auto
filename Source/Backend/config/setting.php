@@ -64,6 +64,11 @@ return [
         'limit-list-id-new'=>3,
         'limit-show-cmt'=>5,
         'id-video'=>1,
+        'paginate-search' => 8,
+        'paginate-all-new-cate' => 6,
+        'paginate-new-cate' => 4,
+        'limit_same_cate' => 9,
+        'show_news_same_cate' => 3
     ],
     'chart'=>[
         'limit-top-10'=>10,
@@ -76,5 +81,8 @@ return [
             'delete' => 3,
             'crawl' => 4,
         ],
+    ],
+    'type_img' => [
+        'img_of_serve' => 'images-'
     ]
 ];

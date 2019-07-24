@@ -22348,4 +22348,12 @@ input:checked + .slider:before {
 .readNoti {
     background-color: #fef6ff !important;
 }
+.image img {
+    width: 100%;
+    height: auto;
+}
+.video video {
+    width: 100%;
+    height: auto;
+}
 /*# sourceMappingURL=maps/style.css.map */

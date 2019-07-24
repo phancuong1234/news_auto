@@ -27,7 +27,7 @@ class CrawlController extends Controller
         $crawler->filter('.nav > li > a')->each(function ($node) { # find class of element to get data
             $data['name_category'] = $node->text();
             $data['url_cate'] = $node->attr('href');
-            if(isset($data['name_category']) && trim($data['name_category']) != ''){
+            if(isset($data['name_category']) && trim($data['name_category']) != '' && trim($data['name_category']) != config('setting.detect_name_crawl.name_2') && trim($data['name_category']) != config('setting.detect_name_crawl.name_1')){
                 $getDataCategoryFromDatabase = Category::where('name_category',$data['name_category'])->count(); #find cate exists in DB
                 if($getDataCategoryFromDatabase < 1){
                     Category::create($data); # save data

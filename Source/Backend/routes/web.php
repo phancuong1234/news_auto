@@ -36,15 +36,17 @@ Route::namespace('User')->middleware('CheckActive')->group(function () {
         'uses'=>'NewsController@search',
     ]);
 
-    Route::get('detail/{id}',[
+    Route::get('danh-muc/{category}',[
+        'as'=>'category',
+        'uses'=>'NewsController@category',
+    ]);
+
+    Route::get('danh-muc/{category}/{news}',[
         'as'=>'detail',
         'uses'=>'NewsController@detail',
     ]);
 
-    Route::get('category/{id}',[
-        'as'=>'category',
-        'uses'=>'NewsController@category',
-    ]);
+
 
     Route::resource('comment', 'CommentController');
 

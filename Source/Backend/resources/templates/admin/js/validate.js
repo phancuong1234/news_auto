@@ -285,7 +285,7 @@ $(document).ready(function() {
             short_description : {
                 required: true,
                 minlength: 10,
-                maxlength: 180
+                maxlength: 500
             },
             content : {
                 required: true,
@@ -302,8 +302,8 @@ $(document).ready(function() {
             },
             short_description : {
                 required: Lang.get('validation_admin.new.short_description.required'),
-                minlength: Lang.get('validation_admin.new.short_description.required'),
-                maxlength: Lang.get('validation_admin.new.short_description.required')
+                minlength: Lang.get('validation_admin.new.short_description.minlenght'),
+                maxlength: Lang.get('validation_admin.new.short_description.maxlenght')
             },
             content : {
                 required: Lang.get('validation_admin.new.content.required')

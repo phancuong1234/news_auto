@@ -25,12 +25,11 @@ class NewsController extends Controller
         $id = Auth::user()->id;
         $role = Auth::user()->id_role;
         if($role == config("setting.role.editor")){
-            $listNews = News::where('is_active', config('setting.is_active.active'))
-                            ->where('id_user',$id)
+            $listNews = News::where('id_user',$id)
                             ->paginate(config('setting.paginate'));
         }
         else{
-            $listNews = News::where('is_active', config('setting.is_active.active'))->paginate(config('setting.paginate'));
+            $listNews = News::paginate(config('setting.paginate'));
         }
         foreach ($listNews as $key => $value ){
             $value['typeURL'] = $this->explodeStr($value->image);
@@ -119,16 +118,26 @@ class NewsController extends Controller
     {   
         $id_login = Auth::user()->id;
         $id_user_new = News::where(['id' => $id])->first()->id_user;
-        if($id_login != $id_user_new ){
-            $this->authorize("editor");
-        }
-        else{
+        if (Auth::user()->id_role != config('setting.role.admin')){
+            if($id_login != $id_user_new ){
+                $this->authorize("editor");
+            }
+            else{
+                $news = News::where(['id' => $id])->first();
+                $idCategory = Category::pluck('name_category', 'id');
+                $typeURL = $this->explodeStr($news->image);
+
+                return view('admin_page.news.edit', compact('news', 'idCategory', 'typeURL'));
+            }
+        } else {
             $news = News::where(['id' => $id])->first();
             $idCategory = Category::pluck('name_category', 'id');
             $typeURL = $this->explodeStr($news->image);
-           
+
             return view('admin_page.news.edit', compact('news', 'idCategory', 'typeURL'));
         }
+
+
         
     }
     #explode string
@@ -148,7 +157,7 @@ class NewsController extends Controller
     public function pendingPreview($id)
     {
         $news = News::where(['id' => $id])->first();
-        if ($news->count() > 0){
+        if (isset($news) && $news->count() > 0){
             $typeURL = $this->explodeStr($news->image);
             if ($news->is_active == config('setting.is_active.pending')){
                 $typePreview = config('setting.type_preview.preview_of_news_pending');
@@ -183,7 +192,7 @@ class NewsController extends Controller
 
         if($status){
             $dataActivities['id_user'] = Auth::user()->id;
-            $dataActivities['id_news'] = $status->id;
+            $dataActivities['id_news'] = $id;
             $dataActivities['content'] = 'Bạn vừa sửa thành công 1 Bài viết';
             $dataActivities['type_active'] = config('setting.type_active.news.edit');
             Activity::create($dataActivities);

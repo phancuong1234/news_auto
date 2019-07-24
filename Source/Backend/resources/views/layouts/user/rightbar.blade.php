@@ -5,9 +5,9 @@
             @foreach($top_view as $key)
               <ul class="list-unstyled">
                 <li class="media">
-                  <a href="{{route('detail', $key->id)}}"><img class="mr-3 image--size" src="{{ $key->image }}" alt="image-2"></a>
+                  <a href="{{route('detail', [$key->slug_cate, $key->slug])}}"><img class="mr-3 image--size" src="{{ (strpos($key->image, config('setting.type_img.img_of_serve')) === 0)?asset('images/news/'.$key->image):$key->image }}" alt="image-2"></a>
                   <div class="media-body">
-                    <a href="{{route('detail', $key->id)}}"><h5 class="media-body__title mt-0 mb-1">{{$key->title}}</h5></a>
+                    <a href="{{route('detail', [$key->slug_cate, $key->slug])}}"><h5 class="media-body__title mt-0 mb-1">{{$key->title}}</h5></a>
                   </div>
                 </li>
               </ul>
@@ -20,4 +20,3 @@
 </div>
 </div>
 </div>
-  
