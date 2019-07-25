@@ -23,6 +23,18 @@
                     </p>
                 </a>
             </a>
+            <a class="dropdown-item preview-item border-bt" v-if="listNotify.length == 0">
+                <div class="preview-thumbnail">
+                    <div class="preview-icon bg-success">
+                        <i class="mdi mdi-information"></i>
+                    </div>
+                </div>
+                <a class="preview-item-content d-flex align-items-start flex-column justify-content-center" >
+                    <p class="text-gray ellipsis mb-0">
+                        Không có thông báo nào
+                    </p>
+                </a>
+            </a>
             <a href="/admin/all-notify"><h6 class="p-3 mb-0 text-center">Xem tất cả các thông báo</h6></a>
         </div>
     </li>

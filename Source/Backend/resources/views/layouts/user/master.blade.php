@@ -3,7 +3,7 @@
     <nav aria-label="Page breadcrumb" style="background-color: #e9ecef">
       <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" ><a href="home.html">Trang chủ</a></li>
+            <li class="breadcrumb-item" ><a href="{{ route('home-page') }}">Trang chủ</a></li>
             @if(Auth::check())
               <div class="right-login">
                 <p>Xin chào !! {{Auth::user()->username}} </p> 
@@ -35,11 +35,11 @@
           </div>
           <div class="modal-body">
             <div class="form-group img-modal">
-              <a href="javascript:void(0)" id="link-to-change">            
-                @if(Auth::user()->image == 'no-image.png')
-                  <img style="width: 92%;" id="img-preview" class="no-img-modal"  src="{{ asset('/templates/user/images/user.png') }}" />
+              <a href="javascript:void(0)" id="link-to-change">
+                @if(Auth::check())
+                  <img style="width: 92%;" id="img-preview" class="no-img-modal"  src="{{ (trim(auth()->user()->image) == '' || auth()->user()->image == 'no-image.png') ? asset('/templates/images/no-image.png'):asset('/images/avatars/'.Auth::user()->image) }}" />
                 @else
-                  <img style="width: 75%;" id="img-preview" src="{{asset('/images/avatars/'.Auth::user()->image)}}" />
+                  <img style="width: 75%;" id="img-preview" src="{{ asset('/templates/images/no-image.png') }}" />
                 @endif 
               </a>
             </div>

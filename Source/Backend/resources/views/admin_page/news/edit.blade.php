@@ -48,6 +48,10 @@
                         {!! Form::textarea('content', $news->content, ['id' => 'content']) !!}
                     </div>
                     <div class="form-group">
+                        {!! Form::label('date_end', 'Ngày hết hạn') !!}
+                        {!! Form::text('date_end', date('d-m-Y', strtotime($news->date_end)), ['class' => 'datepicker-end-date form-control', 'autocomplete' => 'off']) !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::label('is_active', 'Tình trạng') !!}
                         {!! Form::select('is_active', [1 => 'Hoạt động', 0 => 'Khóa'], $news->is_active, ['id' => 'is_active', 'class' => 'form-control']) !!}
                     </div>
@@ -58,7 +62,5 @@
             </div>
         </div>
     </div>
-    <script>
-
-    </script>
+    {{ Html::script(asset('/templates/admin/js/ckeditorConfig.js')) }}
 @endsection

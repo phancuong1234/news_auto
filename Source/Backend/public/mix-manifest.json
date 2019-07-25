@@ -3,6 +3,7 @@
     "/css/app.css": "/css/app.css",
     "/js/bootstrap-datepicker.js": "/js/bootstrap-datepicker.js",
     "/js/bootstrap-select.js": "/js/bootstrap-select.js",
+    "/js/ckeditor.js": "/js/ckeditor.js",
     "/css/bootstrap-datepicker.css": "/css/bootstrap-datepicker.css",
     "/css/bootstrap-select.css": "/css/bootstrap-select.css"
 }

@@ -16,45 +16,51 @@
                     <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                    <span class="menu-title">BIểu Đồ</span>
-                    <i class="menu-arrow"></i>
-                    <i class="mdi mdi-chart-bar menu-icon"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartUser')}}">Biếủ đồ người dùng</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartView')}}">Biểu đồ lượt xem</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartComment')}}">Biểu đồ bình luận</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticle')}}">Biểu đồ bài viết</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleRate')}}">Tỉ lệ bài viết (danh mục)</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleTopView')}}">TOP 10 bài viết (lượt xem)</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ChartTopMod')}}">TOP 10 mod </a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-basic">
-                    <span class="menu-title">Quản Lý Người Dùng</span>
-                    <i class="menu-arrow"></i>
-                    <i class="mdi mdi-contacts menu-icon"></i>
-                </a>
-                <div class="collapse" id="ui-user">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{route('AdminManager')}}">Admin</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ModManager')}}">Mod</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('ViewerManager')}}">Người đọc</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('users.create')}}">Thêm người dùng</a></li>
-                    </ul>
-                </div>
-            </li>
+            @if(Auth::user()->id_role == config('setting.role.admin'))
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="menu-title">Biểu Đồ</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-chart-bar menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartUser')}}">Biếủ đồ người dùng</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartView')}}">Biểu đồ lượt xem</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartComment')}}">Biểu đồ bình luận</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticle')}}">Biểu đồ bài viết</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleRate')}}">Tỉ lệ bài viết (danh mục)</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartArticleTopView')}}">TOP 10 bài viết (lượt xem)</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ChartTopMod')}}">TOP 10 mod </a></li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+            @if(Auth::user()->id_role == config('setting.role.admin') || Auth::user()->id_role == config('setting.role.mod'))
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="menu-title">Quản Lý Người Dùng</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-contacts menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-user">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route('AdminManager')}}">Admin</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ModManager')}}">Mod</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('ViewerManager')}}">Người đọc</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('users.create')}}">Thêm người dùng</a></li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+            @if(Auth::user()->id_role == config('setting.role.admin') || (Auth::user()->id_role == config('setting.role.mod')))
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('categories.index') }}">
                     <span class="menu-title">Quản Lý Danh Mục</span>
                     <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-news-basic" aria-expanded="false" aria-controls="ui-news-basic">
                     <span class="menu-title">Quản Lý Bài Viết</span>
@@ -64,36 +70,44 @@
                 <div class="collapse" id="ui-news-basic">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('news.index') }}">Danh Sách Bài Viết</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('pending.news') }}">Bài Viết Đang Chờ Duyệt</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('rss.index') }}">Quản Lý RSS</a></li>
+                        @if(Auth::user()->id_role == config('setting.role.admin') || Auth::user()->id_role == config('setting.role.mod'))
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('pending.news') }}">Bài Viết Đang Chờ Duyệt</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('rss.index') }}">Quản Lý RSS</a></li>
+                        @endif
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('comments.index') }}">
-                    <span class="menu-title">Quản Lý Bình Luận</span>
-                    <i class="mdi mdi-comment-text-outline menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-crawl-basic" aria-expanded="false" aria-controls="ui-crawl-basic">
-                    <span class="menu-title">Cập Nhật Từ Website</span>
-                    <i class="menu-arrow"></i>
-                    <i class="mdi mdi-auto-upload menu-icon"></i>
-                </a>
-                <div class="collapse" id="ui-crawl-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('crawler.index') }}">Cập nhật tất cả data</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('index.crawl.xml') }}">Thu thập dữ liệu RSS</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('config.index') }}">
-                    <span class="menu-title">Cấu hình rss</span>
-                    <i class="mdi mdi-settings menu-icon"></i>
-                </a>
-            </li>
+            @if(Auth::user()->id_role == config('setting.role.admin') || Auth::user()->id_role == config('setting.role.mod'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('comments.index') }}">
+                        <span class="menu-title">Quản Lý Bình Luận</span>
+                        <i class="mdi mdi-comment-text-outline menu-icon"></i>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->id_role == config('setting.role.admin'))
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-crawl-basic" aria-expanded="false" aria-controls="ui-crawl-basic">
+                        <span class="menu-title">Cập Nhật Từ Website</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-auto-upload menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-crawl-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{ route('crawler.index') }}">Cập nhật tất cả data</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('index.crawl.xml') }}">Thu thập dữ liệu RSS</a></li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+            @if(Auth::user()->id_role == config('setting.role.admin'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('config.index') }}">
+                        <span class="menu-title">Cấu hình rss</span>
+                        <i class="mdi mdi-settings menu-icon"></i>
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
     <div class="main-panel">

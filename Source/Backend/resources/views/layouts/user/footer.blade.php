@@ -11,13 +11,13 @@
         <div class="footer__category col-lg-6 col-xl-2">
           <h3 class="mb-4">DANH MỤC</h3>
           @foreach($list_category as $key)
-            <p><span class="mr-3">&gt;</span><a class="font-white" href="{{route('category', $key->id)}}">{{$key->name_category}}</a></p>
+            <p><span class="mr-3">&gt;</span><a class="font-white" href="{{route('category', $key->slug)}}">{{$key->name_category}}</a></p>
           @endforeach
         </div>
         <div class="footer__highlight-news col-lg-6 col-xl-4">
           <h3 class="mb-4">TIN TỨC NỔI BẬT</h3>
           @foreach($title_news as $key)
-            <p><span class="mr-3">&gt;</span><a class="font-white" href="{{route('detail', $key->id)}}">{{$key->title}}</a></p>
+            <p><span class="mr-3">&gt;</span><a class="font-white" href="{{route('detail', [$key->slug_cate, $key->slug])}}">{{$key->title}}</a></p>
           @endforeach
         </div>
         <div class="footer__fanpage col-lg-6 col-xl-3">

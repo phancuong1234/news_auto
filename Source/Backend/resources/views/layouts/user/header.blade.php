@@ -19,7 +19,7 @@
         <ul class="navbar__item--roboto navbar-nav mr-auto text-danger">
           @foreach($list_category as $list)
             <li class="nav-item">
-              <a class="nav-link" href="{{route('category',$list->id)}}">{{$list->name_category}}</a>
+              <a class="nav-link" href="{{route('category',$list->slug)}}">{{$list->name_category}}</a>
             </li>
           @endforeach
         </ul>

@@ -14,6 +14,7 @@
     {{ Html::style(asset('/templates/admin/images/favicon.png')) }}
     {{ Html::style(asset('/css/bootstrap-datepicker.css')) }}
     {{ Html::style(asset('/css/bootstrap-select.css')) }}
+    {{ Html::script(asset('/js/ckeditor.js')) }}
     {{ Html::style(asset('/templates/common/css/mystyle.css')) }}
 </head>
 <body>
@@ -25,16 +26,6 @@
             <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard.index') }}`   `"><img src="{{ asset('/templates/admin/images/logo-mini.svg') }}" alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
-            <div class="search-field d-none d-md-block">
-                <form class="d-flex align-items-center h-100" action="#">
-                    <div class="input-group">
-                        <div class="input-group-prepend bg-transparent">
-                            <i class="input-group-text border-0 mdi mdi-magnify"></i>
-                        </div>
-                        <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-                    </div>
-                </form>
-            </div>
             <ul class="navbar-nav navbar-nav-right" id="app">
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">

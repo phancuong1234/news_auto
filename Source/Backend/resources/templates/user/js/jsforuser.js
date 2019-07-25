@@ -27,9 +27,9 @@ $("#load_more_button").on("click", function() {
         success: function(data) {
             if (data.trim() != '') {
                 $("#show-cmt").append(data); // show response from the php script.
-                $("#load_more_button").text("Load More");
+                $("#load_more_button").text("Xem thêm...");
             } else {
-                $("#load_more_button").text("Nothing To Load");
+                $("#load_more_button").text("đã tải hết bình luận");
             }
 
         },
