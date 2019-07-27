@@ -18,6 +18,9 @@ class RSSController extends Controller
     public function show($id){
         try{
             $detailRSS = RSS::find($id);
+            if (!isset($detailRSS)){
+                return redirect()->route('404');
+            }
             $detailRSS['date_start'] = date("d-m-Y", strtotime($detailRSS['date_start']));
             $detailRSS['date_end'] = date("d-m-Y", strtotime($detailRSS['date_end']));
 

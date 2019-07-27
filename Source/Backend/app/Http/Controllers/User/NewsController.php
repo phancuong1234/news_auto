@@ -52,6 +52,9 @@ class NewsController extends Controller
     public function detail($category, $news)
     {
         $getIdNews = News::where('slug', $news)->first()->id;
+        if (!isset($getIdNews)){
+            return redirect()->route('404');
+        }
         $detail = News::where('news.id', $getIdNews)
                         ->join('users','news.id_user','=','users.id')
                         ->select('users.username','news.*')
@@ -92,6 +95,9 @@ class NewsController extends Controller
     public function category($category)
     {
         $idCate = Category::where('slug', $category)->first()->id;
+        if (!isset($idCate)){
+            return redirect()->route('404');
+        }
         $main_news_cate = News::join('categories', 'categories.id', '=', 'news.id_category')
                             ->select('news.*', 'categories.slug as slug_cate')
                             ->where('news.id_category', $idCate)

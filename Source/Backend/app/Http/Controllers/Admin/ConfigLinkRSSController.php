@@ -74,6 +74,10 @@ class ConfigLinkRSSController extends Controller
             $idCateParent[$value->id] = $value->name_cate;
         }
         $config = Config_RSS_Link::where('id', $id)->first();
+        if (!isset($config)){
+            return redirect()->route('404');
+        }
+
         return view('admin_page.config_link_rss.edit', compact('idCateParent', 'config'));
     }
 
