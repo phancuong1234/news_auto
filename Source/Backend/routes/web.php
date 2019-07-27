@@ -24,13 +24,16 @@ Route::patch('changepass/{id}', [
 Route::get('/ajax/profile',[
     'uses' => 'MyProfileController@ajaxLoad',
 ]);
+Route::get('/error/404', function (){
+    return view('errors.404');
+})->name('404');
 
 Route::namespace('User')->middleware('CheckActive')->group(function () {
     Route::get('/',[
         'as'=>'home-page',
         'uses'=>'NewsController@home',
     ]);
-    
+
     Route::get('search',[
         'as'=>'search',
         'uses'=>'NewsController@search',
@@ -46,7 +49,10 @@ Route::namespace('User')->middleware('CheckActive')->group(function () {
         'uses'=>'NewsController@detail',
     ]);
 
-
+    Route::get('search/news',[
+        'as'=>'search.typehead',
+        'uses'=>'NewsController@searchTypeHead',
+    ]);
 
     Route::resource('comment', 'CommentController');
 
@@ -147,7 +153,7 @@ Route::prefix('admin')->middleware(['CheckLogin','can:login-admin'])->group(func
         ]);
         # crawl auto
         Route::resource('crawler','CrawlController')->middleware(['can:admin']);
-        
+
         Route::get('/crawl-auto',[
             'as' => 'crawl.auto',
             'uses' => 'CrawlController@crawl',

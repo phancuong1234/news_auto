@@ -356,10 +356,12 @@ function submitFormAcceptNews(id) {
 function thisFileUpload() {
     document.getElementById("image").click();
 };
-function liveSearch(type){
+function liveSearch(event,type){
     var query = document.getElementById('search').value;
+    var pattern = /[\s-]+$/gm;
+    var checkSpace = query.match(pattern) ? true : false;
     //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
-    if(query.trim() != '') {
+    if((query.trim() != '' && checkSpace == true) || event.keyCode == 13) {
         if (type == 'category') { // kiểm tra nếu search danh mục thì thực hiện lệnh bên dưới
             $.ajax({
                 url: "/admin/categories/search/" + query, // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
@@ -436,7 +438,7 @@ function liveSearch(type){
 };
 $("#show-change-pass").click(function(){
     $("#show-change-pass").hide();
-    $('#showpass').show();    
+    $('#showpass').show();
     $('#showrepass').show();
 });
 $("#close").click(function(){

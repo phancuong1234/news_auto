@@ -51,11 +51,12 @@ class NewsController extends Controller
     }
     public function detail($category, $news)
     {
-        $getIdNews = News::where('slug', $news)->first()->id;
+        $getIdNews = News::where('slug', $news)->first();
         if (!isset($getIdNews)){
             return redirect()->route('404');
         }
-        $detail = News::where('news.id', $getIdNews)
+        $category = Category::where('id', $getIdNews->id_category)->first();
+        $detail = News::where('news.id', $getIdNews->id)
                         ->join('users','news.id_user','=','users.id')
                         ->select('users.username','news.*')
                         ->first();
@@ -74,50 +75,51 @@ class NewsController extends Controller
         }
         $listCmt = Comment::join('users', 'users.id', '=', 'comments.id_user')
                     ->select('users.username','users.image','comments.*')
-                    ->where('id_news', $getIdNews)
+                    ->where('id_news', $getIdNews->id)
                     ->orderBy('id','DESC')
                     ->limit(config('setting.viewUser.limit-show-cmt'))
                     ->get();
-        if ((int)Cookie::get('view_'.$getIdNews) == $getIdNews){
-            return view('user_page.detail',compact('detail','arrNewsSameCate', 'listCmt'));
+        if ((int)Cookie::get('view_'.$getIdNews->id) == $getIdNews->id){
+            return view('user_page.detail',compact('detail','arrNewsSameCate', 'listCmt', 'category'));
         } else {
-            $count = News::where('id', $getIdNews)->first()->number_view + 1;
-            News::find($getIdNews)->update(['number_view' => (int)$count]);
-            $detail = News::where('news.id', $getIdNews)
+            $count = News::where('id', $getIdNews->id)->first()->number_view + 1;
+            News::find($getIdNews->id)->update(['number_view' => (int)$count]);
+            $detail = News::where('news.id', $getIdNews->id)
                 ->join('users','news.id_user','=','users.id')
                 ->select('users.username','news.*')
                 ->first();
 
-            return response()->view('user_page.detail',compact('detail','arrNewsSameCate', 'listCmt'))->withCookie('view_'.$getIdNews, $getIdNews, time()+3600);
+            return response()->view('user_page.detail', compact('detail','arrNewsSameCate', 'listCmt', 'category'))
+                ->withCookie('view_'.$getIdNews->id, $getIdNews->id, time()+3600);
         }
     }
 
     public function category($category)
     {
-        $idCate = Category::where('slug', $category)->first()->id;
+        $idCate = Category::where('slug', $category)->first();
         if (!isset($idCate)){
             return redirect()->route('404');
         }
         $main_news_cate = News::join('categories', 'categories.id', '=', 'news.id_category')
                             ->select('news.*', 'categories.slug as slug_cate')
-                            ->where('news.id_category', $idCate)
+                            ->where('news.id_category', $idCate->id)
                             ->inRandomOrder()
                             ->first();
         $news_cate = News::join('categories', 'categories.id', '=', 'news.id_category')
                             ->select('news.*', 'categories.slug as slug_cate')
-                            ->where('news.id_category', $idCate)
+                            ->where('news.id_category', $idCate->id)
                             ->where('news.is_active',config('setting.is_active.active'))
                             ->inRandomOrder()
                             ->limit(config('setting.viewUser.paginate-new-cate'))
                             ->get();
         $all_news_cate = News::join('categories', 'categories.id', '=', 'news.id_category')
                             ->select('news.*', 'categories.slug as slug_cate')
-                            ->where('news.id_category', $idCate)
+                            ->where('news.id_category', $idCate->id)
                             ->where('news.is_active',config('setting.is_active.active'))
                             ->inRandomOrder()
                             ->paginate(config('setting.viewUser.paginate-all-new-cate'));
 
-        return view('user_page.category',compact('main_news_cate','news_cate','all_news_cate'));
+        return view('user_page.category',compact('main_news_cate','news_cate','all_news_cate', 'idCate'));
     }
 
     public function search(Request $request)
@@ -132,4 +134,15 @@ class NewsController extends Controller
         return view('user_page.search',compact('NewSearch','keyword'));
     }
 
+    public function searchTypeHead(Request $request)
+    {
+        $keyword = $request->value;
+        $NewSearch = News::join('categories', 'categories.id', '=', 'news.id_category')
+            ->select('news.slug', 'news.image', 'news.title', 'categories.slug as slug_cate')
+            ->where([['title','like','%'.$keyword.'%'],['news.is_active', '=', config('setting.is_active.active')]])
+            ->inRandomOrder()
+            ->get();
+
+        return response()->json($NewSearch);
+    }
 }

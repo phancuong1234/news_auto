@@ -1,4 +1,11 @@
-@extends('layouts.user.master') @section('content')
+@extends('layouts.user.master')
+@section('page')
+    {{ $category->name_category }}
+@endsection
+@section('url-page')
+    {{ url('danh-muc/'.$category->slug) }}
+@endsection
+@section('content')
     <div class="main__content col-xl-8  border-right" id="main-content">
         <div class="row">
             <input type="hidden" value="{{$detail->id}}" id="id_news">
@@ -23,7 +30,7 @@
                     @foreach($listCmt as $key => $value)
                         <div class="row comment">
                             <div class="img-cmt">
-                                <img style="width: 110px;height: 110px" src="{{ (trim($value->image) == '' || $value->image == 'no-image.png') ? asset('/templates/images/no-image.png'):asset('/images/avatars/'.$value->image) }}" />
+                                <img class="lazyload lazy" style="width: 110px;height: 110px" data-src="{{ (trim($value->image) == '' || $value->image == 'no-image.png') ? asset('/templates/images/no-image.png'):asset('/images/avatars/'.$value->image) }}" />
                             </div>
                             <div class="content-cmt" id="content-cmt">
                                 <input type="hidden" name="id_cmt" value="{{ $value->id }}" id="id_cmt">
@@ -42,8 +49,8 @@
             <div class="form-cmt mt-5">
                 <div class="img-cmt-new">
                     @if(Auth::check())
-                        <img style="width: 85%;" src="{{ (trim(auth()->user()->image) == '' || auth()->user()->image == 'no-image.png') ? asset('/templates/images/no-image.png'):asset('/images/avatars/'.Auth::user()->image) }}" /> @else
-                        <img style="width: 100%;" src="{{ asset('/templates/images/no-image.png') }}" /> @endif
+                        <img style="width: 85%;" class="lazyload lazy" data-src="{{ (trim(auth()->user()->image) == '' || auth()->user()->image == 'no-image.png') ? asset('/templates/images/no-image.png'):asset('/images/avatars/'.Auth::user()->image) }}" /> @else
+                        <img style="width: 100%;" class="lazyload lazy" data-src="{{ asset('/templates/images/no-image.png') }}" /> @endif
                 </div>
                 <form action="{{ route('comment.store') }}" method="POST" id="comment-form">
                     @csrf
@@ -77,7 +84,7 @@
                                 <div class="col-md-4 clearfix d-none d-md-block">
                                     <div class="card mb-2" style="border: none">
                                         <a href="{{ route('detail', [$detail->slug_cate, $detail->slug]) }}">
-                                            <img class="img--full img-fluid mb-2" src="{{ (strpos($detail->image, config('setting.type_img.img_of_serve')) === 0)?asset('images/news/'.$detail->image):$detail->image }}" alt="relevant-image">
+                                            <img class="img--full img-fluid mb-2 lazyload lazy" data-src="{{ (strpos($detail->image, config('setting.type_img.img_of_serve')) === 0)?asset('images/news/'.$detail->image):$detail->image }}" alt="relevant-image">
                                         </a>
                                         <a class="media-body__title" href="{{ route('detail', [$detail->slug_cate, $detail->slug]) }}">
                                             <p class="content__title">
@@ -92,12 +99,6 @@
                     @endforeach
                 </div>
             </div>
-{{--            <small class="paginate">--}}
-{{--                <a href="{{ $news_same_cate->previousPageUrl() }}"><i class="fas fa-circle text-black-50"></i></a>--}}
-{{--                <a href="#"><i class="fas fa-circle mx-2"></i></a>--}}
-{{--                <a href="{{ $news_same_cate->nextPageUrl() }}"><i class="fas fa-circle text-black-50"></i></a>--}}
-{{--            </small>--}}
         </div>
     </div>
-    <!-- end content -->
 @endsection

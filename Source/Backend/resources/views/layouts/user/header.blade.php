@@ -14,7 +14,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar__item--roboto navbar-nav mr-auto text-danger">
           @foreach($list_category as $list)
@@ -23,9 +23,9 @@
             </li>
           @endforeach
         </ul>
-        <form class="form-inline my-2 my-lg-0 inner-addon right-addon" id="search-box" action="{{route('search')}}">
-          <input class="form-search__placeholder form-control mr-sm-2" name="key" type="text" placeholder="Tìm kiếm" aria-label="Search">
-          <i class="fa fa-search"></i>
+        <form class="form-inline my-2 my-lg-0 inner-addon right-addon typeahead" id="search-box" action="{{route('search')}}" role="search">
+          <input class="form-search__placeholder form-control mr-sm-2 search-input" name="key" type="search" placeholder="Tìm kiếm" autocomplete="off" aria-label="Search">
+          <i class="fa fa-search" id="search-box-icon"></i>
         </form>
       </div>
     </div>

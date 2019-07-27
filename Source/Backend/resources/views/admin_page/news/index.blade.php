@@ -15,7 +15,7 @@
                                 Thêm
                             </a>
                         @endcan
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('news')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'news')">
                         @if($listNews->count() > 0)
                             <input type="hidden" id="total_page" value="{{ $listNews->lastPage() }}"/>
                             <div class="btn-next-prev">
@@ -81,8 +81,8 @@
                                             <a href="{{ route('news.show', $news->id) }}">
                                                 <i class="mdi mdi-tooltip-edit"></i>
                                             </a>
-                                        @endcan  
-                                        @can("del-article")  
+                                        @endcan
+                                        @can("del-article")
                                             <a href="javascript:void(0)" style="margin-left: 10%" onclick="submitFormDeleteHard('delete-news' + {{$news->id}})">
                                                 <i class="mdi mdi-delete"></i>
                                             </a>

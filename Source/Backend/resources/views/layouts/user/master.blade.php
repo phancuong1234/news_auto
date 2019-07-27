@@ -2,22 +2,32 @@
 <div class="main">
     <nav aria-label="Page breadcrumb" style="background-color: #e9ecef">
       <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item" ><a href="{{ route('home-page') }}">Trang chủ</a></li>
-            @if(Auth::check())
-              <div class="right-login">
-                <p>Xin chào !! {{Auth::user()->username}} </p>
-                &nbsp/&nbsp <a href="" data-toggle="modal" data-target="#myModal"> Thông tin</a>
-                &nbsp/&nbsp <a href="{{route('login.create')}}"> Đăng Xuất</a>
-              </div>
-            @else
-              <li class="breadcrumb-item active" aria-current="page"></li>
-              <div class="right">
-                <a href="{{route('login.index')}}">Đăng nhập</a>
-                /
-                <a href="{{route('register.index')}}">Đăng ký</a>
-              </div>
+        <ol class="breadcrumb menu-nav-bar">
+            <li class="breadcrumb-item" >
+                <a href="{{ route('home-page') }}">Trang chủ</a>
+            </li>
+            @hasSection('page')
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a href="@yield('url-page')">
+                        @yield('page')
+                    </a>
+                </li>
             @endif
+            <li class="dropdown login-nav-bar" >
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    {{ (Auth::check())?Auth::user()->username:'Đăng Nhập' }}
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu">
+                    @if(Auth::check())
+                        <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Thông tin</a>
+                        <a class="dropdown-item" href="{{ route('login.create') }}">Đăng Xuất</a>
+                    @else
+                        <a class="dropdown-item" href="{{ route('login.index') }}">Đăng Nhập</a>
+                        <a class="dropdown-item" href="{{ route('register.index') }}">Đăng Kí</a>
+                    @endif
+                </div>
+            </li>
           </ol>
       </div>
     </nav>
@@ -57,7 +67,7 @@
               </div>
               <div class="form-group">
                 {!! Form::label('gender', 'Giới tính',['id'=>'label-gender','class'=>'label-modal-2']) !!}
-                {!! Form::select('gender', ['male' => 'Male', 'female' => 'Female'],Auth::user()->gender,['class' => 'form-control inp-profile','disabled'=>'true']) !!}
+                {!! Form::select('gender', ['male' => 'Nam', 'female' => 'Nữ'],Auth::user()->gender,['class' => 'form-control inp-profile','disabled'=>'true']) !!}
                 <label id="address-error" class="error no-img" for="phone"></label>
               </div>
               <div class="form-group">
