@@ -68,7 +68,7 @@
                                         {{ $cmt->content }}
                                     </td>
                                     <td>
-                                        <label class="badge {{ ($cmt->is_active == config('setting.is_active.active'))?"badge-gradient-success":"badge-gradient-danger" }}" id="event-lock-active" onclick="changeStatusCmt({{ $cmt->id }})">
+                                        <label class="badge {{ ($cmt->is_active == config('setting.is_active.active'))?"badge-gradient-success":"badge-gradient-danger" }}" id="event-lock-active{{ $cmt->id }}" onclick="changeStatusCmt({{ $cmt->id }})">
                                             {{ ($cmt->is_active == config('setting.is_active.active'))?"Active":"Lock" }}
                                         </label>
                                     </td>

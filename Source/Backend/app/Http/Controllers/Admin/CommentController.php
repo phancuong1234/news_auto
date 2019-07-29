@@ -69,11 +69,15 @@ class CommentController extends Controller
                 ->orWhere('comments.id', 'LIKE', "%{$text}%")
                 ->orWhere('comments.content', 'LIKE', "%{$text}%")
                 ->paginate(config('setting.paginate'));
-//                ->get();
+
             foreach ($list_comments as $key => $value){
-                $listCate = Comment::join('news', 'news.id', 'comments.id_news')->where('comments.id_news', $value->id_news)->first()->id_category;
-                $nameCate = Category::where('id', $listCate)->first()->slug;
-                $linkNews = News::where('id', $value->id_news)->first()->slug;
+                $listCate = Comment::select('news.id_category')
+                    ->join('news', 'news.id', 'comments.id_news')
+                    ->where('comments.id_news', $value->id_news)
+                    ->first()
+                    ->id_category;
+                $nameCate = Category::select('slug')->where('id', $listCate)->first()->slug;
+                $linkNews = News::select('slug')->where('id', $value->id_news)->first()->slug;
                 $value['link']= 'danh-muc/'.$nameCate.'/'.$linkNews;
             }
 

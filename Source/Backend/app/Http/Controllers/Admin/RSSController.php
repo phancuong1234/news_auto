@@ -60,7 +60,8 @@ class RSSController extends Controller
     {
         if(isset($text))
         {
-            $listRSS = RSS::where('name_page', 'LIKE', "%{$text}%")
+            $listRSS = RSS::select('id','name_page','category','title','active')
+                ->where('name_page', 'LIKE', "%{$text}%")
                 ->orWhere('title', 'LIKE', "%{$text}%")
                 ->orWhere('category', 'LIKE', "%{$text}%")
                 ->paginate(config('setting.paginate'));

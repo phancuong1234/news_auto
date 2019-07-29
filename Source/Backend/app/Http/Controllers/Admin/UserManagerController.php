@@ -14,25 +14,26 @@ class UserManagerController extends Controller
 
         return view('admin_page.users.indexadmin',compact('userAdmin'));
     }
-    
+
     public function ModManager()
     {
         $userMod = User::where('id_role',config('setting.role.mod'))->paginate(config('setting.paginate'));
-       
+
         return view('admin_page.users.indexMod',compact('userMod'));
     }
 
     public function ViewerManager()
     {
         $viewer = User::where('id_role',config('setting.role.user'))->paginate(config('setting.paginate'));
-        
+
         return view('admin_page.users.indexViewer',compact('viewer'));
     }
 
     public function getSearchViewerAjax($text){
         if(isset($text))
         {
-            $list_viewer = User::where('username', 'LIKE', "%{$text}%")
+            $list_viewer = User::select('id', 'username', 'email', 'active', 'updated_at')
+                ->where('username', 'LIKE', "%{$text}%")
                 ->where('id_role',config('setting.role.user'))
                 ->paginate(config('setting.paginate'));
 
@@ -44,7 +45,8 @@ class UserManagerController extends Controller
     {
         if(isset($text))
         {
-            $list_mod = User::where('username', 'LIKE', "%{$text}%")
+            $list_mod = User::select('id', 'username', 'email', 'active', 'updated_at')
+                ->where('username', 'LIKE', "%{$text}%")
                 ->where('id_role',config('setting.role.mod'))
                 ->paginate(config('setting.paginate'));
 

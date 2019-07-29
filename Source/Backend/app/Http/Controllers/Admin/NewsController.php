@@ -237,7 +237,9 @@ class NewsController extends Controller
     {
         $data = [];
         if($typeRQ == config('setting.search_by.pending')){
-            $listPending = News::where('is_active', '=', config('setting.is_active.pending'))->get();
+            $listPending = News::select('id')
+                ->where('is_active', '=', config('setting.is_active.pending'))
+                ->get();
             if($listPending->count() > 0){
                 foreach($listPending as $key => $value){
                     array_push($data, $value->id);
@@ -245,7 +247,9 @@ class NewsController extends Controller
             }
         }
         else {
-            $listPending = News::where('is_active', '=', config('setting.is_active.active'))->get();
+            $listPending = News::select('id')
+                ->where('is_active', '=', config('setting.is_active.active'))
+                ->get();
             if($listPending->count() > 0){
                 foreach($listPending as $key => $value){
                     array_push($data, $value->id);
@@ -255,6 +259,7 @@ class NewsController extends Controller
         if(isset($text))
         {
             $listNews = News::whereIn('id', $data)
+                ->select('title','id','image','is_active')
                 ->where('title', 'LIKE', "%{$text}%")
                 ->orWhere('id_user', 'LIKE', "%{$text}%")
                 ->paginate(config('setting.paginate'));

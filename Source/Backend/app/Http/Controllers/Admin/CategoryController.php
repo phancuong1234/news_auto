@@ -81,7 +81,8 @@ class CategoryController extends Controller
     {
         if(isset($text))
         {
-            $listCategories = Category::where('name_category', 'LIKE', "%{$text}%")->paginate(config('setting.paginate'));
+            $listCategories = Category::select('id','name_category','url_cate','is_active')
+            ->where('name_category', 'LIKE', "%{$text}%")->paginate(config('setting.paginate'));
 
             return view('ajax.admin.category.search', compact('listCategories'));
         }

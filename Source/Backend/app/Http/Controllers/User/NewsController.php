@@ -15,8 +15,8 @@ class NewsController extends Controller
     public function home(){
         $main_new = News::join('categories', 'categories.id', '=', 'news.id_category')
             ->select('news.*', 'categories.slug as slug_cate')
-            ->orderBy('news.id','DESC')
-            ->where('news.is_active',config('setting.is_active.active'))
+            ->orderBy('news.id', 'DESC')
+            ->where('news.is_active', config('setting.is_active.active'))
             ->first();
         $list_news = News::join('categories', 'categories.id', '=', 'news.id_category')
                             ->select('news.*', 'categories.slug as slug_cate')
@@ -76,6 +76,7 @@ class NewsController extends Controller
         $listCmt = Comment::join('users', 'users.id', '=', 'comments.id_user')
                     ->select('users.username','users.image','comments.*')
                     ->where('id_news', $getIdNews->id)
+                    ->where('is_active', config('setting.is_active.active'))
                     ->orderBy('id','DESC')
                     ->limit(config('setting.viewUser.limit-show-cmt'))
                     ->get();
