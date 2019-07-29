@@ -6,7 +6,7 @@
           <p class="text-justify"><b>VIETSOZ</b> được thành lập vào tháng 8 năm 2016, hứa hẹn sẽ là một công ty
           hàng đầu sẽ cung cấp các giải pháp công nghệ tốt nhất cả trong nước và ngoài nước</p>
           <p><i class="far fa-envelope mr-3"></i>support@vietsoz.com</p>
-          <p><i class="fas fa-phone-alt mr-3"></i>09.888.59.692</p>
+          <p><i class="fas fa-phone-alt mr-3"></i>09.660.12.440</p>
         </div>
         <div class="footer__category col-lg-6 col-xl-2">
           <h3 class="mb-4">DANH MỤC</h3>
@@ -36,13 +36,17 @@
       </div>
     </div>
   </div>
-  {{ Html::script(asset('templates/user/js/jquery.min.js')) }}
-  {{ Html::script(asset('messages.js')) }}
-  {{ Html::script(asset('templates/user/js/popper.min.js')) }}
-  {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
-  {{ Html::script(asset('/templates/user/js/validate-user.js')) }}
-  {{ Html::script(asset('templates/user/js/jsforuser.js')) }}
-  {{ Html::script(asset('templates/user/js/bootstrap.min.js')) }}
-  {{ Html::script(asset('templates/user/fonts/all.js')) }}
+    {{ Html::script(asset('templates/user/js/jquery.min.js')) }}
+    {{ Html::script(asset('templates/user/js/jquery.lazy.min.js')) }}
+    {{ Html::script(asset('templates/user/js/lazysizes.min.js')) }}
+    {{ Html::script(asset('templates/user/js/typeahead.bundle.min.js')) }}
+    {{ Html::script(asset('messages.js')) }}
+    {{ Html::script(asset('templates/user/js/popper.min.js')) }}
+    {{ Html::script(asset('/templates/admin/js/jquery.validate.min.js')) }}
+    {{ Html::script(asset('/templates/user/js/validate-user.js')) }}
+    {{ Html::script(asset('templates/user/js/jsforuser.js')) }}
+    {{ Html::script(asset('templates/user/js/bootstrap.min.js')) }}
+    {{ Html::script(asset('templates/user/fonts/all.js')) }}
+    {{ Html::script(asset('templates/user/js/searchtypehead.js')) }}
 </body>
 </html>

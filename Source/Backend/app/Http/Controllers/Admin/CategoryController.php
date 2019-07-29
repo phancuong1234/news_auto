@@ -38,6 +38,9 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::where('id', $id)->first();
+        if (!isset($category)){
+            return redirect()->route('404');
+        }
 
         return view('admin_page.category.edit', compact('category'));
     }

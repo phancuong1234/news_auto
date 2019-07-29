@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @include('common.error')
                     <div>
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('users')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'users')">
                     </div>
                     <h4 class="card-title float-left">Danh Sách Mod </h4>
                     <div class="table-responsive">
@@ -71,7 +71,7 @@
                                                 </a>
                                             @endcannot
                                             @can("mod")
-                                                No action 
+                                                No action
                                             @endcan
                                         </td>
                                     </tr>

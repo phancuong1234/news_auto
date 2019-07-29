@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @include('common.error')
                     <div>
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('viewer')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'viewer')">
                     </div>
                     <h4 class="card-title">Người xem</h4>
                     <div class="table-responsive">
@@ -58,7 +58,7 @@
                                     </td>
                                     <td>
                                         {{$value->updated_at}}
-                                    </td>                                    
+                                    </td>
                                     <td>
                                         <a href="javascript:void(0)" style="float: left;" onclick="submitFormDeleteHard('delete-viewer' + {{$value->id}})">
                                             <i class="mdi mdi-delete"></i>

@@ -13,7 +13,7 @@
                             <i class="mdi mdi-library-plus"></i>
                             Thêm
                         </a>
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('category')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'category')">
                         @if($listCategories->count() > 0)
                             <input type="hidden" id="total_page" value="{{ $listCategories->lastPage() }}"/>
                             <div class="btn-next-prev">
@@ -82,7 +82,7 @@
                                             {!! Form::close() !!}
                                         @endcannot
                                         @can("mod")
-                                            No action 
+                                            No action
                                         @endcan
                                      </td>
                                 </tr>

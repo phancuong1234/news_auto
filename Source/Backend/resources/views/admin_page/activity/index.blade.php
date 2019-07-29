@@ -9,7 +9,7 @@
                     <h4 class="card-title">Lịch sử hoạt động</h4>
                     @include('common.error')
                     <div>
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('activities')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'activities')">
                         @if($listActivities->count() > 0)
                             <input type="hidden" id="total_page" value="{{ $listActivities->lastPage() }}"/>
                             <div class="btn-next-prev">

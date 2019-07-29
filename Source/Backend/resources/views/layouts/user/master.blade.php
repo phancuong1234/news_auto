@@ -2,22 +2,32 @@
 <div class="main">
     <nav aria-label="Page breadcrumb" style="background-color: #e9ecef">
       <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item" ><a href="{{ route('home-page') }}">Trang chủ</a></li>
-            @if(Auth::check())
-              <div class="right-login">
-                <p>Xin chào !! {{Auth::user()->username}} </p> 
-                &nbsp/&nbsp <a href="" data-toggle="modal" data-target="#myModal"> Thông tin</a>
-                &nbsp/&nbsp <a href="{{route('login.create')}}"> Đăng Xuất</a>
-              </div>
-            @else
-              <li class="breadcrumb-item active" aria-current="page"><a href="category.html">Sự kiện</a></li>
-              <div class="right">
-                <a href="{{route('login.index')}}">Đăng nhập</a>
-                / 
-                <a href="{{route('register.index')}}">Đăng ký</a>
-              </div>
+        <ol class="breadcrumb menu-nav-bar">
+            <li class="breadcrumb-item" >
+                <a href="{{ route('home-page') }}">Trang chủ</a>
+            </li>
+            @hasSection('page')
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a href="@yield('url-page')">
+                        @yield('page')
+                    </a>
+                </li>
             @endif
+            <li class="dropdown login-nav-bar" >
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    {{ (Auth::check())?Auth::user()->username:'Đăng Nhập' }}
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu">
+                    @if(Auth::check())
+                        <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Thông tin</a>
+                        <a class="dropdown-item" href="{{ route('login.create') }}">Đăng Xuất</a>
+                    @else
+                        <a class="dropdown-item" href="{{ route('login.index') }}">Đăng Nhập</a>
+                        <a class="dropdown-item" href="{{ route('register.index') }}">Đăng Kí</a>
+                    @endif
+                </div>
+            </li>
           </ol>
       </div>
     </nav>
@@ -31,7 +41,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">Thông tin</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button> 
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <div class="form-group img-modal">
@@ -40,16 +50,16 @@
                   <img style="width: 92%;" id="img-preview" class="no-img-modal"  src="{{ (trim(auth()->user()->image) == '' || auth()->user()->image == 'no-image.png') ? asset('/templates/images/no-image.png'):asset('/images/avatars/'.Auth::user()->image) }}" />
                 @else
                   <img style="width: 75%;" id="img-preview" src="{{ asset('/templates/images/no-image.png') }}" />
-                @endif 
+                @endif
               </a>
             </div>
-            {!!Form::open(['method'=>'PATCH', 'id'=>'change-profile-modal', 'route'=>['change.profile', Auth::user()->id]]) !!} 
-            {!! Form::file('image', ['id' => 'image', 'style' => 'display:none']) !!}  
+            {!!Form::open(['method'=>'PATCH', 'id'=>'change-profile-modal', 'route'=>['change.profile', Auth::user()->id]]) !!}
+            {!! Form::file('image', ['id' => 'image', 'style' => 'display:none']) !!}
               <div class="form-group">
                 {!! Form::label('fullname', 'Họ và tên',['class'=>'label-modal']) !!}
                 {!! Form::text('fullname', Auth::user()->fullname , ['class'=>'form-control inp-profile', 'placeholder'=>'Nhập Họ Tên Đầy Đủ', 'disabled'=>'true']) !!}
                 <label id="address-error" class="error" for="fullname"></label>
-              </div>   
+              </div>
               <div class="form-group">
                 {!! Form::label('phone', 'Số điện thoại',['id'=>'label-phone','class'=>'label-modal']) !!}
                 {!! Form::text('phone',Auth::user()->phone, ['class'=>'form-control inp-profile', 'placeholder'=>'Nhập Số Điện thoại', 'disabled'=>'true']) !!}
@@ -57,7 +67,7 @@
               </div>
               <div class="form-group">
                 {!! Form::label('gender', 'Giới tính',['id'=>'label-gender','class'=>'label-modal-2']) !!}
-                {!! Form::select('gender', ['male' => 'Male', 'female' => 'Female'],Auth::user()->gender,['class' => 'form-control inp-profile','disabled'=>'true']) !!}
+                {!! Form::select('gender', ['male' => 'Nam', 'female' => 'Nữ'],Auth::user()->gender,['class' => 'form-control inp-profile','disabled'=>'true']) !!}
                 <label id="address-error" class="error no-img" for="phone"></label>
               </div>
               <div class="form-group">
@@ -83,23 +93,23 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Đổi mật khẩu</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            {!!Form::open(['method'=>'PATCH', 'id' => 'form-change-pass', 'route'=>['change.pass', Auth::user()->id]]) !!} 
+            {!!Form::open(['method'=>'PATCH', 'id' => 'form-change-pass', 'route'=>['change.pass', Auth::user()->id]]) !!}
               <div class="form-group">
                 {!! Form::label('oldpass', 'Mật khẩu cũ') !!}
                 {!! Form::password('oldpass', ['class'=>'form-control', 'placeholder'=>'Mật khẩu cũ']) !!}
-              </div>   
+              </div>
               <div class="form-group">
                 {!! Form::label('password', 'Mật khẩu mới') !!}
                 {!! Form::password('password',  ['class'=>'form-control','id'=>'password', 'placeholder'=>'Mật khẩu mới']) !!}
-              </div>   
+              </div>
               <div class="form-group">
                 {!! Form::label('repass', 'Xác nhận mật khẩu') !!}
                 {!! Form::password('repass',  ['class'=>'form-control', 'placeholder'=>'Xác nhận mật khẩu']) !!}
-              </div>  
-            {!! Form::close() !!}  
+              </div>
+            {!! Form::close() !!}
               <button id="btn-change-pass" class="btn btn-primary btn-change-profile">Lưu mật khẩu</button>
             </div>
           </div>

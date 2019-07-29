@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\News;
 use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,11 +22,12 @@ class CommentController extends Controller
         $list_comments = Comment::select('comments.*', 'users.username', 'news.title as title_news')
             ->join('users', 'users.id', '=', 'comments.id_user')
             ->join('news', 'news.id', 'comments.id_news')
-            ->paginate(config('setting.paginate'));  
+            ->paginate(config('setting.paginate'));
         foreach ($list_comments as $key => $value){
-            $listCate = Comment::join('news', 'news.id', 'comments.id_news')->first()->id_category;
+            $listCate = Comment::join('news', 'news.id', 'comments.id_news')->where('comments.id_news', $value->id_news)->first()->id_category;
             $nameCate = Category::where('id', $listCate)->first()->slug;
-            $value['link']= $nameCate.'/'.$value->slug;
+            $linkNews = News::where('id', $value->id_news)->first()->slug;
+            $value['link']= 'danh-muc/'.$nameCate.'/'.$linkNews;
         }
 
         return view('admin_page.comment.index', compact('list_comments'));
@@ -60,12 +62,20 @@ class CommentController extends Controller
     {
         if(isset($text))
         {
-            $list_comments = Comment::select('comments.*', 'users.username')
+            $list_comments = Comment::select('comments.*', 'users.username', 'news.title as title_news')
                 ->join('users', 'users.id', '=', 'comments.id_user')
+                ->join('news', 'news.id', 'comments.id_news')
                 ->where('users.username', 'LIKE', "%{$text}%")
                 ->orWhere('comments.id', 'LIKE', "%{$text}%")
                 ->orWhere('comments.content', 'LIKE', "%{$text}%")
                 ->paginate(config('setting.paginate'));
+//                ->get();
+            foreach ($list_comments as $key => $value){
+                $listCate = Comment::join('news', 'news.id', 'comments.id_news')->where('comments.id_news', $value->id_news)->first()->id_category;
+                $nameCate = Category::where('id', $listCate)->first()->slug;
+                $linkNews = News::where('id', $value->id_news)->first()->slug;
+                $value['link']= 'danh-muc/'.$nameCate.'/'.$linkNews;
+            }
 
             return view('ajax.admin.comment.search', compact('list_comments'));
         }

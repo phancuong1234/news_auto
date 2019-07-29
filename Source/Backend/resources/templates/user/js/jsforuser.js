@@ -79,3 +79,10 @@ function readURLPicTure(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+$('.search-input').keyup(function(e) {
+    var enterKey = 13;
+    if (e.which == enterKey){
+        $('#search-box').submit();
+    }
+});
+$('.lazy').lazy();

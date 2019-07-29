@@ -11,7 +11,9 @@
                 {{ $cmt->id }}
             </td>
             <td>
-                {{ $cmt->id_news }}
+                <a href="/{{ $cmt->link }}" target="_blank">
+                    {{ $cmt->title_news }}
+                </a>
             </td>
             <td>
                 {{ $cmt->username }}

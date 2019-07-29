@@ -14,7 +14,7 @@
                             <i class="mdi mdi-library-plus"></i>
                             Thêm
                         </a>
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('config_rss')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'config_rss')">
                         @if($listConfig->count() > 0)
                             <input type="hidden" id="total_page" value="{{ $listConfig->lastPage() }}"/>
                             <div class="btn-next-prev">

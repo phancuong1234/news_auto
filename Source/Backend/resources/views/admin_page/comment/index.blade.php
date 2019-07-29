@@ -9,7 +9,7 @@
                     <h4 class="card-title">Danh sách bình luận</h4>
                     @include('common.error')
                     <div>
-                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch('comment')">
+                        <input class="form-control search-field search" id="search" type="text" placeholder="Tìm kiếm..." aria-label="Search" onkeyup="liveSearch(event,'comment')">
                         @if($list_comments->count() > 0)
                             <input type="hidden" id="total_page" value="{{ $list_comments->lastPage() }}"/>
                             <div class="btn-next-prev">

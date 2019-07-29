@@ -115,7 +115,7 @@ class NewsController extends Controller
 
     # return view edit news
     public function show($id)
-    {   
+    {
         $id_login = Auth::user()->id;
         $id_user_new = News::where(['id' => $id])->first()->id_user;
         if (Auth::user()->id_role != config('setting.role.admin')){
@@ -124,6 +124,9 @@ class NewsController extends Controller
             }
             else{
                 $news = News::where(['id' => $id])->first();
+                if (!isset($news)){
+                    return redirect()->route('404');
+                }
                 $idCategory = Category::pluck('name_category', 'id');
                 $typeURL = $this->explodeStr($news->image);
 
@@ -131,6 +134,9 @@ class NewsController extends Controller
             }
         } else {
             $news = News::where(['id' => $id])->first();
+            if (!isset($news)){
+                return redirect()->route('404');
+            }
             $idCategory = Category::pluck('name_category', 'id');
             $typeURL = $this->explodeStr($news->image);
 
@@ -138,7 +144,7 @@ class NewsController extends Controller
         }
 
 
-        
+
     }
     #explode string
     public function explodeStr($str)
@@ -157,6 +163,9 @@ class NewsController extends Controller
     public function pendingPreview($id)
     {
         $news = News::where(['id' => $id])->first();
+        if (!isset($news)){
+            return redirect()->route('404');
+        }
         if (isset($news) && $news->count() > 0){
             $typeURL = $this->explodeStr($news->image);
             if ($news->is_active == config('setting.is_active.pending')){
