@@ -306,31 +306,36 @@ function readURLPicTure(input) {
 function changeStatusCmt(id){
     const flag = confirm(Lang.get('messages.confirm_change_status'));
     if (flag === true) {
-        if ($('#event-lock-active').text().trim() == 'Active'){
-            ajaxChangeStatus(id);
+        if ($('#event-lock-active'+id).text().trim() == 'Active'){
+            ajaxChangeStatus(id, 'Lock');
         }
         else {
-            ajaxChangeStatus(id);
+            ajaxChangeStatus(id, 'Active');
         }
     }
 }
 //ajax change status
-function ajaxChangeStatus(id){
+function ajaxChangeStatus(id, text){
     $.ajaxSetup({
         beforeSend: function(xhr, type) {
             if (!type.crossDomain) {
                 xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
             }
-        },
+        }
     });
     $.ajax({
         url: '/admin/comments/' + id,
         method: "PATCH",
         success: function () {
             alert(Lang.get('messages.update_status_success'));
-            $('#event-lock-active').removeClass('badge-gradient-success');
-            $('#event-lock-active').addClass('badge-gradient-danger');
-            document.getElementById("event-lock-active").innerHTML = "Lock";
+            if (text == 'Active'){
+                $('#event-lock-active'+id).removeClass('badge-gradient-danger');
+                $('#event-lock-active'+id).addClass('badge-gradient-success');
+            } else {
+                $('#event-lock-active'+id).removeClass('badge-gradient-success');
+                $('#event-lock-active'+id).addClass('badge-gradient-danger');
+            }
+            document.getElementById("event-lock-active"+id).innerHTML = text;
         },
         error: function () {
             alert(Lang.get('messages.update_status_fail'));
